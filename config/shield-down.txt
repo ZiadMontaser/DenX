@@ -1,0 +1,9 @@
+
+
+<LocationMatch "^/(?i:(?:xampp|security|licenses|phpmyadmin|webalizer|server-status|server-info))">
+    Require local
+    Require ip 192.168
+    ErrorDocument 403 /error/XAMPP_FORBIDDEN.html.var
+</LocationMatch>
+
+
