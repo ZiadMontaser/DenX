@@ -1,20 +1,19 @@
 <?php
 //index.php
 session_start();
-if(isset($_SESSION['type'])  && $_SESSION['hidden'] === '0'){
-    if($_SESSION['type'] != 3) {
+if (isset($_SESSION['type'])  && $_SESSION['hidden'] === '0') {
+    if ($_SESSION['type'] != 3) {
 
         echo "Unauthorized access!!";
-        if($_SESSION['type'] === 2){
+        if ($_SESSION['type'] === 2) {
             $url = 'receptionist.php';
         }
-        if($_SESSION['type'] === 1){
+        if ($_SESSION['type'] === 1) {
             $url = 'admin.php';
         }
         header('Location: ' . $url);
     }
-    
-}else {
+} else {
     echo "login first!!";
     header('Location: ' . "login.php");
 }
@@ -38,20 +37,22 @@ if(isset($_SESSION['type'])  && $_SESSION['hidden'] === '0'){
     <script src='public/lib/moment.min.js'></script>
     <script src='public/fullcalendar/fullcalendar.js'></script>
     <script src="public/lib/bootstrap.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="public/datatable/datatables.min.css"/>
-    <link rel="stylesheet" type="text/css" href="public/datatable/select.dataTables.min.css"/>
+    <link rel="stylesheet" type="text/css" href="public/datatable/datatables.min.css" />
+    <link rel="stylesheet" type="text/css" href="public/datatable/select.dataTables.min.css" />
     <script type="text/javascript" src="public/datatable/datatables.min.js"></script>
     <script type="text/javascript" src="public/datatable/dataTables.select.min.js"></script>
     <script src="public/lib/print.min.js"></script>
     <link rel="stylesheet" type="text/css" href="public/lib/print.min.css">
     <script>
-    $( function() {
-        $( ".date" ).datepicker({ dateFormat: 'dd-mm-yy' });
-    } );
+        $(function() {
+            $(".date").datepicker({
+                dateFormat: 'dd-mm-yy'
+            });
+        });
     </script>
-<style>
-    
-</style>
+    <style>
+
+    </style>
 
 </head>
 
@@ -59,631 +60,664 @@ if(isset($_SESSION['type'])  && $_SESSION['hidden'] === '0'){
     <div id='calendar'></div>
     <div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog modal-lg">
-        
-        <!-- Modal content-->
-        <div class="modal-content">
-            
-            <div class="modal-body">
-                <div id='modal-calendar'></div>
+
+            <!-- Modal content-->
+            <div class="modal-content">
+
+                <div class="modal-body">
+                    <div id='modal-calendar'></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
             </div>
-            <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-        
+
         </div>
     </div>
 
 
     <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            
-            <div class="modal-body">
-                <div role="tabpanel">
-                    <!-- Nav tabs -->
-                    <ul class="nav nav-tabs" role="tablist">
-                        <li role="presentation" class="active"><a href="#pi" aria-controls="pi" role="tab" data-toggle="tab">Patient info.</a>
+        <div class="modal-dialog">
+            <div class="modal-content">
 
-                        
-                        </li>
-                        <li role="presentation"><a href="#vi" aria-controls="vi" role="tab" data-toggle="tab">Visit date</a>
+                <div class="modal-body">
+                    <div role="tabpanel">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active"><a href="#pi" aria-controls="pi" role="tab" data-toggle="tab">Patient info.</a>
 
-                        </li>
-                    </ul>
-                    <!-- Tab panes -->
-                    <div class="tab-content">
-                        <div role="tabpanel" class="tab-pane active" id="pi">
-                            
-                            <div id="add-new-patient" style="display:none">
-                            <div class="container" style="margin-left: -15px">
-<div class="row">
-<div class="col-xs-3">
+
+                            </li>
+                            <li role="presentation"><a href="#vi" aria-controls="vi" role="tab" data-toggle="tab">Visit date</a>
+
+                            </li>
+                        </ul>
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane active" id="pi">
+
+                                <div id="add-new-patient" style="display:none">
+                                    <div class="container" style="margin-left: -15px">
+                                        <div class="row">
+                                            <div class="col-xs-3">
 
                                                 <label for="new-patient-name"><b>Name</b></label>
-                                                <input type="text" placeholder="Name" name="new-patient-name"id="new-patient-name" class="form-control" style="margin-bottom: 20px">
-                                                </div><div class="col-xs-3">
+                                                <input type="text" placeholder="Name" name="new-patient-name" id="new-patient-name" class="form-control" style="margin-bottom: 20px">
+                                            </div>
+                                            <div class="col-xs-3">
                                                 <label for="new-patient-ssn"><b>Phone</b></label>
-                                                <input type="text" placeholder="Phone" name="new-patient-ssn"id="new-patient-ssn" class="form-control" style="margin-bottom: 20px">
-                                                
-                                                </div></div></div>
-                                                <div style="display: none">
-                                                    <label for="new-phone"><b>Phone</b></label>
-                                                    <input type="number" placeholder="Phone" name="new-phone"id="new-phone" class="form-control" style="margin-bottom: 20px">
-                                                </div>
+                                                <input type="text" placeholder="Phone" name="new-patient-ssn" id="new-patient-ssn" class="form-control" style="margin-bottom: 20px">
 
-<div class="container" style="margin-left: -15px">
-<div class="row">
-<div class="col-xs-3">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div style="display: none">
+                                        <label for="new-phone"><b>Phone</b></label>
+                                        <input type="number" placeholder="Phone" name="new-phone" id="new-phone" class="form-control" style="margin-bottom: 20px">
+                                    </div>
+
+                                    <div class="container" style="margin-left: -15px">
+                                        <div class="row">
+                                            <div class="col-xs-3">
                                                 <label for="sex"><b>Sex</b></label>
-                                                <select type="text" placeholder="sex" name="sex"id="sex" class="form-control" style="margin-bottom: 20px">
-                                                <option value="Male">Male</option>
-                                                <option value="Female">Female</option>
-                                                <option value="Other">Other</option>
+                                                <select type="text" placeholder="sex" name="sex" id="sex" class="form-control" style="margin-bottom: 20px">
+                                                    <option value="Male">Male</option>
+                                                    <option value="Female">Female</option>
+                                                    <option value="Other">Other</option>
 
                                                 </select>
-                                                </div><div class="col-xs-3">
+                                            </div>
+                                            <div class="col-xs-3">
                                                 <label for="bd"><b>Birthdate</b></label>
-                                                <input type="text" placeholder="bd" name="bd"id="bd" class="date form-control" style="margin-bottom: 20px">
-                                                </div></div></div>
-                                                
-                                                <label for="address"><b>Address</b></label>
-                                                <input type="text" placeholder="address" name="address"id="address" class="form-control" style="margin-bottom: 20px">
-                                                
-                                                <div class="container" style="margin-left: -15px">
-<div class="row">
-<div class="col-xs-3">
-                                                
+                                                <input type="text" placeholder="bd" name="bd" id="bd" class="date form-control" style="margin-bottom: 20px">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <label for="address"><b>Address</b></label>
+                                    <input type="text" placeholder="address" name="address" id="address" class="form-control" style="margin-bottom: 20px">
+
+                                    <div class="container" style="margin-left: -15px">
+                                        <div class="row">
+                                            <div class="col-xs-3">
+
                                                 <label for="nation"><b>Nationality</b></label>
-                                                <input type="text" placeholder="nationality" name="nation"id="nation" class="form-control" style="margin-bottom: 20px">
+                                                <input type="text" placeholder="nationality" name="nation" id="nation" class="form-control" style="margin-bottom: 20px">
 
 
 
-</div><div class="col-xs-3">
+                                            </div>
+                                            <div class="col-xs-3">
 
 
 
 
 
                                                 <label for="new-comment"><b>Comment</b></label>
-                                                <input type="text" placeholder="Comment" name="new-comment"id="new-comment" class="form-control" style="margin-bottom: 20px">
-                                                </div></div></div>
-                                <button type="button" id="save-patient" class="btn btn-primary save" onclick="savePatient()">Save patient</button>
+                                                <input type="text" placeholder="Comment" name="new-comment" id="new-comment" class="form-control" style="margin-bottom: 20px">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type="button" id="save-patient" class="btn btn-primary save" onclick="savePatient()">Save patient</button>
+                                </div>
+                                <div id="patientss">
+                                    <table id="patients" class="display" style="width:100%">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Name</th>
+                                                <th>Phone</th>
+                                                <th>Sex</th>
+                                                <th>Bitrhdate</th>
+                                                <th>Address</th>
+                                                <th>Nationality</th>
+                                            </tr>
+                                        </thead>
+                                        <tfoot>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Name</th>
+                                                <th>Phone</th>
+                                                <th>Sex</th>
+                                                <th>Bitrhdate</th>
+                                                <th>Address</th>
+                                                <th>Nationality</th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
                             </div>
-                            <div id="patientss">
-                                <table id="patients" class="display" style="width:100%">
-                                    <thead>
-                                        <tr>
-                                        <th>ID</th>
-                                                        <th>Name</th>
-                                                        <th>Phone</th>
-                                                        <th>Sex</th>
-                                                        <th>Bitrhdate</th>
-                                                        <th>Address</th>
-                                                        <th>Nationality</th>
-                                        </tr>
-                                    </thead>
-                                    <tfoot>
-                                        <tr>
-                                        <th>ID</th>
-                                                        <th>Name</th>
-                                                        <th>Phone</th>
-                                                        <th>Sex</th>
-                                                        <th>Bitrhdate</th>
-                                                        <th>Address</th>
-                                                        <th>Nationality</th>
-                                        </tr>
-                                    </tfoot>
-                                </table>
+
+                            <div role="tabpanel" class="tab-pane" id="vi">
+                                <label for="date"><b>date</b></label>
+                                <input type="text" placeholder="date" name="date" id="date" class="date form-control" style="margin-bottom: 20px">
+                                <label for="start"><b>start</b></label>
+                                <input type="time" placeholder="start" name="start" id="start" class="form-control" style="margin-bottom: 20px">
+                                <div style="display:none">
+                                    <label for="end"><b>end</b></label>
+                                    <input type="time" placeholder="end" name="end" id="end" class="form-control" style="margin-bottom: 20px">
+                                </div>
+                                <label for="payment"><b>payment</b></label>
+                                <input type="number" placeholder="payment" name="payment" id="payment" class="form-control" style="margin-bottom: 20px" disabled>
+                                <label for="Comment"><b>Comment</b></label>
+                                <input type="text" placeholder="Comment" name="Comment" id="Comment" class="form-control" style="margin-bottom: 20px">
                             </div>
-                        </div>
-                        
-                        <div role="tabpanel" class="tab-pane" id="vi">
-                            <label for="date"><b>date</b></label>
-                            <input type="text" placeholder="date" name="date"id="date" class="date form-control" style="margin-bottom: 20px">
-                            <label for="start"><b>start</b></label>
-                            <input type="time" placeholder="start" name="start"id="start" class="form-control" style="margin-bottom: 20px">
-                            <div style="display:none">
-                            <label for="end"><b>end</b></label>
-                            <input type="time" placeholder="end" name="end"id="end" class="form-control" style="margin-bottom: 20px">
-                            </div>
-                            <label for="payment"><b>payment</b></label>
-                            <input type="number" placeholder="payment" name="payment"id="payment" class="form-control" style="margin-bottom: 20px" disabled>
-                            <label for="Comment"><b>Comment</b></label>
-                            <input type="text" placeholder="Comment" name="Comment"id="Comment" class="form-control" style="margin-bottom: 20px">
                         </div>
                     </div>
                 </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary save" onclick="save()">Save Visit</button>
+                </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary save" onclick="save()">Save Visit</button>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="pModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-body">
+
+                    <div id='disp-patient-calendar' style="display: none"></div>
+                    <div id="pt">
+                        <table id="disp-patients" class="display" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Phone</th>
+                                    <th>Sex</th>
+                                    <th>Bitrhdate</th>
+                                    <th>Address</th>
+                                    <th>Nationality</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Phone</th>
+                                    <th>Sex</th>
+                                    <th>Bitrhdate</th>
+                                    <th>Address</th>
+                                    <th>Nationality</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-default" onclick="patientList()" id="vv" style="display: none">Back</button>
+
+                </div>
+
             </div>
         </div>
     </div>
-</div>
 
 
-<div class="modal fade" id="pModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            
-            <div class="modal-body">
-            
-            <div id='disp-patient-calendar' style="display: none"></div>
-            <div id="pt">
-                            <table id="disp-patients" class="display" style="width:100%">
-                                <thead>
-                                    <tr>
+
+
+    <div class="modal fade" id="dModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-body">
+
+                    <div id='disp-dentist-calendar' style="display: none"></div>
+                    <div id="dt">
+                        <table id="disp-dentists" class="display" style="width:100%">
+                            <thead>
+                                <tr>
                                     <th>ID</th>
-                                                        <th>Name</th>
-                                                        <th>Phone</th>
-                                                        <th>Sex</th>
-                                                        <th>Bitrhdate</th>
-                                                        <th>Address</th>
-                                                        <th>Nationality</th>
-                                    </tr>
-                                </thead>
-                                <tfoot>
-                                    <tr>
+                                    <th>Name</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
                                     <th>ID</th>
-                                                        <th>Name</th>
-                                                        <th>Phone</th>
-                                                        <th>Sex</th>
-                                                        <th>Bitrhdate</th>
-                                                        <th>Address</th>
-                                                        <th>Nationality</th>
-                                    </tr>
-                                </tfoot>
-                            </table>
-</div>
-                        </div>
-                        <div class="modal-footer" >
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-default"  onclick="patientList()" id = "vv" style="display: none">Back</button>
-                
-            </div>    
-           
+                                    <th>Name</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer" id="cc" style="display: none">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-default" onclick="dentistList()" id="cc" style="display: none">Back</button>
+
+                </div>
+
+            </div>
         </div>
     </div>
-</div>
 
 
 
 
-<div class="modal fade" id="dModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            
-            <div class="modal-body">
-            
-            <div id='disp-dentist-calendar' style="display: none"></div>
-            <div id="dt">
-                            <table id="disp-dentists" class="display" style="width:100%">
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Name</th>
-                                    </tr>
-                                </thead>
-                                <tfoot>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Name</th>
-                                    </tr>
-                                </tfoot>
-                            </table>
-</div>
-                        </div>
-                        <div class="modal-footer" id = "cc" style="display: none">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-default"  onclick="dentistList()" id = "cc" style="display: none">Back</button>
-                
-            </div>    
-           
-        </div>
-    </div>
-</div>
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+                <div class="modal-body">
+                    <div role="tabpanel">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active"><a onclick="document.getElementById('se').style.display='block';document.getElementById('pres').style.display='none';document.getElementById('surg').style.display='none';document.getElementById('diag').style.display='none';document.getElementById('pres3').style.display='none';document.getElementById('pres4').style.display='none';" href="#piz" aria-controls="piz" role="tab" data-toggle="tab">Visit data</a>
+                            </li>
+                            <li role="presentation"><a onclick="document.getElementById('se').style.display='none';document.getElementById('surg').style.display='none';document.getElementById('pres').style.display='none';document.getElementById('diag').style.display='block';document.getElementById('pres3').style.display='none';document.getElementById('pres4').style.display='none';" href="#viz" aria-controls="viz" role="tab" data-toggle="tab">Diagnosis</a>
+                            </li>
+                            <li role="presentation"><a onclick="document.getElementById('se').style.display='none';document.getElementById('diag').style.display='none';document.getElementById('pres').style.display='none';document.getElementById('surg').style.display='block';document.getElementById('pres3').style.display='none';document.getElementById('pres4').style.display='none';" href="#piz2" aria-controls="piz2" role="tab" data-toggle="tab">Managements</a>
+                            </li>
+                            <li role="presentation"><a onclick="document.getElementById('se').style.display='none';document.getElementById('surg').style.display='none';document.getElementById('diag').style.display='none';document.getElementById('pres').style.display='block';document.getElementById('pres3').style.display='none';document.getElementById('pres4').style.display='none';loadPres();" href="#viz2" aria-controls="viz2" role="tab" data-toggle="tab">prescriptions</a>
+                            </li>
+                            <li role="presentation"><a onclick="document.getElementById('se').style.display='none';document.getElementById('surg').style.display='none';document.getElementById('diag').style.display='none';document.getElementById('pres').style.display='none';document.getElementById('pres3').style.display='block';document.getElementById('pres4').style.display='none';" href="#viz3" aria-controls="viz3" role="tab" data-toggle="tab">Sick leave</a>
+                            </li>
+                            <li role="presentation"><a onclick="document.getElementById('se').style.display='none';document.getElementById('surg').style.display='none';document.getElementById('diag').style.display='none';document.getElementById('pres').style.display='none';document.getElementById('pres3').style.display='none';document.getElementById('pres4').style.display='block';loadReport();" href="#viz4" aria-controls="viz4" role="tab" data-toggle="tab">Visit report</a>
+                            </li>
+
+                        </ul>
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane active" id="piz">
 
 
 
-
-<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            
-            <div class="modal-body">
-            <div role="tabpanel">
-                <!-- Nav tabs -->
-                <ul class="nav nav-tabs" role="tablist">
-                    <li role="presentation" class="active"><a onclick="document.getElementById('se').style.display='block';document.getElementById('pres').style.display='none';document.getElementById('surg').style.display='none';document.getElementById('diag').style.display='none';document.getElementById('pres3').style.display='none';document.getElementById('pres4').style.display='none';" href="#piz" aria-controls="piz" role="tab" data-toggle="tab">Visit data</a>
-                        </li>
-                        <li role="presentation"><a onclick="document.getElementById('se').style.display='none';document.getElementById('surg').style.display='none';document.getElementById('pres').style.display='none';document.getElementById('diag').style.display='block';document.getElementById('pres3').style.display='none';document.getElementById('pres4').style.display='none';" href="#viz" aria-controls="viz" role="tab" data-toggle="tab">Diagnosis</a>
-                        </li>
-                        <li role="presentation"><a onclick="document.getElementById('se').style.display='none';document.getElementById('diag').style.display='none';document.getElementById('pres').style.display='none';document.getElementById('surg').style.display='block';document.getElementById('pres3').style.display='none';document.getElementById('pres4').style.display='none';" href="#piz2" aria-controls="piz2" role="tab" data-toggle="tab">Managements</a>
-                        </li>
-                        <li role="presentation"><a onclick="document.getElementById('se').style.display='none';document.getElementById('surg').style.display='none';document.getElementById('diag').style.display='none';document.getElementById('pres').style.display='block';document.getElementById('pres3').style.display='none';document.getElementById('pres4').style.display='none';loadPres();" href="#viz2" aria-controls="viz2" role="tab" data-toggle="tab">prescriptions</a>
-                        </li>
-                        <li role="presentation"><a onclick="document.getElementById('se').style.display='none';document.getElementById('surg').style.display='none';document.getElementById('diag').style.display='none';document.getElementById('pres').style.display='none';document.getElementById('pres3').style.display='block';document.getElementById('pres4').style.display='none';" href="#viz3" aria-controls="viz3" role="tab" data-toggle="tab">Sick leave</a>
-                        </li>
-                        <li role="presentation"><a onclick="document.getElementById('se').style.display='none';document.getElementById('surg').style.display='none';document.getElementById('diag').style.display='none';document.getElementById('pres').style.display='none';document.getElementById('pres3').style.display='none';document.getElementById('pres4').style.display='block';loadReport();" href="#viz4" aria-controls="viz4" role="tab" data-toggle="tab">Visit report</a>
-                        </li>
-
-                    </ul>
-                    <!-- Tab panes -->
-                    <div class="tab-content">
-                        <div role="tabpanel" class="tab-pane active" id="piz">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-xs-4">
 
 
+                                            <div>
+                                                <div class="container" style="margin-left: -15px">
+                                                    <div class="row">
+                                                        <div class="col-xs-2">
 
-<div class="container">
-    <div class="row">
-        <div class="col-xs-4">
-        
+                                                            <label for="pp1x"><b>Name</b></label>
+                                                            <input type="text" placeholder="Name" name="pp1x" id="pp1x" class="form-control" style="margin-bottom: 20px" disabled>
+                                                        </div>
+                                                        <div class="col-xs-2">
+                                                            <label for="pp2x"><b>Phone</b></label>
+                                                            <input type="text" placeholder="Phone" name="pp2x" id="pp2x" class="form-control" style="margin-bottom: 20px" disabled>
 
-<div >
-                        <div class="container" style="margin-left: -15px">
-<div class="row">
-<div class="col-xs-2">
-
-                                                <label for="pp1x"><b>Name</b></label>
-                                                <input type="text" placeholder="Name" name="pp1x"id="pp1x" class="form-control" style="margin-bottom: 20px" disabled>
-                                                </div><div class="col-xs-2">
-                                                <label for="pp2x"><b>Phone</b></label>
-                                                <input type="text" placeholder="Phone" name="pp2x"id="pp2x" class="form-control" style="margin-bottom: 20px"disabled>
-                                                
-                                                </div></div></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                 <div style="display: none">
                                                     <label for="pp3x"><b>Phone</b></label>
-                                                    <input type="text" placeholder="Phone" name="pp3x"id="pp3x" class="form-control" style="margin-bottom: 20px"disabled>
+                                                    <input type="text" placeholder="Phone" name="pp3x" id="pp3x" class="form-control" style="margin-bottom: 20px" disabled>
                                                 </div>
 
-<div class="container" style="margin-left: -15px">
-<div class="row">
-<div class="col-xs-2">
-                                                <label for="pp4x"><b>Sex</b></label>
-                                                <select type="text" placeholder="sex" name="pp4x"id="pp4x" class="form-control" style="margin-bottom: 20px"disabled>
-                                                <option value="Male">Male</option>
-                                                <option value="Female">Female</option>
-                                                <option value="Other">Other</option>
-
-                                                </select>
-                                                </div><div class="col-xs-2">
-                                                <label for="pp5x"><b>Birthdate</b></label>
-                                                <input type="text" placeholder="bd" name="pp5x"id="pp5x" class="date form-control" style="margin-bottom: 20px"disabled>
-                                                </div></div></div>
-                                                
-                                                <label for="pp6x"><b>Address</b></label>
-                                                <input type="text" placeholder="address" name="pp6x"id="pp6x" class="form-control" style="margin-bottom: 20px"disabled>
-                                                
                                                 <div class="container" style="margin-left: -15px">
-<div class="row">
-<div class="col-xs-2">
-                                                
-                                                <label for="pp7x"><b>Nationality</b></label>
-                                                <input type="text" placeholder="nationality" name="pp7x"id="pp7x" class="form-control" style="margin-bottom: 20px"disabled>
+                                                    <div class="row">
+                                                        <div class="col-xs-2">
+                                                            <label for="pp4x"><b>Sex</b></label>
+                                                            <select type="text" placeholder="sex" name="pp4x" id="pp4x" class="form-control" style="margin-bottom: 20px" disabled>
+                                                                <option value="Male">Male</option>
+                                                                <option value="Female">Female</option>
+                                                                <option value="Other">Other</option>
+
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-xs-2">
+                                                            <label for="pp5x"><b>Birthdate</b></label>
+                                                            <input type="text" placeholder="bd" name="pp5x" id="pp5x" class="date form-control" style="margin-bottom: 20px" disabled>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <label for="pp6x"><b>Address</b></label>
+                                                <input type="text" placeholder="address" name="pp6x" id="pp6x" class="form-control" style="margin-bottom: 20px" disabled>
+
+                                                <div class="container" style="margin-left: -15px">
+                                                    <div class="row">
+                                                        <div class="col-xs-2">
+
+                                                            <label for="pp7x"><b>Nationality</b></label>
+                                                            <input type="text" placeholder="nationality" name="pp7x" id="pp7x" class="form-control" style="margin-bottom: 20px" disabled>
 
 
 
-</div><div class="col-xs-2">
+                                                        </div>
+                                                        <div class="col-xs-2">
 
 
 
 
 
-                                                <label for="pp8x"><b>Comment</b></label>
-                                                <input type="text" placeholder="Comment" name="pp8x"id="pp8x" class="form-control" style="margin-bottom: 20px"disabled>
-                                                </div></div></div>
+                                                            <label for="pp8x"><b>Comment</b></label>
+                                                            <input type="text" placeholder="Comment" name="pp8x" id="pp8x" class="form-control" style="margin-bottom: 20px" disabled>
+                                                        </div>
+                                                    </div>
+                                                </div>
 
-                        </div>
-                  
-
-
-
-
-
-
-
-
-
-        </div>
-    
-
-
-
-
-
-<div class="col-xs-4">
-<div style="display:none">
-                            <label for="vid"><b>Visit ID</b></label>
-                            <input type="number" placeholder="vid" name="vid"id="vid" class="form-control" style="margin-bottom: 20px" disabled>
-                            </div>
-                            <label for="date"><b>date</b></label>
-                            <input type="text" placeholder="date" name="Edate"id="Edate" class=" date form-control" style="margin-bottom: 20px">
-                            <label for="start"><b>start</b></label>
-                            <input type="time" placeholder="start" name="Estart"id="Estart" class="form-control" style="margin-bottom: 20px">
-                            <div style="display: none">
-                            <label for="end"><b>end</b></label>
-                            <input type="time" placeholder="end" name="Eend"id="Eend" class="form-control" style="margin-bottom: 20px">
-                            </div>
-                            <div class="container" style="margin-left:-16px">
-                            <div class="row">
-                            <div class="col-xs-2">
-                            <label for="payment"><b>payment</b></label>
-                            <input type="number" placeholder="payment" name="Epayment"id="Epayment" class="form-control" style="margin-bottom: 20px" disabled>
-                            </div><div class="col-xs-2">
-                            <label for="ent"><b>entry</b></label>
-                            <input type="number" placeholder="ent" name="ent"id="ent" class="form-control" style="margin-bottom: 20px" disabled>
-                            </div></div></div>
-                            <label for="Comment"><b>Comment</b></label>
-                            <input type="text" placeholder="Comment" name="EComment"id="EComment" class="form-control" style="margin-bottom: 20px">
-
-
-</div>
-    </div>
-</div>
+                                            </div>
 
 
 
 
 
 
-                        </div>
-                        
-                        <div role="tabpanel" class="tab-pane" id="viz">
-                            <div class="container">
-                                <div class="row">
-                                <div class="col-xs-4">
-                                        <label for="tooth"><b>Tooth</b></label>
-                                        <input type="text" list="toto1" placeholder="tooth" name="tooth"id="tooth" class="form-control" style="margin-bottom: 20px">
-                                        <datalist id="toto1">
-                            
-                            </datalist>
-                                        <label for="dia"><b>Diagnosis</b></label>
-                                        <input type="text" list="diadia" placeholder="diagnosis" name="dia"id="dia" class="form-control" style="margin-bottom: 20px">
-                                        <datalist id="diadia">
-                            
-                            </datalist>
-                                        <label for="dComment"><b>Comment</b></label>
-                                        <input type="text" placeholder="dComment" name="dComment"id="dComment" class="form-control" style="margin-bottom: 20px">
+
+
+
+
+                                        </div>
+
+
+
+
+
+
+                                        <div class="col-xs-4">
+                                            <div style="display:none">
+                                                <label for="vid"><b>Visit ID</b></label>
+                                                <input type="number" placeholder="vid" name="vid" id="vid" class="form-control" style="margin-bottom: 20px" disabled>
+                                            </div>
+                                            <label for="date"><b>date</b></label>
+                                            <input type="text" placeholder="date" name="Edate" id="Edate" class=" date form-control" style="margin-bottom: 20px">
+                                            <label for="start"><b>start</b></label>
+                                            <input type="time" placeholder="start" name="Estart" id="Estart" class="form-control" style="margin-bottom: 20px">
+                                            <div style="display: none">
+                                                <label for="end"><b>end</b></label>
+                                                <input type="time" placeholder="end" name="Eend" id="Eend" class="form-control" style="margin-bottom: 20px">
+                                            </div>
+                                            <div class="container" style="margin-left:-16px">
+                                                <div class="row">
+                                                    <div class="col-xs-2">
+                                                        <label for="payment"><b>payment</b></label>
+                                                        <input type="number" placeholder="payment" name="Epayment" id="Epayment" class="form-control" style="margin-bottom: 20px" disabled>
+                                                    </div>
+                                                    <div class="col-xs-2">
+                                                        <label for="ent"><b>entry</b></label>
+                                                        <input type="number" placeholder="ent" name="ent" id="ent" class="form-control" style="margin-bottom: 20px" disabled>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <label for="Comment"><b>Comment</b></label>
+                                            <input type="text" placeholder="Comment" name="EComment" id="EComment" class="form-control" style="margin-bottom: 20px">
+
+
+                                        </div>
                                     </div>
-                                    <div class="col-xs-5">
-                                        <table id="dtDiag" class="display" style="width:100%">
-                                            <thead>
-                                                <tr>
-                                                    <th>Tooth</th>
-                                                    <th>Diagnosis</th>
-                                                    <th>Comment</th>
-                                                </tr>
-                                            </thead>
-                                            <tfoot>
-                                                <tr>
-                                                    <th>Tooth</th>
-                                                    <th>Diagnosis</th>
-                                                    <th>Comment</th>
-                                                </tr>
-                                            </tfoot>
-                                        </table>
+                                </div>
+
+
+
+
+
+
+                            </div>
+
+                            <div role="tabpanel" class="tab-pane" id="viz">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-xs-4">
+                                            <label for="tooth"><b>Tooth</b></label>
+                                            <input type="text" list="toto1" placeholder="tooth" name="tooth" id="tooth" class="form-control" style="margin-bottom: 20px">
+                                            <datalist id="toto1">
+
+                                            </datalist>
+                                            <label for="dia"><b>Diagnosis</b></label>
+                                            <input type="text" list="diadia" placeholder="diagnosis" name="dia" id="dia" class="form-control" style="margin-bottom: 20px">
+                                            <datalist id="diadia">
+
+                                            </datalist>
+                                            <label for="dComment"><b>Comment</b></label>
+                                            <input type="text" placeholder="dComment" name="dComment" id="dComment" class="form-control" style="margin-bottom: 20px">
+                                        </div>
+                                        <div class="col-xs-5">
+                                            <table id="dtDiag" class="display" style="width:100%">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Tooth</th>
+                                                        <th>Diagnosis</th>
+                                                        <th>Comment</th>
+                                                    </tr>
+                                                </thead>
+                                                <tfoot>
+                                                    <tr>
+                                                        <th>Tooth</th>
+                                                        <th>Diagnosis</th>
+                                                        <th>Comment</th>
+                                                    </tr>
+                                                </tfoot>
+                                            </table>
+                                        </div>
+
                                     </div>
-                                    
                                 </div>
                             </div>
-                        </div>
-                        <div role="tabpanel" class="tab-pane" id="piz2">
-                            <div class="container">
+                            <div role="tabpanel" class="tab-pane" id="piz2">
+                                <div class="container">
                                     <div class="row">
                                         <div class="col-xs-4">
                                             <label for="stooth"><b>Tooth</b></label>
-                                            <input type="text" list="toto2"placeholder="tooth" name="stooth"id="stooth" class="form-control" style="margin-bottom: 20px">
+                                            <input type="text" list="toto2" placeholder="tooth" name="stooth" id="stooth" class="form-control" style="margin-bottom: 20px">
                                             <datalist id="toto2">
-                            
-                            </datalist>
+
+                                            </datalist>
                                             <label for="sur"><b>Management</b></label>
-                                            <input type="text" list="sursur" placeholder="Management" name="sur"id="sur" class="form-control" style="margin-bottom: 20px">
+                                            <input type="text" list="sursur" placeholder="Management" name="sur" id="sur" class="form-control" style="margin-bottom: 20px">
                                             <datalist id="sursur">
-                            
-                            </datalist>
+
+                                            </datalist>
                                             <label for="sprice"><b>Price</b></label>
-                                            <input type="number" placeholder="Price" name="sprice"id="sprice" class="form-control" style="margin-bottom: 20px">
+                                            <input type="number" placeholder="Price" name="sprice" id="sprice" class="form-control" style="margin-bottom: 20px">
                                             <label for="sComment"><b>Comment</b></label>
-                                            <input type="text" placeholder="Comment" name="sComment"id="sComment" class="form-control" style="margin-bottom: 20px">
+                                            <input type="text" placeholder="Comment" name="sComment" id="sComment" class="form-control" style="margin-bottom: 20px">
                                         </div>
                                         <div class="col-xs-5">
-                            <table id="dtSur" class="display" style="width:100%">
-                                <thead>
-                                    <tr>
-                                        <th>Tooth</th>
-                                        <th>Management</th>
-                                        <th>Price</th>
-                                        <th>Comment</th>
-                                    </tr>
-                                </thead>
-                                <tfoot>
-                                    <tr>
-                                        <th>Tooth</th>
-                                        <th>Management</th>
-                                        <th>Price</th>
-                                        <th>Comment</th>
-                                    </tr>
-                                </tfoot>
-                            </table>
-</div></div></div>
-                        </div>
-                        <div role="tabpanel" class="tab-pane" id="viz2">
-                        <div class="container">
+                                            <table id="dtSur" class="display" style="width:100%">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Tooth</th>
+                                                        <th>Management</th>
+                                                        <th>Price</th>
+                                                        <th>Comment</th>
+                                                    </tr>
+                                                </thead>
+                                                <tfoot>
+                                                    <tr>
+                                                        <th>Tooth</th>
+                                                        <th>Management</th>
+                                                        <th>Price</th>
+                                                        <th>Comment</th>
+                                                    </tr>
+                                                </tfoot>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="viz2">
+                                <div class="container">
                                     <div class="row">
                                         <div class="col-xs-4">
-                            <label for="med"><b>Medicine</b></label>
-                            <input type="text" list="medmed" placeholder="medicine" name="med"id="med" class="form-control" style="margin-bottom: 20px">
-                            <datalist id="medmed">
-                            
-                            </datalist>
+                                            <label for="med"><b>Medicine</b></label>
+                                            <input type="text" list="medmed" placeholder="medicine" name="med" id="med" class="form-control" style="margin-bottom: 20px">
+                                            <datalist id="medmed">
 
-                            <label for="mg"><b>mg</b></label>
-                            <input type="number" placeholder="mg" name="mg"id="mg" class="form-control" style="margin-bottom: 20px">
-                            <label for="dose"><b>Dose</b></label>
-                            <input type="text" placeholder="dose" name="dose"id="dose" class="form-control" style="margin-bottom: 20px">
-                            <label for="pComment"><b>Comment</b></label>
-                            <input type="text" placeholder="Comment" name="pComment"id="pComment" class="form-control" style="margin-bottom:20px">
-                            </div>
-                            <div class="col-xs-5">
-                            <div>
-                                <table id="dtpres" class="display" style="width:100%">
-                                    <thead>
-                                        <tr>
-                                            <th>Medicine</th>
-                                            <th>mg</th>
-                                            <th>Dose</th>
-                                            <th>Comment</th>
-                                        </tr>
-                                    </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Medicine</th>
-                                            <th>mg</th>
-                                            <th>Dose</th>
-                                            <th>Comment</th>
-                                        </tr>
-                                    </tfoot>
-                                </table>
+                                            </datalist>
+
+                                            <label for="mg"><b>mg</b></label>
+                                            <input type="number" placeholder="mg" name="mg" id="mg" class="form-control" style="margin-bottom: 20px">
+                                            <label for="dose"><b>Dose</b></label>
+                                            <input type="text" placeholder="dose" name="dose" id="dose" class="form-control" style="margin-bottom: 20px">
+                                            <label for="pComment"><b>Comment</b></label>
+                                            <input type="text" placeholder="Comment" name="pComment" id="pComment" class="form-control" style="margin-bottom:20px">
+                                        </div>
+                                        <div class="col-xs-5">
+                                            <div>
+                                                <table id="dtpres" class="display" style="width:100%">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Medicine</th>
+                                                            <th>mg</th>
+                                                            <th>Dose</th>
+                                                            <th>Comment</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tfoot>
+                                                        <tr>
+                                                            <th>Medicine</th>
+                                                            <th>mg</th>
+                                                            <th>Dose</th>
+                                                            <th>Comment</th>
+                                                        </tr>
+                                                    </tfoot>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div></div></div>
-                        </div>
-                        <div role="tabpanel" class="tab-pane" id="viz3">
-                            <div class="container">
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="viz3">
+                                <div class="container">
                                     <div class="row">
-                                    <div class="col-xs-4">
+                                        <div class="col-xs-4">
 
 
 
-<div class="container" style="margin-left:-15px">
-<div class="row">
-<div class="col-xs-2">
-<label for="slname"><b>Name</b></label>
-                            <input type="text" placeholder="name" name="slname"id="slname" class="form-control" style="margin-bottom: 20px"onchange="$('#sl1').html($('#slname').val());">
-                            </div><div class="col-xs-2">
+                                            <div class="container" style="margin-left:-15px">
+                                                <div class="row">
+                                                    <div class="col-xs-2">
+                                                        <label for="slname"><b>Name</b></label>
+                                                        <input type="text" placeholder="name" name="slname" id="slname" class="form-control" style="margin-bottom: 20px" onchange="$('#sl1').html($('#slname').val());">
+                                                    </div>
+                                                    <div class="col-xs-2">
 
-                                                <label for="slsex"><b>Sex</b></label>
-                                                <select type="text" placeholder="sex" name="slsex"id="slsex" class="form-control" style="margin-bottom: 20px" onchange="$('#slsex1').html($('#slsex').val() === 'Male'?'he':'she');">
-                                                <option value="Male">Male</option>
-                                                <option value="Female">Female</option>
-                                                </select>
+                                                        <label for="slsex"><b>Sex</b></label>
+                                                        <select type="text" placeholder="sex" name="slsex" id="slsex" class="form-control" style="margin-bottom: 20px" onchange="$('#slsex1').html($('#slsex').val() === 'Male'?'he':'she');">
+                                                            <option value="Male">Male</option>
+                                                            <option value="Female">Female</option>
+                                                        </select>
 
 
 
-                            </div></div></div>
+                                                    </div>
+                                                </div>
+                                            </div>
 
-                            
-                            
-                            <label for="slwork"><b>Place of work</b></label>
-                            <input type="text" placeholder="work place" name="slwork"id="slwork" class="form-control" style="margin-bottom: 20px" onchange="$('#sl2').html($('#slwork').val());">
-                            <label for="sldiag"><b>Diagnosis</b></label>
-                            <input type="text" placeholder="diagnosis" name="sldiag"id="sldiag" class="form-control" style="margin-bottom: 20px" onchange="$('#sl3').html($('#sldiag').val());">
-                            <label for="sldn"><b>Management</b></label>
-                            <input type="text" placeholder="dentist name" name="sldn"id="sldn" class="form-control" style="margin-bottom:20px" onchange="$('#sl7').html($('#sldn').val());">
-                            <label for="sld"><b>Duration</b></label>
-                            <input type="number" placeholder="Comment" name="sld"id="sld" class="form-control" style="margin-bottom:20px" onchange="$('#sl4').html($('#sld').val());">
-<div class="container" style="margin-left:-15px">
-<div class="row">
-<div class="col-xs-2">
-                            <label for="slstart"><b>Start</b></label>
-                            <input type="text" placeholder="start" name="slstart"id="slstart" class="date form-control" style="margin-bottom:20px" onchange="$('#sl5').html($('#slstart').val());">
-                            </div><div class="col-xs-2">
-                            <label for="slend"><b>End</b></label>
-                            <input type="text" placeholder="end" name="slend"id="slend" class=" date form-control" style="margin-bottom:20px" onchange="$('#sl6').html($('#slend').val());">
-                            </div></div></div>
-                            
-                                
+
+
+                                            <label for="slwork"><b>Place of work</b></label>
+                                            <input type="text" placeholder="work place" name="slwork" id="slwork" class="form-control" style="margin-bottom: 20px" onchange="$('#sl2').html($('#slwork').val());">
+                                            <label for="sldiag"><b>Diagnosis</b></label>
+                                            <input type="text" placeholder="diagnosis" name="sldiag" id="sldiag" class="form-control" style="margin-bottom: 20px" onchange="$('#sl3').html($('#sldiag').val());">
+                                            <label for="sldn"><b>Management</b></label>
+                                            <input type="text" placeholder="dentist name" name="sldn" id="sldn" class="form-control" style="margin-bottom:20px" onchange="$('#sl7').html($('#sldn').val());">
+                                            <label for="sld"><b>Duration</b></label>
+                                            <input type="number" placeholder="Comment" name="sld" id="sld" class="form-control" style="margin-bottom:20px" onchange="$('#sl4').html($('#sld').val());">
+                                            <div class="container" style="margin-left:-15px">
+                                                <div class="row">
+                                                    <div class="col-xs-2">
+                                                        <label for="slstart"><b>Start</b></label>
+                                                        <input type="text" placeholder="start" name="slstart" id="slstart" class="date form-control" style="margin-bottom:20px" onchange="$('#sl5').html($('#slstart').val());">
+                                                    </div>
+                                                    <div class="col-xs-2">
+                                                        <label for="slend"><b>End</b></label>
+                                                        <input type="text" placeholder="end" name="slend" id="slend" class=" date form-control" style="margin-bottom:20px" onchange="$('#sl6').html($('#slend').val());">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                        <div class="col-xs-5">
+
+                                            <div id="slfile">
+                                                <h4 style="margin-top: 10px">Alkamil dental clinic </h4></br>
+                                                <h4 style="margin-top: -15px">C.R no. :1268338</h4></br>
+                                                <h2>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Sick leave</h2></br>
+                                                <h3>Patient name: <span id="sl1"></span></br>
+                                                    Place of work: <span id="sl2"></span></br>
+                                                    Alkamil dental clinic certifies that; the above mentioned patient is diagnosed in our clinic and <span id="slsex1">he</span> found suffering from <span id="sl3"></span>, <span id="sl7"></span> was done for him and he is eligible to take sick leave for <span id="sl4"></span> days form date <span id="sl5"></span> to date <span id="sl6"></span></br>
+                                                    </br>
+                                                    Dentist name: <?php echo $_SESSION['name'] ?></br>
+                                                    Sign and stamp &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;clinic stamp
+                                                </h3>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
                             </div>
-                                        <div class="col-xs-5" >
-                            
-                            <div id="slfile">
-                            <h4 style="margin-top: 10px">Alkamil dental clinic </h4></br>
-                            <h4 style="margin-top: -15px">C.R no. :1268338</h4></br>
-                            <h2>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Sick leave</h2></br>
-                            <h3>Patient name: <span id="sl1"></span></br>
-                            Place of work: <span id="sl2"></span></br>
-                            Alkamil dental clinic certifies that; the above mentioned patient is diagnosed in our clinic and <span id="slsex1">he</span> found suffering from <span id="sl3"></span>, <span id="sl7"></span> was done for him and he is eligible to take sick leave for <span id="sl4"></span> days form date <span id="sl5"></span> to date <span id="sl6"></span></br>
-                            </br>
-                            Dentist name: <?php echo $_SESSION['name'] ?></br>
-                            Sign and stamp &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;clinic stamp
-                            </h3>
-                            
+                            <div role="tabpanel" class="tab-pane" id="viz4">
+                                <div id="visr"></div>
+                                <div id="diar"></div>
+                                <div id="manr"></div>
+                                <div id="prer"></div>
+
                             </div>
-                            </div>
-                
-                            </div></div>
                         </div>
-                        <div role="tabpanel" class="tab-pane" id="viz4">
-                            <div id="visr"></div>
-                            <div id="diar"></div>
-                            <div id="manr"></div>
-                            <div id="prer"></div>
-                        
-                        </div>
+
                     </div>
-                    
+
                 </div>
-                
-            </div>
-             
-            
-            <div class="modal-footer" id="se">
-                <button type="button" class="btn btn-primary save" onclick="saveEdit()">Save Visit</button>
-            </div>
-            <div class="modal-footer" id="diag" style="display:none">
-            <button type="button" class="btn btn-primary save" onclick="addDiag()">Save Diagnosis</button>
-            <button type="button" class="btn btn-primary save" onclick="clearDiag()">Clear Diagnosis</button>
-            </div>
-            <div class="modal-footer" id="surg" style="display:none">
-            <button type="button" class="btn btn-primary save" onclick="addSur()">Save Management</button>
-            <button type="button" class="btn btn-primary save" onclick="clearSur()">Clear Managements</button>
-            </div>
-            <div class="modal-footer" id="pres" style="display:none">
-            <button type="button" class="btn btn-primary save" onclick="addPres()">Save Medicine</button>
-            <button type="button" class="btn btn-primary save" onclick="clearPres()">clear prescription</button>
-                <button type="button" class="btn btn-primary save" onclick="loadPres(); printJS('prpes', 'html')">Print precription</button>
-            </div>
-            <div class="modal-footer" id="pres3" style="display:none">
-                <button type="button" class="btn btn-default save" onclick="clearsl()">Clear</button>
-                <button type="button" class="btn btn-primary save" onclick="printJS('slfile', 'html')">Print</button>
-            </div>
-            <div class="modal-footer" id="pres4" style="display:none">
-                <button type="button" class="btn btn-primary save" onclick="printJS('viz4', 'html')">Print</button>
-                <button type="button" class="btn btn-primary save" onclick="payrep()">payment report</button>
+
+
+                <div class="modal-footer" id="se">
+                    <button type="button" class="btn btn-primary save" onclick="saveEdit()">Save Visit</button>
+                </div>
+                <div class="modal-footer" id="diag" style="display:none">
+                    <button type="button" class="btn btn-primary save" onclick="addDiag()">Save Diagnosis</button>
+                    <button type="button" class="btn btn-primary save" onclick="clearDiag()">Clear Diagnosis</button>
+                </div>
+                <div class="modal-footer" id="surg" style="display:none">
+                    <button type="button" class="btn btn-primary save" onclick="addSur()">Save Management</button>
+                    <button type="button" class="btn btn-primary save" onclick="clearSur()">Clear Managements</button>
+                </div>
+                <div class="modal-footer" id="pres" style="display:none">
+                    <button type="button" class="btn btn-primary save" onclick="addPres()">Save Medicine</button>
+                    <button type="button" class="btn btn-primary save" onclick="clearPres()">clear prescription</button>
+                    <button type="button" class="btn btn-primary save" onclick="loadPres(); printJS('prpes', 'html')">Print precription</button>
+                </div>
+                <div class="modal-footer" id="pres3" style="display:none">
+                    <button type="button" class="btn btn-default save" onclick="clearsl()">Clear</button>
+                    <button type="button" class="btn btn-primary save" onclick="printJS('slfile', 'html')">Print</button>
+                </div>
+                <div class="modal-footer" id="pres4" style="display:none">
+                    <button type="button" class="btn btn-primary save" onclick="printJS('viz4', 'html')">Print</button>
+                    <button type="button" class="btn btn-primary save" onclick="payrep()">payment report</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<div style="display: none">
-    <div id="prpes">
+    <div style="display: none">
+        <div id="prpes">
 
+        </div>
     </div>
-</div>
-<div style="display: none" id="payrephead">
-<h4>payment report: </h4>" + "</br>
-    <table id="payrep" border="1" style="border: 1px solid black;">
+    <div style="display: none" id="payrephead">
+        <h4>payment report: </h4>" + "</br>
+        <table id="payrep" border="1" style="border: 1px solid black;">
 
-    <tr style="border: 1px solid black;">
-        <th style="border: 1px solid black;">item</th>
-        <th style="border: 1px solid black;">price</th> 
-    </tr>
-    </table>
-</div>
+            <tr style="border: 1px solid black;">
+                <th style="border: 1px solid black;">item</th>
+                <th style="border: 1px solid black;">price</th>
+            </tr>
+        </table>
+    </div>
 
     <script>
         window.onbeforeunload = confirmExit;
+
         function confirmExit() {
             return "You have attempted to leave this page. Are you sure?";
         }
         var p = -1;
         var pid = -1;
-        var did = <?php echo $_SESSION['id']?>;
-        var d = <?php echo $_SESSION['id']?>;
+        var did = <?php echo $_SESSION['id'] ?>;
+        var d = <?php echo $_SESSION['id'] ?>;
 
-        
-        function clearsl(){
+
+        function clearsl() {
             $('#slname').val("");
             $('#slwork').val("");
             $('#sldiag').val("");
@@ -698,20 +732,22 @@ if(isset($_SESSION['type'])  && $_SESSION['hidden'] === '0'){
             $('#sl5').html("");
             $('#sl6').html("");
             $('#sl7').html("");
-            
+
         }
-        function altt(){
-            if(document.getElementById("add-new-patient").style.display === "none"){
+
+        function altt() {
+            if (document.getElementById("add-new-patient").style.display === "none") {
                 document.getElementById("add-new-patient").style.display = "block";
                 document.getElementById("patientss").style.display = "none";
                 document.getElementById("new-ext").innerHTML = "Existing patient";
-            }else{
+            } else {
                 document.getElementById("add-new-patient").style.display = "none";
                 document.getElementById("patientss").style.display = "block";
                 document.getElementById("new-ext").innerHTML = "New patient";
             }
         }
-        function savePatient(){
+
+        function savePatient() {
             var name = document.getElementById("new-patient-name").value;
             var ssn = document.getElementById("new-patient-ssn").value;
             var phone = document.getElementById("new-phone").value;
@@ -721,12 +757,12 @@ if(isset($_SESSION['type'])  && $_SESSION['hidden'] === '0'){
             var address = $('#address').val();
             var nationality = $('#nation').val();
 
-            if(name === ""){
+            if (name === "") {
                 alert("name field is empty");
                 return;
 
             }
-            if(ssn === ""){
+            if (ssn === "") {
                 alert("phone field is empty");
                 return;
             }
@@ -744,11 +780,15 @@ if(isset($_SESSION['type'])  && $_SESSION['hidden'] === '0'){
             var dataString = JSON.stringify(data);
             $.ajax({
                 url: 'add-patient.php',
-                data: {myData: dataString},
+                data: {
+                    myData: dataString
+                },
                 type: 'POST',
                 success: function(response) {
-                    var tle = $('#patients').DataTable({"lengthChange": false,
-                "iDisplayLength": 5});
+                    var tle = $('#patients').DataTable({
+                        "lengthChange": false,
+                        "iDisplayLength": 5
+                    });
                     tle.ajax.reload();
                     tle.page('last').draw('page');
                     altt();
@@ -762,63 +802,66 @@ if(isset($_SESSION['type'])  && $_SESSION['hidden'] === '0'){
                     $('#nation').val("");
 
                 },
-                error: function(response){
+                error: function(response) {
                     alert("some problem happened, please try again");
                 }
             });
         }
 
-        function coloring(event){
+        function coloring(event) {
             var dt = moment(new Date());
-            if(event.done === 0 && moment(event.start._i).isBefore(dt) && moment(event.end._i).isAfter(dt)){
+            if (event.done === 0 && moment(event.start._i).isBefore(dt) && moment(event.end._i).isAfter(dt)) {
                 return "orange";
             }
-            if(event.done === 0 && moment(event.start._i).isBefore(dt) && moment(event.end._i).isBefore(dt)){
-                
+            if (event.done === 0 && moment(event.start._i).isBefore(dt) && moment(event.end._i).isBefore(dt)) {
+
                 return "red";
             }
-            if(event.done === 0 && moment(event.start._i).isAfter(dt) && moment(event.end._i).isAfter(dt)){
+            if (event.done === 0 && moment(event.start._i).isAfter(dt) && moment(event.end._i).isAfter(dt)) {
                 console.log(moment(event.end._i));
                 return "blue";
             }
             return "black"
         }
-        function patientList(){
+
+        function patientList() {
             document.getElementById("disp-patient-calendar").style.display = "none";
             document.getElementById("pt").style.display = "block";
             document.getElementById("vv").style.display = "none";
             $('#disp-patient-calendar').fullCalendar('removeEventSources');
         }
-        function dentistList(){
+
+        function dentistList() {
             document.getElementById("disp-dentist-calendar").style.display = "none";
             document.getElementById("dt").style.display = "block";
             document.getElementById("cc").style.display = "none";
             $('#disp-dentist-calendar').fullCalendar('removeEventSources');
         }
-        function save(){
+
+        function save() {
             var date1 = document.getElementById("date").value;
             var start1 = document.getElementById("start").value;
             var end1 = document.getElementById("end").value;
             var payment1 = document.getElementById("payment").value;
             var comment1 = document.getElementById("Comment").value;
-            if(date1 == ""){
+            if (date1 == "") {
                 date1 = moment().format("YYYY-MM-DD");
-                
-            }else console.log(date1);
-            if(start1 == ""){
-                start1=moment().format('HH:mm');
+
+            } else console.log(date1);
+            if (start1 == "") {
+                start1 = moment().format('HH:mm');
                 console.log(moment().format('HH:mm'))
-                end1="23:59";
+                end1 = "23:59";
             }
-            
-            if(payment1 == ""){
+
+            if (payment1 == "") {
                 payment1 = 0;
             }
-            if(p == -1){
+            if (p == -1) {
                 alert("select patient first!!");
                 return;
             }
-            if(d == -1){
+            if (d == -1) {
                 alert("select dentist first!!");
                 return;
             }
@@ -827,13 +870,15 @@ if(isset($_SESSION['type'])  && $_SESSION['hidden'] === '0'){
                 "dentistId": d,
                 "start": date1 + " " + start1,
                 "end": date1 + " " + end1,
-                "payment": payment1, 
+                "payment": payment1,
                 "Comment": comment1
             };
             var dataString = JSON.stringify(data);
             $.ajax({
                 url: 'add-visit.php',
-                data: {myData: dataString},
+                data: {
+                    myData: dataString
+                },
                 type: 'POST',
                 success: function(response) {
                     $('#calendar').fullCalendar('refetchEvents');
@@ -846,13 +891,13 @@ if(isset($_SESSION['type'])  && $_SESSION['hidden'] === '0'){
             document.getElementById("end").value = "";
             document.getElementById("payment").value = "";
             document.getElementById("Comment").value = "";
-            t1.rows( '.selected' ).nodes().to$().removeClass( 'selected' );
-            t2.rows( '.selected' ).nodes().to$().removeClass( 'selected' );
+            t1.rows('.selected').nodes().to$().removeClass('selected');
+            t2.rows('.selected').nodes().to$().removeClass('selected');
             $("#addModal").modal("hide");
 
         }
-        
-        function saveEdit(){
+
+        function saveEdit() {
             var vid = document.getElementById("vid").value;
             var date1 = document.getElementById("Edate").value;
             var start1 = document.getElementById("Estart").value;
@@ -864,45 +909,49 @@ if(isset($_SESSION['type'])  && $_SESSION['hidden'] === '0'){
             document.getElementById("Eend").disabled = false;
             document.getElementById("Epayment").disabled = true;
             document.getElementById("EComment").disabled = false;
-            if(date1 == ""){
+            if (date1 == "") {
                 alert("select date first!!");
                 return;
             }
-            if(start1 == ""){
+            if (start1 == "") {
                 alert("select starting time first!!");
                 return;
             }
-            if(end1 == ""){
+            if (end1 == "") {
                 alert("select ending time first!!");
                 return;
             }
-            if(payment1 == ""){
+            if (payment1 == "") {
                 payment1 = 0;
             }
-            
+
             var data = {
                 "vid": vid,
                 "start": date1 + " " + start1,
                 "end": date1 + " " + end1,
-                "payment": payment1, 
+                "payment": payment1,
                 "Comment": comment1
             };
             var dataString = JSON.stringify(data);
             $.ajax({
                 url: 'edit-visit.php',
-                data: {myData: dataString},
+                data: {
+                    myData: dataString
+                },
                 type: 'POST',
                 success: function(response) {
                     $('#calendar').fullCalendar('refetchEvents');
                     $('#modal-calendar').fullCalendar('refetchEvents');
-                    if(pid != -1){
+                    if (pid != -1) {
                         $('#disp-patient-calendar').fullCalendar('removeEventSources');
                         $.ajax({
-                            url:"load-patient-dentist.php",
-                            type:"POST",
-                            data:{pid:pid, did:did},
-                            success:function(events)
-                            {
+                            url: "load-patient-dentist.php",
+                            type: "POST",
+                            data: {
+                                pid: pid,
+                                did: did
+                            },
+                            success: function(events) {
                                 data = JSON.parse(events);
                                 console.log(events)
                                 $('#disp-patient-calendar').fullCalendar('addEventSource', data);
@@ -910,14 +959,15 @@ if(isset($_SESSION['type'])  && $_SESSION['hidden'] === '0'){
                             }
                         });
                     }
-                    if(did != -1){
+                    if (did != -1) {
                         $('#disp-dentist-calendar').fullCalendar('removeEventSources');
                         $.ajax({
-                            url:"load-dentist.php",
-                            type:"POST",
-                            data:{did:did},
-                            success:function(events)
-                            {
+                            url: "load-dentist.php",
+                            type: "POST",
+                            data: {
+                                did: did
+                            },
+                            success: function(events) {
                                 data = JSON.parse(events);
                                 console.log(events)
                                 $('#disp-dentist-calendar').fullCalendar('addEventSource', data);
@@ -927,7 +977,7 @@ if(isset($_SESSION['type'])  && $_SESSION['hidden'] === '0'){
                     }
                 }
             });
-            
+
             $("#editModal").modal("hide");
 
         }
@@ -935,63 +985,59 @@ if(isset($_SESSION['type'])  && $_SESSION['hidden'] === '0'){
         var bb = [];
         var cc = [];
         var dd = [];
-        $(document).ready(function(){
+        $(document).ready(function() {
 
             $.ajax({
-                url:"medicine.php",
-                type:"POST",
-                success:function(response)
-                {
+                url: "medicine.php",
+                type: "POST",
+                success: function(response) {
                     data = JSON.parse(response);
-                    for (var i = 0; i < data.length; i++){
+                    for (var i = 0; i < data.length; i++) {
                         $('#medmed').append('<option value="' + data[i][0] + '">');
                         aa.push(data[i][0]);
                     }
-                    
+
                 }
             });
             $.ajax({
-                url:"diagnosis.php",
-                type:"POST",
-                success:function(response)
-                {
+                url: "diagnosis.php",
+                type: "POST",
+                success: function(response) {
                     data = JSON.parse(response);
-                    for (var i = 0; i < data.length; i++){
+                    for (var i = 0; i < data.length; i++) {
                         $('#diadia').append('<option value="' + data[i][0] + '">');
                         bb.push(data[i][0]);
                     }
-                    
+
                 }
             });
             $.ajax({
-                url:"surgery.php",
-                type:"POST",
-                success:function(response)
-                {
+                url: "surgery.php",
+                type: "POST",
+                success: function(response) {
                     data = JSON.parse(response);
-                    for (var i = 0; i < data.length; i++){
+                    for (var i = 0; i < data.length; i++) {
                         $('#sursur').append('<option value="' + data[i][0] + '">');
                         cc.push(data[i][0]);
                     }
-                    
+
                 }
             });
             $.ajax({
-                url:"tooth.php",
-                type:"POST",
-                success:function(response)
-                {
+                url: "tooth.php",
+                type: "POST",
+                success: function(response) {
                     data = JSON.parse(response);
-                    for (var i = 0; i < data.length; i++){
+                    for (var i = 0; i < data.length; i++) {
                         $('#toto1').append('<option value="' + data[i][0] + '">');
                         $('#toto2').append('<option value="' + data[i][0] + '">');
                         dd.push(data[i][0]);
                     }
-                    
+
                 }
             });
-            t1 = $('#patients').DataTable( {
-                "bInfo" : false,
+            t1 = $('#patients').DataTable({
+                "bInfo": false,
                 "lengthChange": false,
                 "iDisplayLength": 5,
                 "processing": true,
@@ -1000,10 +1046,10 @@ if(isset($_SESSION['type'])  && $_SESSION['hidden'] === '0'){
                     style: 'single'
                 },
                 "ajax": "patients-dentist.php"
-            } );
-            
-            t2 = $('#dentists').DataTable( {
-                "bInfo" : false,
+            });
+
+            t2 = $('#dentists').DataTable({
+                "bInfo": false,
                 "lengthChange": false,
                 "iDisplayLength": 5,
                 "processing": true,
@@ -1012,180 +1058,200 @@ if(isset($_SESSION['type'])  && $_SESSION['hidden'] === '0'){
                     style: 'single'
                 },
                 "ajax": "dentists.php"
-            } );
-            t3 = $('#disp-patients').DataTable( {
-                "bInfo" : false,
+            });
+            t3 = $('#disp-patients').DataTable({
+                "bInfo": false,
                 "lengthChange": false,
                 "iDisplayLength": 5,
                 "processing": true,
                 "serverSide": true,
                 "ajax": "patients-dentist.php"
-            } );
-            t4 = $('#disp-dentists').DataTable( {
-                "bInfo" : false,
+            });
+            t4 = $('#disp-dentists').DataTable({
+                "bInfo": false,
                 "lengthChange": false,
                 "iDisplayLength": 5,
                 "processing": true,
                 "serverSide": true,
                 "ajax": "dentists.php"
-            } );
-            var column = t1.column( $(this).attr('ID') );
-            column.visible( ! column.visible() );
-            column = t2.column( $(this).attr('ID') );
-            column.visible( ! column.visible() );
-            column = t3.column( $(this).attr('ID') );
-            column.visible( ! column.visible() );
-            column = t4.column( $(this).attr('ID') );
-            column.visible( ! column.visible() );
+            });
+            var column = t1.column($(this).attr('ID'));
+            column.visible(!column.visible());
+            column = t2.column($(this).attr('ID'));
+            column.visible(!column.visible());
+            column = t3.column($(this).attr('ID'));
+            column.visible(!column.visible());
+            column = t4.column($(this).attr('ID'));
+            column.visible(!column.visible());
 
-            t5 = $('#dtDiag').DataTable({"lengthChange": false,                "bInfo" : false,
+            t5 = $('#dtDiag').DataTable({
+                "lengthChange": false,
+                "bInfo": false,
 
-                "iDisplayLength": 5});
-            $('#dtDiag tbody').on( 'mousedown', 'tr', function (ev) {
-                var cell = t5.row( this );
+                "iDisplayLength": 5
+            });
+            $('#dtDiag tbody').on('mousedown', 'tr', function(ev) {
+                var cell = t5.row(this);
                 console.log(cell)
                 var r = cell.data();
-                if(ev.which == 3){
-                    
-                    if(confirm("are you sure you want to delete this medicine?!")){
-                    var data = {
-                        "x1": r[0],
-                        "x2": r[1],
-                        "x3": r[2]
-                    };
-                    var dataString = JSON.stringify(data);
-                    $.ajax({
-                        url: 'del-diag.php',
-                        data: {myData: dataString},
-                        type: 'POST',
-                        success: function(res){
-                            $.ajax({
-                                url:"diag.php",
-                                type:"POST",
-                                data:{vid:$('#vid').val()},
-                                success:function(events)
-                                {
-                                    data = JSON.parse(events);
-                                    t5.clear().draw();
-                                    t5.rows.add(data); // Add new data
-                                    t5.columns.adjust().draw(); // Redraw the DataTable
-                                    //$('#disp-patient-calendar').fullCalendar('renderEvents');
-                                }
-                            });
-                        },
-                        error: function(response){
-                            alert("some problem happened, please try again");
-                        }
-                    });
+                if (ev.which == 3) {
+
+                    if (confirm("are you sure you want to delete this medicine?!")) {
+                        var data = {
+                            "x1": r[0],
+                            "x2": r[1],
+                            "x3": r[2]
+                        };
+                        var dataString = JSON.stringify(data);
+                        $.ajax({
+                            url: 'del-diag.php',
+                            data: {
+                                myData: dataString
+                            },
+                            type: 'POST',
+                            success: function(res) {
+                                $.ajax({
+                                    url: "diag.php",
+                                    type: "POST",
+                                    data: {
+                                        vid: $('#vid').val()
+                                    },
+                                    success: function(events) {
+                                        data = JSON.parse(events);
+                                        t5.clear().draw();
+                                        t5.rows.add(data); // Add new data
+                                        t5.columns.adjust().draw(); // Redraw the DataTable
+                                        //$('#disp-patient-calendar').fullCalendar('renderEvents');
+                                    }
+                                });
+                            },
+                            error: function(response) {
+                                alert("some problem happened, please try again");
+                            }
+                        });
                     }
                 }
-            } );
-            t6 = $('#dtSur').DataTable({"lengthChange": false,                "bInfo" : false,
+            });
+            t6 = $('#dtSur').DataTable({
+                "lengthChange": false,
+                "bInfo": false,
 
-                "iDisplayLength": 5});
-            $('#dtSur tbody').on( 'mousedown', 'tr', function (ev) {
-                var cell = t6.row( this );
+                "iDisplayLength": 5
+            });
+            $('#dtSur tbody').on('mousedown', 'tr', function(ev) {
+                var cell = t6.row(this);
                 console.log(cell)
                 var r = cell.data();
-                if(ev.which == 3){
-                    
-                    if(confirm("are you sure you want to delete this medicine?!")){
-                    var data = {
-                        "x1": r[0],
-                        "x2": r[1],
-                        "x3": r[2],
-                        "x4": r[3]
-                    };
-                    var dataString = JSON.stringify(data);
-                    $.ajax({
-                        url: 'del-sur.php',
-                        data: {myData: dataString},
-                        type: 'POST',
-                        success: function(res){
-                            $.ajax({
-                                url:"sur.php",
-                                type:"POST",
-                                data:{vid:$('#vid').val()},
-                                success:function(events)
-                                {
-                                    data = JSON.parse(events);
-                                    t6.clear().draw();
-                                    t6.rows.add(data); // Add new data
-                                    t6.columns.adjust().draw(); // Redraw the DataTable
-                                    //$('#disp-patient-calendar').fullCalendar('renderEvents');
-                                }
-                            });
-                        },
-                        error: function(response){
-                            alert("some problem happened, please try again");
-                        }
-                    });
+                if (ev.which == 3) {
+
+                    if (confirm("are you sure you want to delete this medicine?!")) {
+                        var data = {
+                            "x1": r[0],
+                            "x2": r[1],
+                            "x3": r[2],
+                            "x4": r[3]
+                        };
+                        var dataString = JSON.stringify(data);
+                        $.ajax({
+                            url: 'del-sur.php',
+                            data: {
+                                myData: dataString
+                            },
+                            type: 'POST',
+                            success: function(res) {
+                                $.ajax({
+                                    url: "sur.php",
+                                    type: "POST",
+                                    data: {
+                                        vid: $('#vid').val()
+                                    },
+                                    success: function(events) {
+                                        data = JSON.parse(events);
+                                        t6.clear().draw();
+                                        t6.rows.add(data); // Add new data
+                                        t6.columns.adjust().draw(); // Redraw the DataTable
+                                        //$('#disp-patient-calendar').fullCalendar('renderEvents');
+                                    }
+                                });
+                            },
+                            error: function(response) {
+                                alert("some problem happened, please try again");
+                            }
+                        });
                     }
                 }
-            } );
+            });
 
-            t7 = $('#dtpres').DataTable({"lengthChange": false,                "bInfo" : false,
+            t7 = $('#dtpres').DataTable({
+                "lengthChange": false,
+                "bInfo": false,
 
-                "iDisplayLength": 5});
-            $('#dtpres tbody').on( 'mousedown', 'tr', function (ev) {
-                var cell = t7.row( this );
+                "iDisplayLength": 5
+            });
+            $('#dtpres tbody').on('mousedown', 'tr', function(ev) {
+                var cell = t7.row(this);
                 console.log(cell)
                 var r = cell.data();
-                if(ev.which == 3){
-                    
-                    if(confirm("are you sure you want to delete this medicine?!")){
-                    var data = {
-                        "x1": r[0],
-                        "x2": r[1],
-                        "x3": r[2],
-                        "x4": r[3]
-                    };
-                    var dataString = JSON.stringify(data);
-                    $.ajax({
-                        url: 'del-pres.php',
-                        data: {myData: dataString},
-                        type: 'POST',
-                        success: function(res){
-                            $.ajax({
-                                url:"pres.php",
-                                type:"POST",
-                                data:{vid:$('#vid').val()},
-                                success:function(events)
-                                {
-                                    data = JSON.parse(events);
-                                    t7.clear().draw();
-                                    t7.rows.add(data); // Add new data
-                                    t7.columns.adjust().draw(); // Redraw the DataTable
-                                    //$('#disp-patient-calendar').fullCalendar('renderEvents');
-                                }
-                            });
-                        },
-                        error: function(response){
-                            alert("some problem happened, please try again");
-                        }
-                    });
+                if (ev.which == 3) {
+
+                    if (confirm("are you sure you want to delete this medicine?!")) {
+                        var data = {
+                            "x1": r[0],
+                            "x2": r[1],
+                            "x3": r[2],
+                            "x4": r[3]
+                        };
+                        var dataString = JSON.stringify(data);
+                        $.ajax({
+                            url: 'del-pres.php',
+                            data: {
+                                myData: dataString
+                            },
+                            type: 'POST',
+                            success: function(res) {
+                                $.ajax({
+                                    url: "pres.php",
+                                    type: "POST",
+                                    data: {
+                                        vid: $('#vid').val()
+                                    },
+                                    success: function(events) {
+                                        data = JSON.parse(events);
+                                        t7.clear().draw();
+                                        t7.rows.add(data); // Add new data
+                                        t7.columns.adjust().draw(); // Redraw the DataTable
+                                        //$('#disp-patient-calendar').fullCalendar('renderEvents');
+                                    }
+                                });
+                            },
+                            error: function(response) {
+                                alert("some problem happened, please try again");
+                            }
+                        });
                     }
                 }
-            } );
-            
+            });
+
             $('.dataTable').on('click', 'tbody tr', function() {
-                if(t1.row(this).data()){
+                if (t1.row(this).data()) {
                     p = t1.row(this).data()[0];
                 }
-                if(t2.row(this).data()){
+                if (t2.row(this).data()) {
                     d = t2.row(this).data()[0];
                 }
-                if(t3.row(this).data()){
+                if (t3.row(this).data()) {
                     pid = t3.row(this).data()[0];
                     document.getElementById("disp-patient-calendar").style.display = "block";
                     document.getElementById("pt").style.display = "none";
                     document.getElementById("vv").style.display = "block";
                     $.ajax({
-                        url:"load-patient-dentist.php",
-                        type:"POST",
-                        data:{pid:t3.row(this).data()[0], did:did},
-                        success:function(events)
-                        {
+                        url: "load-patient-dentist.php",
+                        type: "POST",
+                        data: {
+                            pid: t3.row(this).data()[0],
+                            did: did
+                        },
+                        success: function(events) {
                             data = JSON.parse(events);
                             console.log(events)
                             $('#disp-patient-calendar').fullCalendar('addEventSource', data);
@@ -1193,20 +1259,21 @@ if(isset($_SESSION['type'])  && $_SESSION['hidden'] === '0'){
                         }
                     });
 
-                    
-                    
+
+
                 }
-                if(did){
-                    
+                if (did) {
+
                     document.getElementById("disp-dentist-calendar").style.display = "block";
                     document.getElementById("dt").style.display = "none";
                     document.getElementById("cc").style.display = "block";
                     $.ajax({
-                        url:"load-dentist.php",
-                        type:"POST",
-                        data:{did:did},
-                        success:function(events)
-                        {
+                        url: "load-dentist.php",
+                        type: "POST",
+                        data: {
+                            did: did
+                        },
+                        success: function(events) {
                             data = JSON.parse(events);
                             console.log(events)
                             $('#disp-dentist-calendar').fullCalendar('addEventSource', data);
@@ -1214,11 +1281,11 @@ if(isset($_SESSION['type'])  && $_SESSION['hidden'] === '0'){
                         }
                     });
 
-                    
-                    
+
+
                 }
             });
-            $('#addModal').on('hidden.bs.modal', function () {
+            $('#addModal').on('hidden.bs.modal', function() {
                 $('[href="#pi"]').tab('show');
                 document.getElementById("date").value = "";
                 document.getElementById("start").value = "";
@@ -1226,101 +1293,116 @@ if(isset($_SESSION['type'])  && $_SESSION['hidden'] === '0'){
                 document.getElementById("payment").value = "";
                 document.getElementById("Comment").value = "";
                 p = -1;
-                t1.rows( '.selected' ).nodes().to$().removeClass( 'selected' );
-                t2.rows( '.selected' ).nodes().to$().removeClass( 'selected' );
-                
+                t1.rows('.selected').nodes().to$().removeClass('selected');
+                t2.rows('.selected').nodes().to$().removeClass('selected');
+
             })
-            $('#pModal').on('hidden.bs.modal', function () {
+            $('#pModal').on('hidden.bs.modal', function() {
                 document.getElementById("disp-patient-calendar").style.display = "none";
                 document.getElementById("pt").style.display = "block";
                 $('#disp-patient-calendar').fullCalendar('removeEventSources');
                 pid = -1;
             });
-            $('#dModal').on('hidden.bs.modal', function () {
+            $('#dModal').on('hidden.bs.modal', function() {
                 document.getElementById("disp-dentist-calendar").style.display = "none";
                 document.getElementById("dt").style.display = "block";
                 $('#disp-dentist-calendar').fullCalendar('removeEventSources');
             });
-            $('#editModal').on('hidden.bs.modal', function () {
+            $('#editModal').on('hidden.bs.modal', function() {
                 $('[href="#piz"]').tab('show');
                 document.getElementById("Edate").disabled = false;
                 document.getElementById("Estart").disabled = false;
                 document.getElementById("Eend").disabled = false;
                 document.getElementById("EComment").disabled = false;
-                document.getElementById('se').style.display='block';
-                document.getElementById('pres').style.display='none';
-                document.getElementById('surg').style.display='none';
-                document.getElementById('diag').style.display='none';
-                document.getElementById('pres3').style.display='none';
+                document.getElementById('se').style.display = 'block';
+                document.getElementById('pres').style.display = 'none';
+                document.getElementById('surg').style.display = 'none';
+                document.getElementById('diag').style.display = 'none';
+                document.getElementById('pres3').style.display = 'none';
 
             });
 
         });
-        function clearDiag(){
+
+        function clearDiag() {
             $.ajax({
-                url:"cleard.php",
-                type:"POST",
-                data:{vid:$('#vid').val()},
-                success: function(){
+                url: "cleard.php",
+                type: "POST",
+                data: {
+                    vid: $('#vid').val()
+                },
+                success: function() {
                     $.ajax({
-                                url:"diag.php",
-                                type:"POST",
-                                data:{vid:$('#vid').val()},
-                                success:function(events)
-                                {
-                                    data = JSON.parse(events);
-                                    t5.clear().draw();
-                                    t5.rows.add(data); // Add new data
-                                    t5.columns.adjust().draw(); // Redraw the DataTable
-                                    //$('#disp-patient-calendar').fullCalendar('renderEvents');
-                                }
-                            });
+                        url: "diag.php",
+                        type: "POST",
+                        data: {
+                            vid: $('#vid').val()
+                        },
+                        success: function(events) {
+                            data = JSON.parse(events);
+                            t5.clear().draw();
+                            t5.rows.add(data); // Add new data
+                            t5.columns.adjust().draw(); // Redraw the DataTable
+                            //$('#disp-patient-calendar').fullCalendar('renderEvents');
+                        }
+                    });
                 }
             });
         }
-        function clearSur(){
+
+        function clearSur() {
             $.ajax({
-                url:"clears.php",
-                type:"POST",
-                data:{vid:$('#vid').val()},
-                success: function(){$.ajax({
-                                url:"sur.php",
-                                type:"POST",
-                                data:{vid:$('#vid').val()},
-                                success:function(events)
-                                {
-                                    data = JSON.parse(events);
-                                    t6.clear().draw();
-                                    t6.rows.add(data); // Add new data
-                                    t6.columns.adjust().draw(); // Redraw the DataTable
-                                    //$('#disp-patient-calendar').fullCalendar('renderEvents');
-                                }
-                            });}
-            });
-        }
-        function clearPres(){
-            $.ajax({
-                url:"clearp.php",
-                type:"POST",
-                data:{vid:$('#vid').val()},
-                success: function(){
+                url: "clears.php",
+                type: "POST",
+                data: {
+                    vid: $('#vid').val()
+                },
+                success: function() {
                     $.ajax({
-                                url:"pres.php",
-                                type:"POST",
-                                data:{vid:$('#vid').val()},
-                                success:function(events)
-                                {
-                                    data = JSON.parse(events);
-                                    t7.clear().draw();
-                                    t7.rows.add(data); // Add new data
-                                    t7.columns.adjust().draw(); // Redraw the DataTable
-                                    //$('#disp-patient-calendar').fullCalendar('renderEvents');
-                                }
-                            });
+                        url: "sur.php",
+                        type: "POST",
+                        data: {
+                            vid: $('#vid').val()
+                        },
+                        success: function(events) {
+                            data = JSON.parse(events);
+                            t6.clear().draw();
+                            t6.rows.add(data); // Add new data
+                            t6.columns.adjust().draw(); // Redraw the DataTable
+                            //$('#disp-patient-calendar').fullCalendar('renderEvents');
+                        }
+                    });
                 }
             });
         }
-        function payrep(){
+
+        function clearPres() {
+            $.ajax({
+                url: "clearp.php",
+                type: "POST",
+                data: {
+                    vid: $('#vid').val()
+                },
+                success: function() {
+                    $.ajax({
+                        url: "pres.php",
+                        type: "POST",
+                        data: {
+                            vid: $('#vid').val()
+                        },
+                        success: function(events) {
+                            data = JSON.parse(events);
+                            t7.clear().draw();
+                            t7.rows.add(data); // Add new data
+                            t7.columns.adjust().draw(); // Redraw the DataTable
+                            //$('#disp-patient-calendar').fullCalendar('renderEvents');
+                        }
+                    });
+                }
+            });
+        }
+
+        function payrep() {
             $("#payrep").html(`<tr>
         <th>item</th>
         <th>price</th> 
@@ -1328,27 +1410,29 @@ if(isset($_SESSION['type'])  && $_SESSION['hidden'] === '0'){
 
             $("#payrep").append("<tr>");
             $("#payrep").append("<td>Entry fees</td>");
-            $("#payrep").append("<td>"+$('#ent').val() + "</td>");
-            
+            $("#payrep").append("<td>" + $('#ent').val() + "</td>");
+
             $("#payrep").append("</tr>");
-            t6.rows().every( function ( rowIdx, tableLoop, rowLoop ) {
+            t6.rows().every(function(rowIdx, tableLoop, rowLoop) {
                 var data = this.data();
                 $("#payrep").append("<tr><td>" + data[1] + " @ tooth: " + data[0] + "</td> <td>" + data[2] + "</td></tr>");
-            } );
+            });
             printJS('payrep', 'html');
         }
-        function loadPres(){
+
+        function loadPres() {
             $("#prpes").html("");
             console.log('xxx');
             $("#prpes").append("<h4>prescription: </h4>" + "</br>");
-            
-            t7.rows().every( function ( rowIdx, tableLoop, rowLoop ) {
+
+            t7.rows().every(function(rowIdx, tableLoop, rowLoop) {
                 var data = this.data();
                 $("#prpes").append("prescriped: " + data[0] + " concentration: " + data[1] + " dosage: " + data[2] + "</br>");
-            } );
+            });
 
         }
-        function loadReport(){
+
+        function loadReport() {
             $("#visr").html("");
             $("#diar").html("");
             $("#manr").html("");
@@ -1366,34 +1450,35 @@ if(isset($_SESSION['type'])  && $_SESSION['hidden'] === '0'){
             $("#visr").append($('#Edate').val() + " " + $('#Estart').val() + "</br>");
 
             $("#diar").append("<h4>Diagnosis: </h4>" + "</br>");
-            t5.rows().every( function ( rowIdx, tableLoop, rowLoop ) {
+            t5.rows().every(function(rowIdx, tableLoop, rowLoop) {
                 var data = this.data();
-                $("#diar").append( data[1] + " at tooth: " + data[0] + "</br>");
-            } );
+                $("#diar").append(data[1] + " at tooth: " + data[0] + "</br>");
+            });
             $("#manr").append("<h4>Management: </h4>" + "</br>");
-            t6.rows().every( function ( rowIdx, tableLoop, rowLoop ) {
+            t6.rows().every(function(rowIdx, tableLoop, rowLoop) {
                 var data = this.data();
                 $("#manr").append(data[1] + " at tooth: " + data[0] + "</br>");
-            } );
+            });
             $("#prer").append("<h4>Prescription: </h4>" + "</br>");
-            t7.rows().every( function ( rowIdx, tableLoop, rowLoop ) {
+            t7.rows().every(function(rowIdx, tableLoop, rowLoop) {
                 var data = this.data();
                 $("#prer").append(data[0] + " " + data[1] + "mg " + data[2] + "</br>");
-            } );
+            });
         }
-        function addDiag(){
+
+        function addDiag() {
             var t = $('#tooth').val();
             var d = $('#dia').val();
             var c = $('#dComment').val();
-            if(t == "" && d == "" && c == "") return;
-            if(dd.includes(t)){
-            $('#toto1').append('<option value="' + t + '">');
-            $('#toto2').append('<option value="' + t + '">');
+            if (t == "" && d == "" && c == "") return;
+            if (dd.includes(t)) {
+                $('#toto1').append('<option value="' + t + '">');
+                $('#toto2').append('<option value="' + t + '">');
             }
-            if(bb.includes(d))
-            $('#diadia').append('<option value="' + d + '">');
+            if (bb.includes(d))
+                $('#diadia').append('<option value="' + d + '">');
             var data = {
-                
+
                 "t": t,
                 "d": d,
                 "c": c,
@@ -1402,63 +1487,71 @@ if(isset($_SESSION['type'])  && $_SESSION['hidden'] === '0'){
             var dataString = JSON.stringify(data);
             $.ajax({
                 url: 'add-diag.php',
-                data: {myData: dataString},
+                data: {
+                    myData: dataString
+                },
                 type: 'POST',
                 success: function(response) {
                     document.getElementById("tooth").value = "";
                     document.getElementById("dia").value = "";
                     document.getElementById("dComment").value = "";
-                    t5.row.add( [
+                    t5.row.add([
                         t,
                         d,
                         c
-                    ] ).draw( false );
+                    ]).draw(false);
                     $.ajax({
-                        url:"pay.php",
-                        type:"POST",
-                        data:{vid:document.getElementById("vid").value},
-                        success:function(res)
-                        {
+                        url: "pay.php",
+                        type: "POST",
+                        data: {
+                            vid: document.getElementById("vid").value
+                        },
+                        success: function(res) {
                             document.getElementById("Epayment").value = res;
                         }
                     });
                     $.ajax({
-                        url:"done.php",
-                        type:"POST",
-                        data:{vid:document.getElementById("vid").value}
-                        
+                        url: "done.php",
+                        type: "POST",
+                        data: {
+                            vid: document.getElementById("vid").value
+                        }
+
                     });
                     $.ajax({
-                        url:"done.php",
-                        type:"POST",
-                        data:{vid:document.getElementById("vid").value},
+                        url: "done.php",
+                        type: "POST",
+                        data: {
+                            vid: document.getElementById("vid").value
+                        },
                         success: function(response) {
                             $('#calendar').fullCalendar('refetchEvents');
                             $('#modal-calendar').fullCalendar('refetchEvents');
                         }
                     });
                 },
-                error: function(response){
+                error: function(response) {
                     alert("some problem happened, please try again");
                 }
             });
-            
+
         }
-        function addSur(){
+
+        function addSur() {
             var t = $('#stooth').val();
             var d = $('#sur').val();
             var p = $('#sprice').val();
             var c = $('#sComment').val();
-            if(t == "" && d == "" && c == "" && p == "") return;
-            if(dd.includes(t)){
-            $('#toto1').append('<option value="' + t + '">');
-            $('#toto2').append('<option value="' + t + '">');
+            if (t == "" && d == "" && c == "" && p == "") return;
+            if (dd.includes(t)) {
+                $('#toto1').append('<option value="' + t + '">');
+                $('#toto2').append('<option value="' + t + '">');
             }
-            if(cc.includes(d))
-            $('#sursur').append('<option value="' + d + '">');
+            if (cc.includes(d))
+                $('#sursur').append('<option value="' + d + '">');
 
             var data = {
-                
+
                 "t": t,
                 "d": d,
                 "p": p,
@@ -1468,55 +1561,61 @@ if(isset($_SESSION['type'])  && $_SESSION['hidden'] === '0'){
             var dataString = JSON.stringify(data);
             $.ajax({
                 url: 'add-sur.php',
-                data: {myData: dataString},
+                data: {
+                    myData: dataString
+                },
                 type: 'POST',
                 success: function(response) {
                     document.getElementById("stooth").value = "";
                     document.getElementById("sur").value = "";
                     document.getElementById("sprice").value = "";
                     document.getElementById("sComment").value = "";
-                    t6.row.add( [
+                    t6.row.add([
                         t,
                         d,
                         p,
                         c
-                    ] ).draw( false );
+                    ]).draw(false);
                     $.ajax({
-                        url:"pay.php",
-                        type:"POST",
-                        data:{vid:document.getElementById("vid").value},
-                        success:function(res)
-                        {
+                        url: "pay.php",
+                        type: "POST",
+                        data: {
+                            vid: document.getElementById("vid").value
+                        },
+                        success: function(res) {
                             document.getElementById("Epayment").value = res;
                         }
                     });
                     $.ajax({
-                        url:"done.php",
-                        type:"POST",
-                        data:{vid:document.getElementById("vid").value},
+                        url: "done.php",
+                        type: "POST",
+                        data: {
+                            vid: document.getElementById("vid").value
+                        },
                         success: function(response) {
                             $('#calendar').fullCalendar('refetchEvents');
                             $('#modal-calendar').fullCalendar('refetchEvents');
                         }
                     });
                 },
-                error: function(response){
+                error: function(response) {
                     alert("some problem happened, please try again");
                 }
             });
-            
+
         }
-        function addPres(){
+
+        function addPres() {
             var t = $('#med').val();
             var d = $('#mg').val();
             var p = $('#dose').val();
             var c = $('#pComment').val();
-            if(t == "" && d == "" && c == "" && p == "") return;
-            if(aa.includes(t))
-            $('#medmed').append('<option value="' + t + '">');
+            if (t == "" && d == "" && c == "" && p == "") return;
+            if (aa.includes(t))
+                $('#medmed').append('<option value="' + t + '">');
 
             var data = {
-                
+
                 "t": t,
                 "d": d,
                 "p": p,
@@ -1526,36 +1625,40 @@ if(isset($_SESSION['type'])  && $_SESSION['hidden'] === '0'){
             var dataString = JSON.stringify(data);
             $.ajax({
                 url: 'add-pres.php',
-                data: {myData: dataString},
+                data: {
+                    myData: dataString
+                },
                 type: 'POST',
                 success: function(response) {
                     document.getElementById("med").value = "";
                     document.getElementById("mg").value = "";
                     document.getElementById("dose").value = "";
                     document.getElementById("pComment").value = "";
-                    t7.row.add( [
+                    t7.row.add([
                         t,
                         d,
                         p,
                         c
-                    ] ).draw( false );
+                    ]).draw(false);
                     $.ajax({
-                        url:"done.php",
-                        type:"POST",
-                        data:{vid:document.getElementById("vid").value},
+                        url: "done.php",
+                        type: "POST",
+                        data: {
+                            vid: document.getElementById("vid").value
+                        },
                         success: function(response) {
                             $('#calendar').fullCalendar('refetchEvents');
                             $('#modal-calendar').fullCalendar('refetchEvents');
                         }
                     });
-                                    
+
                 },
-                error: function(response){
+                error: function(response) {
                     alert("some problem happened, please try again");
                 }
             });
             loadPres();
-            
+
         }
         $(function() {
 
@@ -1563,22 +1666,22 @@ if(isset($_SESSION['type'])  && $_SESSION['hidden'] === '0'){
                 themeSystem: 'standard',
                 eventLimit: true,
                 //defaultView: 'agendaDay',
-                
-                
+
+
                 //aspectRatio: 5,
                 header: {
-                left: 'prev,next,today',
-                center: 'title',
-                right: 'month,list'
+                    left: 'prev,next,today',
+                    center: 'title',
+                    right: 'month,list'
                 },
                 businessHours: [ // specify an array instead
                     {
-                        dow: [ 0, 1, 2, 3, 6 ], // Sunday, Monday, Tuesday, Wednesday, Saturday
+                        dow: [0, 1, 2, 3, 6], // Sunday, Monday, Tuesday, Wednesday, Saturday
                         start: '08:00', // 8am
                         end: '18:00' // 6pm
                     },
                     {
-                        dow: [ 4, 5 ], // Thursday, Friday
+                        dow: [4, 5], // Thursday, Friday
                         start: '10:00', // 10am
                         end: '16:00' // 4pm
                     }
@@ -1589,23 +1692,23 @@ if(isset($_SESSION['type'])  && $_SESSION['hidden'] === '0'){
                     //$('#calendar').fullCalendar('changeView', 'agendaDay');
                     //$('#calendar').fullCalendar('gotoDate',date);
                 },
-                eventClick:function(event)
-                {
+                eventClick: function(event) {
                     $("#editModal").modal("show");
                     document.getElementById("vid").value = event.id;
                     document.getElementById("visd").value = event.id;
                     document.getElementById("ent").value = event.payment;
-                    document.getElementById("Edate").value = ((event.start.year()) + "-" + ((event.start.month()+1)<10?'0'+(event.start.month()+1):(event.start.month()+1)) + "-" + event.start.date());
-                    document.getElementById("Estart").value = ((event.start.hour())<10?'0'+(event.start.hour()):(event.start.hour())) + ":" + ((event.start.minute())<10?'0'+(event.start.minute()):(event.start.minute()));
-                    document.getElementById("Eend").value = ((event.end.hour())<10?'0'+(event.end.hour()):(event.end.hour())) + ":" + ((event.end.minute())<10?'0'+(event.end.minute()):(event.end.minute()));
-                    
+                    document.getElementById("Edate").value = ((event.start.year()) + "-" + ((event.start.month() + 1) < 10 ? '0' + (event.start.month() + 1) : (event.start.month() + 1)) + "-" + event.start.date());
+                    document.getElementById("Estart").value = ((event.start.hour()) < 10 ? '0' + (event.start.hour()) : (event.start.hour())) + ":" + ((event.start.minute()) < 10 ? '0' + (event.start.minute()) : (event.start.minute()));
+                    document.getElementById("Eend").value = ((event.end.hour()) < 10 ? '0' + (event.end.hour()) : (event.end.hour())) + ":" + ((event.end.minute()) < 10 ? '0' + (event.end.minute()) : (event.end.minute()));
+
                     document.getElementById("EComment").value = event.comment;
                     $.ajax({
-                        url:"one-patient.php",
-                        type:"POST",
-                        data:{pid:event.pid},
-                        success:function(resp)
-                        {
+                        url: "one-patient.php",
+                        type: "POST",
+                        data: {
+                            pid: event.pid
+                        },
+                        success: function(resp) {
                             res = JSON.parse(resp);
                             document.getElementById("pp1x").value = res[0];
                             document.getElementById("pp2x").value = res[1];
@@ -1618,15 +1721,16 @@ if(isset($_SESSION['type'])  && $_SESSION['hidden'] === '0'){
                         }
                     });
                     $.ajax({
-                        url:"pay.php",
-                        type:"POST",
-                        data:{vid:event.id},
-                        success:function(res)
-                        {
+                        url: "pay.php",
+                        type: "POST",
+                        data: {
+                            vid: event.id
+                        },
+                        success: function(res) {
                             document.getElementById("Epayment").value = res;
                         }
                     });
-                    if(event.done != 0){
+                    if (event.done != 0) {
                         document.getElementById("Edate").disabled = true;
                         document.getElementById("Estart").disabled = true;
                         document.getElementById("Eend").disabled = true;
@@ -1634,11 +1738,12 @@ if(isset($_SESSION['type'])  && $_SESSION['hidden'] === '0'){
                     }
                     //to-do
                     $.ajax({
-                        url:"diag.php",
-                        type:"POST",
-                        data:{vid:event.id},
-                        success:function(events)
-                        {
+                        url: "diag.php",
+                        type: "POST",
+                        data: {
+                            vid: event.id
+                        },
+                        success: function(events) {
                             data = JSON.parse(events);
                             t5.clear().draw();
                             t5.rows.add(data); // Add new data
@@ -1647,11 +1752,12 @@ if(isset($_SESSION['type'])  && $_SESSION['hidden'] === '0'){
                         }
                     });
                     $.ajax({
-                        url:"sur.php",
-                        type:"POST",
-                        data:{vid:event.id},
-                        success:function(events)
-                        {
+                        url: "sur.php",
+                        type: "POST",
+                        data: {
+                            vid: event.id
+                        },
+                        success: function(events) {
                             data = JSON.parse(events);
                             t6.clear().draw();
                             t6.rows.add(data); // Add new data
@@ -1660,11 +1766,12 @@ if(isset($_SESSION['type'])  && $_SESSION['hidden'] === '0'){
                         }
                     });
                     $.ajax({
-                        url:"pres.php",
-                        type:"POST",
-                        data:{vid:event.id},
-                        success:function(events)
-                        {
+                        url: "pres.php",
+                        type: "POST",
+                        data: {
+                            vid: event.id
+                        },
+                        success: function(events) {
                             data = JSON.parse(events);
                             t7.clear().draw();
                             t7.rows.add(data); // Add new data
@@ -1681,7 +1788,7 @@ if(isset($_SESSION['type'])  && $_SESSION['hidden'] === '0'){
                     element.css('background-color', coloring(event));
                 },
                 customButtons: {
-                    
+
                 }
             });
 
@@ -1691,22 +1798,22 @@ if(isset($_SESSION['type'])  && $_SESSION['hidden'] === '0'){
                 themeSystem: 'standard',
                 eventLimit: true,
                 //defaultView: 'agendaDay',
-                
-                
+
+
                 //aspectRatio: 5,
                 header: {
-                left: 'prev,next,today',
-                center: 'title',
-                right: 'month,list'
+                    left: 'prev,next,today',
+                    center: 'title',
+                    right: 'month,list'
                 },
                 businessHours: [ // specify an array instead
                     {
-                        dow: [ 0, 1, 2, 3, 6 ], // Sunday, Monday, Tuesday, Wednesday, Saturday
+                        dow: [0, 1, 2, 3, 6], // Sunday, Monday, Tuesday, Wednesday, Saturday
                         start: '08:00', // 8am
                         end: '18:00' // 6pm
                     },
                     {
-                        dow: [ 4, 5 ], // Thursday, Friday
+                        dow: [4, 5], // Thursday, Friday
                         start: '10:00', // 10am
                         end: '16:00' // 4pm
                     }
@@ -1717,21 +1824,21 @@ if(isset($_SESSION['type'])  && $_SESSION['hidden'] === '0'){
                     //$('#calendar').fullCalendar('changeView', 'agendaDay');
                     //$('#calendar').fullCalendar('gotoDate',date);
                 },
-                eventClick:function(event)
-                {
+                eventClick: function(event) {
                     $("#editModal").modal("show");
                     document.getElementById("vid").value = event.id;
                     document.getElementById("ent").value = event.payment;
-                    document.getElementById("Edate").value = ((event.start.year()) + "-" + ((event.start.month()+1)<10?'0'+(event.start.month()+1):(event.start.month()+1)) + "-" + event.start.date());
-                    document.getElementById("Estart").value = ((event.start.hour())<10?'0'+(event.start.hour()):(event.start.hour())) + ":" + ((event.start.minute())<10?'0'+(event.start.minute()):(event.start.minute()));
-                    document.getElementById("Eend").value = ((event.end.hour())<10?'0'+(event.end.hour()):(event.end.hour())) + ":" + ((event.end.minute())<10?'0'+(event.end.minute()):(event.end.minute()));
+                    document.getElementById("Edate").value = ((event.start.year()) + "-" + ((event.start.month() + 1) < 10 ? '0' + (event.start.month() + 1) : (event.start.month() + 1)) + "-" + event.start.date());
+                    document.getElementById("Estart").value = ((event.start.hour()) < 10 ? '0' + (event.start.hour()) : (event.start.hour())) + ":" + ((event.start.minute()) < 10 ? '0' + (event.start.minute()) : (event.start.minute()));
+                    document.getElementById("Eend").value = ((event.end.hour()) < 10 ? '0' + (event.end.hour()) : (event.end.hour())) + ":" + ((event.end.minute()) < 10 ? '0' + (event.end.minute()) : (event.end.minute()));
                     document.getElementById("EComment").value = event.comment;
                     $.ajax({
-                        url:"one-patient.php",
-                        type:"POST",
-                        data:{pid:event.pid},
-                        success:function(resp)
-                        {
+                        url: "one-patient.php",
+                        type: "POST",
+                        data: {
+                            pid: event.pid
+                        },
+                        success: function(resp) {
                             res = JSON.parse(resp);
                             document.getElementById("pp1x").value = res[0];
                             document.getElementById("pp2x").value = res[1];
@@ -1744,26 +1851,28 @@ if(isset($_SESSION['type'])  && $_SESSION['hidden'] === '0'){
                         }
                     });
                     $.ajax({
-                        url:"pay.php",
-                        type:"POST",
-                        data:{vid:event.id},
-                        success:function(res)
-                        {
+                        url: "pay.php",
+                        type: "POST",
+                        data: {
+                            vid: event.id
+                        },
+                        success: function(res) {
                             document.getElementById("Epayment").value = res;
                         }
                     });
-                    if(event.done != 0){
+                    if (event.done != 0) {
                         document.getElementById("Edate").disabled = true;
                         document.getElementById("Estart").disabled = true;
                         document.getElementById("Eend").disabled = true;
 
                     }
                     $.ajax({
-                        url:"diag.php",
-                        type:"POST",
-                        data:{vid:event.id},
-                        success:function(events)
-                        {
+                        url: "diag.php",
+                        type: "POST",
+                        data: {
+                            vid: event.id
+                        },
+                        success: function(events) {
                             data = JSON.parse(events);
                             t5.clear().draw();
                             t5.rows.add(data); // Add new data
@@ -1772,11 +1881,12 @@ if(isset($_SESSION['type'])  && $_SESSION['hidden'] === '0'){
                         }
                     });
                     $.ajax({
-                        url:"sur.php",
-                        type:"POST",
-                        data:{vid:event.id},
-                        success:function(events)
-                        {
+                        url: "sur.php",
+                        type: "POST",
+                        data: {
+                            vid: event.id
+                        },
+                        success: function(events) {
                             data = JSON.parse(events);
                             t6.clear().draw();
                             t6.rows.add(data); // Add new data
@@ -1785,11 +1895,12 @@ if(isset($_SESSION['type'])  && $_SESSION['hidden'] === '0'){
                         }
                     });
                     $.ajax({
-                        url:"pres.php",
-                        type:"POST",
-                        data:{vid:event.id},
-                        success:function(events)
-                        {
+                        url: "pres.php",
+                        type: "POST",
+                        data: {
+                            vid: event.id
+                        },
+                        success: function(events) {
                             data = JSON.parse(events);
                             t7.clear().draw();
                             t7.rows.add(data); // Add new data
@@ -1805,7 +1916,7 @@ if(isset($_SESSION['type'])  && $_SESSION['hidden'] === '0'){
                     element.css('background-color', coloring(event));
                 },
                 customButtons: {
-                    
+
                 }
             });
 
@@ -1814,7 +1925,7 @@ if(isset($_SESSION['type'])  && $_SESSION['hidden'] === '0'){
                 themeSystem: 'standard',
                 eventLimit: true,
                 //defaultView: 'agendaDay',
-                
+
                 events: {
                     url: 'load-dentist.php',
                     type: 'POST',
@@ -1827,18 +1938,18 @@ if(isset($_SESSION['type'])  && $_SESSION['hidden'] === '0'){
                 },
                 //aspectRatio: 5,
                 header: {
-                left: 'prev,next,today',
-                center: 'title',
-                right: 'addEventButton'
+                    left: 'prev,next,today',
+                    center: 'title',
+                    right: 'addEventButton'
                 },
                 businessHours: [ // specify an array instead
                     {
-                        dow: [ 0, 1, 2, 3, 6 ], // Sunday, Monday, Tuesday, Wednesday, Saturday
+                        dow: [0, 1, 2, 3, 6], // Sunday, Monday, Tuesday, Wednesday, Saturday
                         start: '08:00', // 8am
                         end: '18:00' // 6pm
                     },
                     {
-                        dow: [ 4, 5 ], // Thursday, Friday
+                        dow: [4, 5], // Thursday, Friday
                         start: '10:00', // 10am
                         end: '16:00' // 4pm
                     }
@@ -1849,21 +1960,21 @@ if(isset($_SESSION['type'])  && $_SESSION['hidden'] === '0'){
                     //$('#calendar').fullCalendar('changeView', 'agendaDay');
                     //$('#calendar').fullCalendar('gotoDate',date);
                 },
-                eventClick:function(event)
-                {
+                eventClick: function(event) {
                     $("#editModal").modal("show");
                     document.getElementById("vid").value = event.id;
                     document.getElementById("ent").value = event.payment;
-                    document.getElementById("Edate").value = ((event.start.year()) + "-" + ((event.start.month()+1)<10?'0'+(event.start.month()+1):(event.start.month()+1)) + "-" + event.start.date());
-                    document.getElementById("Estart").value = ((event.start.hour())<10?'0'+(event.start.hour()):(event.start.hour())) + ":" + ((event.start.minute())<10?'0'+(event.start.minute()):(event.start.minute()));
-                    document.getElementById("Eend").value = ((event.end.hour())<10?'0'+(event.end.hour()):(event.end.hour())) + ":" + ((event.end.minute())<10?'0'+(event.end.minute()):(event.end.minute()));
+                    document.getElementById("Edate").value = ((event.start.year()) + "-" + ((event.start.month() + 1) < 10 ? '0' + (event.start.month() + 1) : (event.start.month() + 1)) + "-" + event.start.date());
+                    document.getElementById("Estart").value = ((event.start.hour()) < 10 ? '0' + (event.start.hour()) : (event.start.hour())) + ":" + ((event.start.minute()) < 10 ? '0' + (event.start.minute()) : (event.start.minute()));
+                    document.getElementById("Eend").value = ((event.end.hour()) < 10 ? '0' + (event.end.hour()) : (event.end.hour())) + ":" + ((event.end.minute()) < 10 ? '0' + (event.end.minute()) : (event.end.minute()));
                     document.getElementById("EComment").value = event.comment;
                     $.ajax({
-                        url:"one-patient.php",
-                        type:"POST",
-                        data:{pid:event.pid},
-                        success:function(resp)
-                        {
+                        url: "one-patient.php",
+                        type: "POST",
+                        data: {
+                            pid: event.pid
+                        },
+                        success: function(resp) {
                             res = JSON.parse(resp);
                             document.getElementById("pp1x").value = res[0];
                             document.getElementById("pp2x").value = res[1];
@@ -1876,26 +1987,28 @@ if(isset($_SESSION['type'])  && $_SESSION['hidden'] === '0'){
                         }
                     });
                     $.ajax({
-                        url:"pay.php",
-                        type:"POST",
-                        data:{vid:event.id},
-                        success:function(res)
-                        {
+                        url: "pay.php",
+                        type: "POST",
+                        data: {
+                            vid: event.id
+                        },
+                        success: function(res) {
                             document.getElementById("Epayment").value = res;
                         }
                     });
-                    if(event.done != 0){
+                    if (event.done != 0) {
                         document.getElementById("Edate").disabled = true;
                         document.getElementById("Estart").disabled = true;
                         document.getElementById("Eend").disabled = true;
 
                     }
                     $.ajax({
-                        url:"diag.php",
-                        type:"POST",
-                        data:{vid:event.id},
-                        success:function(events)
-                        {
+                        url: "diag.php",
+                        type: "POST",
+                        data: {
+                            vid: event.id
+                        },
+                        success: function(events) {
                             data = JSON.parse(events);
                             t5.clear().draw();
                             t5.rows.add(data); // Add new data
@@ -1904,11 +2017,12 @@ if(isset($_SESSION['type'])  && $_SESSION['hidden'] === '0'){
                         }
                     });
                     $.ajax({
-                        url:"sur.php",
-                        type:"POST",
-                        data:{vid:event.id},
-                        success:function(events)
-                        {
+                        url: "sur.php",
+                        type: "POST",
+                        data: {
+                            vid: event.id
+                        },
+                        success: function(events) {
                             data = JSON.parse(events);
                             t6.clear().draw();
                             t6.rows.add(data); // Add new data
@@ -1917,11 +2031,12 @@ if(isset($_SESSION['type'])  && $_SESSION['hidden'] === '0'){
                         }
                     });
                     $.ajax({
-                        url:"pres.php",
-                        type:"POST",
-                        data:{vid:event.id},
-                        success:function(events)
-                        {
+                        url: "pres.php",
+                        type: "POST",
+                        data: {
+                            vid: event.id
+                        },
+                        success: function(events) {
                             data = JSON.parse(events);
                             t7.clear().draw();
                             t7.rows.add(data); // Add new data
@@ -1941,18 +2056,18 @@ if(isset($_SESSION['type'])  && $_SESSION['hidden'] === '0'){
                         text: 'New Visit...',
                         click: function() {
                             $("#addModal").modal("show");
-                        
+
                         }
                     }
                 }
             });
-           
+
 
             $('#calendar').fullCalendar({
                 themeSystem: 'standard',
                 eventLimit: true,
                 //defaultView: 'agendaDay',
-                
+
                 events: {
                     url: 'load-dentist.php',
                     type: 'POST',
@@ -1964,11 +2079,11 @@ if(isset($_SESSION['type'])  && $_SESSION['hidden'] === '0'){
                     }
                 },
                 //aspectRatio: 5,
-                height: $(window).height()*0.96,
+                height: $(window).height() * 0.96,
                 header: {
-                left: 'prev,next,today addEventButton patients,dentists',
-                center: 'title',
-                right: 'month,agendaWeek,agendaDay,listMonth logout'
+                    left: 'prev,next,today addEventButton patients,dentists',
+                    center: 'title',
+                    right: 'month,agendaWeek,agendaDay,listMonth logout'
                 },
                 selectable: true,
                 selectHelper: true,
@@ -1976,12 +2091,12 @@ if(isset($_SESSION['type'])  && $_SESSION['hidden'] === '0'){
                 eventLimit: true, // allow "more" link when too many events
                 businessHours: [ // specify an array instead
                     {
-                        dow: [ 0, 1, 2, 3, 6 ], // Sunday, Monday, Tuesday, Wednesday, Saturday
+                        dow: [0, 1, 2, 3, 6], // Sunday, Monday, Tuesday, Wednesday, Saturday
                         start: '08:00', // 8am
                         end: '18:00' // 6pm
                     },
                     {
-                        dow: [ 4, 5 ], // Thursday, Friday
+                        dow: [4, 5], // Thursday, Friday
                         start: '10:00', // 10am
                         end: '16:00' // 4pm
                     }
@@ -1991,27 +2106,27 @@ if(isset($_SESSION['type'])  && $_SESSION['hidden'] === '0'){
                     $("#myModal").modal("show");
                     setTimeout(() => {
                         $('#modal-calendar').fullCalendar('changeView', 'agendaDay');
-                        $('#modal-calendar').fullCalendar('gotoDate',date);
+                        $('#modal-calendar').fullCalendar('gotoDate', date);
                     }, 150);
-                    
+
                 },
-                eventClick:function(event)
-                {
+                eventClick: function(event) {
                     $("#editModal").modal("show");
                     document.getElementById("vid").value = event.id;
                     document.getElementById("ent").value = event.payment;
-                    document.getElementById("Edate").value = ((event.start.year()) + "-" + ((event.start.month()+1)<10?'0'+(event.start.month()+1):(event.start.month()+1)) + "-" + event.start.date());
-                    document.getElementById("Estart").value = ((event.start.hour())<10?'0'+(event.start.hour()):(event.start.hour())) + ":" + ((event.start.minute())<10?'0'+(event.start.minute()):(event.start.minute()));
-                    document.getElementById("Eend").value = ((event.end.hour())<10?'0'+(event.end.hour()):(event.end.hour())) + ":" + ((event.end.minute())<10?'0'+(event.end.minute()):(event.end.minute()));
+                    document.getElementById("Edate").value = ((event.start.year()) + "-" + ((event.start.month() + 1) < 10 ? '0' + (event.start.month() + 1) : (event.start.month() + 1)) + "-" + event.start.date());
+                    document.getElementById("Estart").value = ((event.start.hour()) < 10 ? '0' + (event.start.hour()) : (event.start.hour())) + ":" + ((event.start.minute()) < 10 ? '0' + (event.start.minute()) : (event.start.minute()));
+                    document.getElementById("Eend").value = ((event.end.hour()) < 10 ? '0' + (event.end.hour()) : (event.end.hour())) + ":" + ((event.end.minute()) < 10 ? '0' + (event.end.minute()) : (event.end.minute()));
                     document.getElementById("EComment").value = event.comment;
                     console.log(event.pid)
                     $.ajax({
-                        url:"one-patient.php",
-                        type:"POST",
-                        data:{pid:event.pid},
-                        success:function(resp)
-                        {
-                            
+                        url: "one-patient.php",
+                        type: "POST",
+                        data: {
+                            pid: event.pid
+                        },
+                        success: function(resp) {
+
                             res = JSON.parse(resp);
                             console.log(res)
                             document.getElementById("pp1x").value = res[0][1];
@@ -2025,40 +2140,43 @@ if(isset($_SESSION['type'])  && $_SESSION['hidden'] === '0'){
                         }
                     });
                     $.ajax({
-                        url:"pay.php",
-                        type:"POST",
-                        data:{vid:event.id},
-                        success:function(res)
-                        {
+                        url: "pay.php",
+                        type: "POST",
+                        data: {
+                            vid: event.id
+                        },
+                        success: function(res) {
                             document.getElementById("Epayment").value = res;
                         }
                     });
-                    if(event.done != 0){
+                    if (event.done != 0) {
                         document.getElementById("Edate").disabled = true;
                         document.getElementById("Estart").disabled = true;
                         document.getElementById("Eend").disabled = true;
 
                     }
                     $.ajax({
-                        url:"diag.php",
-                        type:"POST",
-                        data:{vid:event.id},
-                        success:function(events)
-                        {
+                        url: "diag.php",
+                        type: "POST",
+                        data: {
+                            vid: event.id
+                        },
+                        success: function(events) {
                             data = JSON.parse(events);
                             t5.clear().draw();
                             t5.rows.add(data); // Add new data
                             t5.columns.adjust().draw(); // Redraw the DataTable
                             //$('#disp-patient-calendar').fullCalendar('renderEvents');
-                            
+
                         }
                     });
                     $.ajax({
-                        url:"sur.php",
-                        type:"POST",
-                        data:{vid:event.id},
-                        success:function(events)
-                        {
+                        url: "sur.php",
+                        type: "POST",
+                        data: {
+                            vid: event.id
+                        },
+                        success: function(events) {
                             data = JSON.parse(events);
                             t6.clear().draw();
                             t6.rows.add(data); // Add new data
@@ -2067,11 +2185,12 @@ if(isset($_SESSION['type'])  && $_SESSION['hidden'] === '0'){
                         }
                     });
                     $.ajax({
-                        url:"pres.php",
-                        type:"POST",
-                        data:{vid:event.id},
-                        success:function(events)
-                        {
+                        url: "pres.php",
+                        type: "POST",
+                        data: {
+                            vid: event.id
+                        },
+                        success: function(events) {
                             data = JSON.parse(events);
                             t7.clear().draw();
                             t7.rows.add(data); // Add new data
@@ -2088,28 +2207,28 @@ if(isset($_SESSION['type'])  && $_SESSION['hidden'] === '0'){
                         text: 'New Visit...',
                         click: function() {
                             $("#addModal").modal("show");
-                        
+
                         }
                     },
                     logout: {
                         text: 'logout',
                         click: function() {
                             window.location.replace("logout.php");
-                        
+
                         }
                     },
                     patients: {
                         text: 'patients...',
                         click: function() {
                             $("#pModal").modal("show");
-                        
+
                         }
                     }
                 }
             });
-            
+
         });
-        setInterval(function(){
+        setInterval(function() {
             $('#calendar').fullCalendar('refetchEvents');
             $('#modal-calendar').fullCalendar('refetchEvents');
 
