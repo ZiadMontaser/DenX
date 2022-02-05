@@ -1,0 +1,41 @@
+.file {
+    margin-top: 0px;
+    margin-bottom: 0px;
+
+    width: 794px;
+    height: 295mm;
+    padding: 32px;
+    display: flex;
+
+    font-family: Verdana,sans-serif;
+
+    pointer-events: none;
+}
+
+.page_head{
+    width: 100%;
+    text-align: center;
+}
+
+.line_page_border {
+    padding: 32px;
+    align-items: stretch;
+    width: 100%;
+    border-style: groove;
+    border-radius: 25px;
+    position: relative;
+}
+
+.line_page_border img{
+    height:150px;
+}
+
+.watermark {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0.2;
+    height: 350px !important;
+    /* z-index: -1; */
+}

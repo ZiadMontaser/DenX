@@ -43,6 +43,7 @@ if (isset($_SESSION['type'])  && $_SESSION['hidden'] === '0') {
     <script type="text/javascript" src="public/datatable/dataTables.select.min.js"></script>
     <script src="public/lib/print.min.js"></script>
     <link rel="stylesheet" type="text/css" href="public/lib/print.min.css">
+    <link rel="stylesheet" type="text/css" href="css/print_page.css">
     <script>
         $(function() {
             $(".date").datepicker({
@@ -308,15 +309,17 @@ if (isset($_SESSION['type'])  && $_SESSION['hidden'] === '0') {
                         <ul class="nav nav-tabs" role="tablist">
                             <li role="presentation" class="active"><a onclick="document.getElementById('se').style.display='block';document.getElementById('pres').style.display='none';document.getElementById('surg').style.display='none';document.getElementById('diag').style.display='none';document.getElementById('pres3').style.display='none';document.getElementById('pres4').style.display='none';" href="#piz" aria-controls="piz" role="tab" data-toggle="tab">Visit data</a>
                             </li>
-                            <li role="presentation"><a onclick="document.getElementById('se').style.display='none';document.getElementById('surg').style.display='none';document.getElementById('pres').style.display='none';document.getElementById('diag').style.display='block';document.getElementById('pres3').style.display='none';document.getElementById('pres4').style.display='none';" href="#viz" aria-controls="viz" role="tab" data-toggle="tab">Diagnosis</a>
+                            <li role="presentation"><a onclick="document.getElementById('se').style.display='none';document.getElementById('surg').style.display='none';document.getElementById('pres').style.display='none';document.getElementById('diag').style.display='block';document.getElementById('pres3').style.display='none';document.getElementById('attendance').style.display='none';document.getElementById('pres4').style.display='none';" href="#viz" aria-controls="viz" role="tab" data-toggle="tab">Diagnosis</a>
                             </li>
-                            <li role="presentation"><a onclick="document.getElementById('se').style.display='none';document.getElementById('diag').style.display='none';document.getElementById('pres').style.display='none';document.getElementById('surg').style.display='block';document.getElementById('pres3').style.display='none';document.getElementById('pres4').style.display='none';" href="#piz2" aria-controls="piz2" role="tab" data-toggle="tab">Managements</a>
+                            <li role="presentation"><a onclick="document.getElementById('se').style.display='none';document.getElementById('diag').style.display='none';document.getElementById('pres').style.display='none';document.getElementById('surg').style.display='block';document.getElementById('pres3').style.display='none';document.getElementById('attendance').style.display='none';document.getElementById('pres4').style.display='none';" href="#piz2" aria-controls="piz2" role="tab" data-toggle="tab">Managements</a>
                             </li>
-                            <li role="presentation"><a onclick="document.getElementById('se').style.display='none';document.getElementById('surg').style.display='none';document.getElementById('diag').style.display='none';document.getElementById('pres').style.display='block';document.getElementById('pres3').style.display='none';document.getElementById('pres4').style.display='none';loadPres();" href="#viz2" aria-controls="viz2" role="tab" data-toggle="tab">prescriptions</a>
+                            <li role="presentation"><a onclick="document.getElementById('se').style.display='none';document.getElementById('surg').style.display='none';document.getElementById('diag').style.display='none';document.getElementById('pres').style.display='block';document.getElementById('pres3').style.display='none';document.getElementById('attendance').style.display='none';document.getElementById('pres4').style.display='none';loadPres();" href="#viz2" aria-controls="viz2" role="tab" data-toggle="tab">prescriptions</a>
                             </li>
-                            <li role="presentation"><a onclick="document.getElementById('se').style.display='none';document.getElementById('surg').style.display='none';document.getElementById('diag').style.display='none';document.getElementById('pres').style.display='none';document.getElementById('pres3').style.display='block';document.getElementById('pres4').style.display='none';" href="#viz3" aria-controls="viz3" role="tab" data-toggle="tab">Sick leave</a>
+                            <li role="presentation"><a onclick="document.getElementById('se').style.display='none';document.getElementById('surg').style.display='none';document.getElementById('diag').style.display='none';document.getElementById('pres').style.display='none';document.getElementById('pres3').style.display='block';document.getElementById('attendance').style.display='none';document.getElementById('pres4').style.display='none';loadSickLeave()" href="#viz3" aria-controls="viz3" role="tab" data-toggle="tab">Sick leave</a>
                             </li>
-                            <li role="presentation"><a onclick="document.getElementById('se').style.display='none';document.getElementById('surg').style.display='none';document.getElementById('diag').style.display='none';document.getElementById('pres').style.display='none';document.getElementById('pres3').style.display='none';document.getElementById('pres4').style.display='block';loadReport();" href="#viz4" aria-controls="viz4" role="tab" data-toggle="tab">Visit report</a>
+                            <li role="presentation"><a onclick="document.getElementById('se').style.display='none';document.getElementById('surg').style.display='none';document.getElementById('diag').style.display='none';document.getElementById('pres').style.display='none';document.getElementById('pres3').style.display='none';document.getElementById('attendance').style.display='block';document.getElementById('pres4').style.display='none';loadAttendance()" href="#viz5" aria-controls="viz5" role="tab" data-toggle="tab">Attendance</a>
+                            </li>
+                            <li role="presentation"><a onclick="document.getElementById('se').style.display='none';document.getElementById('surg').style.display='none';document.getElementById('diag').style.display='none';document.getElementById('pres').style.display='none';document.getElementById('pres3').style.display='none';document.getElementById('attendance').style.display='none';document.getElementById('pres4').style.display='block';loadReport();" href="#viz4" aria-controls="viz4" role="tab" data-toggle="tab">Visit report</a>
                             </li>
 
                         </ul>
@@ -647,6 +650,86 @@ if (isset($_SESSION['type'])  && $_SESSION['hidden'] === '0') {
                                     </div>
                                 </div>
                             </div>
+                            <div role="tabpanel" class="tab-pane" id="viz5">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-xs-4">
+
+
+
+                                            <div class="container" style="margin-left:-15px">
+                                                <div class="row">
+                                                    <div class="col-xs-2">
+                                                        <label for="aname"><b>Name</b></label>
+                                                        <input type="text" placeholder="name" name="aname" id="aname" class="form-control" style="margin-bottom: 20px" onchange="$('#a1').html($('#aname').val());">
+                                                    </div>
+                                                    <div class="col-xs-2">
+
+                                                        <label for="asex"><b>Sex</b></label>
+                                                        <select type="text" placeholder="sex" name="asex" id="asex" class="form-control" style="margin-bottom: 20px" onchange="$('#asex1').html($('#asex').val() === 'Male'?'he':'she');">
+                                                            <option value="Male">Male</option>
+                                                            <option value="Female">Female</option>
+                                                        </select>
+
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+
+                                            <label for="awork"><b>Place of work</b></label>
+                                            <input type="text" placeholder="work place" name="awork" id="awork" class="form-control" style="margin-bottom: 20px" onchange="$('#a2').html($('#awork').val());">
+                                            <div class="container" style="margin-left:-15px">
+                                                <div class="row">
+                                                    <div class="col-xs-2">
+                                                        <label for="astart"><b>Start</b></label>
+                                                        <input type="time" placeholder="start" name="astart" id="astart" class="form-control" style="margin-bottom:20px" onchange="$('#a4').html($('#astart').val());">
+                                                    </div>
+                                                    <div class="col-xs-2">
+                                                        <label for="aend"><b>End</b></label>
+                                                        <input type="time" placeholder="end" name="aend" id="aend" class="form-control" style="margin-bottom:20px" onchange="$('#a5').html($('#aend').val());">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                        <div class="col-xs-5">
+
+                                            <div id="afile" style="zoom: 0.6; ">
+                                            <div class="file">
+        <div class="line_page_border">
+            <img class="logo" src="img/ClinicLog.png"> </img>
+            <img class="watermark"  src="img/ClinicLog.png"> </img>
+            <!-- <h4 style="margin-top: 10px">Alkamil dental clinic </h4></br> -->
+            <h4 style="margin-top: 15px">C.R no. :1268338</h4></br>
+            <h2 class="page_head">Attendance</h2></br>
+        </br><br><br>
+            <div>Patient name: <span id="a1"></span></br>
+                Place of work: <span id="a2"></span></br><br>
+                Alkamil dental clinic certifies that the above mentioned patient was examined in 
+                our clinic from <span id="a4">12:34 PM</span> to <span id="a5">1:10 PM</span> 
+                
+                </br><br><br></br><br><br>
+                Dentist name:
+                <?php echo ucwords(strtolower($_SESSION['name'])) ?></br>
+                <br>
+                Sign and stamp
+                &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;clinic
+                stamp
+            </div>
+
+        </div>
+    </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
                             <div role="tabpanel" class="tab-pane" id="viz4">
                                 <div id="visr"></div>
                                 <div id="diar"></div>
@@ -680,6 +763,10 @@ if (isset($_SESSION['type'])  && $_SESSION['hidden'] === '0') {
                 <div class="modal-footer" id="pres3" style="display:none">
                     <button type="button" class="btn btn-default save" onclick="clearsl()">Clear</button>
                     <button type="button" class="btn btn-primary save" onclick="printJS('slfile', 'html')">Print</button>
+                </div>
+                <div class="modal-footer" id="attendance" style="display:none">
+                    <!-- <button type="button" class="btn btn-default save" onclick="clearsl()">Clear input</button> -->
+                    <button type="button" class="btn btn-primary save" onclick="printJS({printable:'afile', type:'html', css:'css/print_page.css'})">Print</button>
                 </div>
                 <div class="modal-footer" id="pres4" style="display:none">
                     <button type="button" class="btn btn-primary save" onclick="printJS('viz4', 'html')">Print</button>
@@ -1319,7 +1406,7 @@ if (isset($_SESSION['type'])  && $_SESSION['hidden'] === '0') {
                 document.getElementById('surg').style.display = 'none';
                 document.getElementById('diag').style.display = 'none';
                 document.getElementById('pres3').style.display = 'none';
-
+                document.getElementById('attendance').style.display='none';
             });
 
         });
@@ -1464,6 +1551,33 @@ if (isset($_SESSION['type'])  && $_SESSION['hidden'] === '0') {
                 var data = this.data();
                 $("#prer").append(data[0] + " " + data[1] + "mg " + data[2] + "</br>");
             });
+        }
+
+        function loadAttendance(){
+            $("#aname").val($('#pp1x').val());
+            $('#aname').change();
+
+            $("#astart").val($('#Estart').val());
+            $('#astart').change();
+            
+            $("#aend").val(moment().format("HH:mm"));
+            $('#aend').change();
+
+            $("#asex").val($('#pp4x').val())
+            $('#asex').change();
+
+        }
+
+        function loadSickLeave(){
+            $("#slname").val($('#pp1x').val());
+            $('#slname').change();
+
+            // $("#slstart").val($('#Estart').val());
+            // $('#slstart').change();
+
+            $("#slsex").val($('#pp4x').val())
+            $('#slsex').change();
+
         }
 
         function addDiag() {

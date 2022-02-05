@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Attendance page</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="css/print_page.css">
+    <link rel="stylesheet" href="https://printjs-4de6.kxcdn.com/print.min.css">
+    <script src='https://printjs-4de6.kxcdn.com/print.min.js'></script>
+</head>
+
+<body>
+    <div style="zoom: 0.25; ">
+    <div id="afile" class="file">
+        <div class="line_page_border">
+            <img class="logo" src="img/ClinicLog.png"> </img>
+            <img class="watermark"  src="img/ClinicLog.png"> </img>
+            <!-- <h4 style="margin-top: 10px">Alkamil dental clinic </h4></br> -->
+            <h4 style="margin-top: 15px">C.R no. :1268338</h4></br>
+            <h2 class="page_head">Attendance</h2></br>
+        </br><br><br>
+        <button onclick="printJS({printable:'afile', type:'html', css:'css/print_page.css'})">Print</button>
+            <div>Patient name: <span id="a1"></span></br>
+                Place of work: <span id="a2"></span></br><br>
+                Alkamil dental clinic certifies that the above mentioned patient was examined in 
+                our clinic from <span id="a4">12:34 PM</span> to <span id="a5">1:10 PM</span> 
+                
+                </br><br><br></br><br><br>
+                Dentist name:
+                <?php echo $_SESSION['name'] ?></br>
+                Sign and stamp
+                &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;clinic
+                stamp
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+
+</html>
