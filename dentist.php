@@ -614,16 +614,16 @@ if (isset($_SESSION['type'])  && $_SESSION['hidden'] === '0') {
                                             <label for="sldn"><b>Management</b></label>
                                             <input type="text" placeholder="dentist name" name="sldn" id="sldn" class="form-control" style="margin-bottom:20px" onchange="$('#sl7').html($('#sldn').val());">
                                             <label for="sld"><b>Duration</b></label>
-                                            <input type="number" placeholder="Comment" name="sld" id="sld" class="form-control" style="margin-bottom:20px" onchange="$('#sl4').html($('#sld').val());">
+                                            <input type="number" placeholder="Comment" name="sld" id="sld" class="form-control" style="margin-bottom:20px" onchange="updateSickleaveDuration();">
                                             <div class="container" style="margin-left:-15px">
                                                 <div class="row">
                                                     <div class="col-xs-2">
                                                         <label for="slstart"><b>Start</b></label>
-                                                        <input type="text" placeholder="start" name="slstart" id="slstart" class="date form-control" style="margin-bottom:20px" onchange="$('#sl5').html($('#slstart').val());">
+                                                        <input type="text" placeholder="start" name="slstart" id="slstart" class="date form-control" style="margin-bottom:20px" onchange="$('#sl5').html($('#slstart').val());updateSickleaveDuration()">
                                                     </div>
                                                     <div class="col-xs-2">
                                                         <label for="slend"><b>End</b></label>
-                                                        <input type="text" placeholder="end" name="slend" id="slend" class=" date form-control" style="margin-bottom:20px" onchange="$('#sl6').html($('#slend').val());">
+                                                        <input disabled type="text" placeholder="end" name="slend" id="slend" class=" date form-control" style="margin-bottom:20px" onchange="$('#sl6').html($('#slend').val());">
                                                     </div>
                                                 </div>
                                             </div>
@@ -632,17 +632,34 @@ if (isset($_SESSION['type'])  && $_SESSION['hidden'] === '0') {
                                         </div>
                                         <div class="col-xs-5">
 
-                                            <div id="slfile">
-                                                <h4 style="margin-top: 10px">Alkamil dental clinic </h4></br>
-                                                <h4 style="margin-top: -15px">C.R no. :1268338</h4></br>
-                                                <h2>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Sick leave</h2></br>
-                                                <h3>Patient name: <span id="sl1"></span></br>
-                                                    Place of work: <span id="sl2"></span></br>
-                                                    Alkamil dental clinic certifies that; the above mentioned patient is diagnosed in our clinic and <span id="slsex1">he</span> found suffering from <span id="sl3"></span>, <span id="sl7"></span> was done for him and he is eligible to take sick leave for <span id="sl4"></span> days form date <span id="sl5"></span> to date <span id="sl6"></span></br>
-                                                    </br>
-                                                    Dentist name: <?php echo $_SESSION['name'] ?></br>
-                                                    Sign and stamp &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;clinic stamp
-                                                </h3>
+                                            <div id="slfile" style="zoom: 0.6; ">
+                                                <div class="file">
+                                                    <div class="line_page_border">
+                                                        <img class="logo" src="img/ClinicLog.png"> </img>
+                                                        <img class="watermark" src="img/ClinicLog.png"> </img>
+                                                        <!-- <h4 style="margin-top: 10px">Alkamil dental clinic </h4></br> -->
+                                                        <h4 style="margin-top: 15px">C.R no. :1268338</h4></br>
+                                                        <h2 class="page_head">Sick leave</h2></br>
+                                                        </br><br><br>
+                                                        <div>Patient name: <span id="sl1"></span></br>
+                                                            Place of work: <span id="sl2"></span></br><br>
+
+                                                            Alkamil dental clinic certifies that; the above mentioned patient is diagnosed in our clinic
+                                                            and <span id="slsex1">he</span> found suffering from <span id="sl3"></span>,
+                                                            <span id="sl7"></span> was done for him and he is eligible to take sick leave for <span id="sl4"></span> days
+                                                            form date <span id="sl5"></span> to date <span id="sl6"></span></br>
+
+                                                            </br><br><br></br><br><br>
+                                                            Dentist name:
+                                                            <?php echo ucwords(strtolower($_SESSION['name'])) ?></br>
+                                                            <br>
+                                                            Sign and stamp
+                                                            &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;clinic
+                                                            stamp
+                                                        </div>
+
+                                                    </div>
+                                                </div>
 
                                             </div>
                                         </div>
@@ -699,30 +716,30 @@ if (isset($_SESSION['type'])  && $_SESSION['hidden'] === '0') {
                                         <div class="col-xs-5">
 
                                             <div id="afile" style="zoom: 0.6; ">
-                                            <div class="file">
-        <div class="line_page_border">
-            <img class="logo" src="img/ClinicLog.png"> </img>
-            <img class="watermark"  src="img/ClinicLog.png"> </img>
-            <!-- <h4 style="margin-top: 10px">Alkamil dental clinic </h4></br> -->
-            <h4 style="margin-top: 15px">C.R no. :1268338</h4></br>
-            <h2 class="page_head">Attendance</h2></br>
-        </br><br><br>
-            <div>Patient name: <span id="a1"></span></br>
-                Place of work: <span id="a2"></span></br><br>
-                Alkamil dental clinic certifies that the above mentioned patient was examined in 
-                our clinic from <span id="a4">12:34 PM</span> to <span id="a5">1:10 PM</span> 
-                
-                </br><br><br></br><br><br>
-                Dentist name:
-                <?php echo ucwords(strtolower($_SESSION['name'])) ?></br>
-                <br>
-                Sign and stamp
-                &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;clinic
-                stamp
-            </div>
+                                                <div class="file">
+                                                    <div class="line_page_border">
+                                                        <img class="logo" src="img/ClinicLog.png"> </img>
+                                                        <img class="watermark" src="img/ClinicLog.png"> </img>
+                                                        <!-- <h4 style="margin-top: 10px">Alkamil dental clinic </h4></br> -->
+                                                        <h4 style="margin-top: 15px">C.R no. :1268338</h4></br>
+                                                        <h2 class="page_head">Attendance</h2></br>
+                                                        </br><br><br>
+                                                        <div>Patient name: <span id="a1"></span></br>
+                                                            Place of work: <span id="a2"></span></br><br>
+                                                            Alkamil dental clinic certifies that the above mentioned patient was examined in
+                                                            our clinic from <span id="a4">12:34 PM</span> to <span id="a5">1:10 PM</span>
 
-        </div>
-    </div>
+                                                            </br><br><br></br><br><br>
+                                                            Dentist name:
+                                                            <?php echo ucwords(strtolower($_SESSION['name'])) ?></br>
+                                                            <br>
+                                                            Sign and stamp
+                                                            &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;clinic
+                                                            stamp
+                                                        </div>
+
+                                                    </div>
+                                                </div>
 
                                             </div>
                                         </div>
@@ -762,7 +779,7 @@ if (isset($_SESSION['type'])  && $_SESSION['hidden'] === '0') {
                 </div>
                 <div class="modal-footer" id="pres3" style="display:none">
                     <button type="button" class="btn btn-default save" onclick="clearsl()">Clear</button>
-                    <button type="button" class="btn btn-primary save" onclick="printJS('slfile', 'html')">Print</button>
+                    <button type="button" class="btn btn-primary save" onclick="printJS({printable:'slfile', type:'html', css:'css/print_page.css'})">Print</button>
                 </div>
                 <div class="modal-footer" id="attendance" style="display:none">
                     <!-- <button type="button" class="btn btn-default save" onclick="clearsl()">Clear input</button> -->
@@ -1406,7 +1423,7 @@ if (isset($_SESSION['type'])  && $_SESSION['hidden'] === '0') {
                 document.getElementById('surg').style.display = 'none';
                 document.getElementById('diag').style.display = 'none';
                 document.getElementById('pres3').style.display = 'none';
-                document.getElementById('attendance').style.display='none';
+                document.getElementById('attendance').style.display = 'none';
             });
 
         });
@@ -1553,13 +1570,13 @@ if (isset($_SESSION['type'])  && $_SESSION['hidden'] === '0') {
             });
         }
 
-        function loadAttendance(){
+        function loadAttendance() {
             $("#aname").val($('#pp1x').val());
             $('#aname').change();
 
             $("#astart").val($('#Estart').val());
             $('#astart').change();
-            
+
             $("#aend").val(moment().format("HH:mm"));
             $('#aend').change();
 
@@ -1568,7 +1585,7 @@ if (isset($_SESSION['type'])  && $_SESSION['hidden'] === '0') {
 
         }
 
-        function loadSickLeave(){
+        function loadSickLeave() {
             $("#slname").val($('#pp1x').val());
             $('#slname').change();
 
@@ -1578,6 +1595,21 @@ if (isset($_SESSION['type'])  && $_SESSION['hidden'] === '0') {
             $("#slsex").val($('#pp4x').val())
             $('#slsex').change();
 
+            $('#slstart').val(moment().format("DD-MM-YYYY"))
+            $('#slstart').change();
+        }
+
+        function updateSickleaveDuration() {
+            const duration = $('#sld').val();
+            if (duration.length > 0) {
+                $('#sl4').html(duration);
+
+                const date = moment($('#slstart').val(), "DD-MM-YYYY");
+                date.add(duration - 1, 'day');
+
+                $('#slend').val(date.format("DD-MM-YYYY"));
+                $('#slend').change();
+            }
         }
 
         function addDiag() {
