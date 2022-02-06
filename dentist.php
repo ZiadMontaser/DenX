@@ -2122,14 +2122,14 @@ if (isset($_SESSION['type'])  && $_SESSION['hidden'] === '0') {
                         },
                         success: function(resp) {
                             res = JSON.parse(resp);
-                            document.getElementById("pp1x").value = res[0];
-                            document.getElementById("pp2x").value = res[1];
-                            document.getElementById("pp3x").value = res[2];
-                            document.getElementById("pp4x").value = res[3];
-                            document.getElementById("pp5x").value = res[4];
-                            document.getElementById("pp6x").value = res[5];
-                            document.getElementById("pp7x").value = res[6];
-                            document.getElementById("pp8x").value = res[7];
+                            document.getElementById("pp1x").value = res[0][1];
+                            document.getElementById("pp2x").value = res[0][2];
+                            document.getElementById("pp3x").value = res[0][3];
+                            document.getElementById("pp4x").value = res[0][4];
+                            document.getElementById("pp5x").value = res[0][5];
+                            document.getElementById("pp6x").value = res[0][6];
+                            document.getElementById("pp7x").value = res[0][7];
+                            document.getElementById("pp8x").value = res[0][3];
                         }
                     });
                     $.ajax({
