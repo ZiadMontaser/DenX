@@ -16,13 +16,31 @@ $results = $statement->get_result();
 
 $result = $results->fetch_all();
 
+$myfile = fopen("src/cdt_codes.txt", "r");
+while(!feof($myfile)) {
+    $line = fgets($myfile);
+    array_push($data,utf8_encode(str_replace("\r\n","", $line)));
+}
+
 foreach($result as $row)
 {
-    $data[] = array(
-        0   => $row[0]
-    );
+    if(!is_in_array($row[0], $data)){
+        array_push($data,$row[0]);
+    }
 }
 
 echo json_encode($data);
+
+function normlize_item($n) { return str_replace(' ', '', strtolower($n));}
+
+function is_in_array($item, $array){
+
+    foreach($array as $x)
+    {
+        if(normlize_item($item) == normlize_item($x)) return true;
+    }
+    return false;
+
+}
 
 ?>

@@ -1109,8 +1109,8 @@ if (isset($_SESSION['type'])  && $_SESSION['hidden'] === '0') {
                 success: function(response) {
                     data = JSON.parse(response);
                     for (var i = 0; i < data.length; i++) {
-                        $('#diadia').append('<option value="' + data[i][0] + '">');
-                        bb.push(data[i][0]);
+                        $('#diadia').append('<option value="' + data[i] + '">');
+                        bb.push(data[i]);
                     }
 
                 }
@@ -1121,8 +1121,8 @@ if (isset($_SESSION['type'])  && $_SESSION['hidden'] === '0') {
                 success: function(response) {
                     data = JSON.parse(response);
                     for (var i = 0; i < data.length; i++) {
-                        $('#sursur').append('<option value="' + data[i][0] + '">');
-                        cc.push(data[i][0]);
+                        $('#sursur').append('<option value="' + data[i] + '">');
+                        cc.push(data[i]);
                     }
 
                 }
