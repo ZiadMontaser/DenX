@@ -9,15 +9,15 @@ D0330 - Panoramic radiographic image
 D0340 - 2D cephalometric radiographic image - acquisition, measurement and analysis
 D0350 - 2D oral/facial images, photographic image obtained intraorally or extraorally
 D0351 - 3D photographic image
-D0701 - Panoramic radiographic image – image capture only (Effective 01/01/2021)
-D0702 - 2-D cephalometric radiographic image – image capture only (Effective 01/01/2021)
-D0703 - 2-D oral/facial photographic image obtained intra-orally or extra-orally – image capture only (Effective 01/01/2021)
-D0704 - 3-D photographic image – image capture only (Effective 01/01/2021)
-D0705 - Extra-oral posterior dental radiographic image – image capture only (Effective 01/01/2021)
-D0706 - Intraoral – occlusal radiographic image – image capture only (Effective 01/01/2021)
-D0707 - Intraoral – periapical radiographic image – image capture only (Effective 01/01/2021)
-D0708 - Intraoral – bitewing radiographic image – image capture only (Effective 01/01/2021)
-D0709 - Intraoral – complete series of radiographic images – image capture only (Effective 01/01/2021)
+D0701 - Panoramic radiographic image image capture only (Effective 01/01/2021)
+D0702 - 2-D cephalometric radiographic image image capture only (Effective 01/01/2021)
+D0703 - 2-D oral/facial photographic image obtained intra-orally or extra-orally image capture only (Effective 01/01/2021)
+D0704 - 3-D photographic image image capture only (Effective 01/01/2021)
+D0705 - Extra-oral posterior dental radiographic image image capture only (Effective 01/01/2021)
+D0706 - Intraoral occlusal radiographic image image capture only (Effective 01/01/2021)
+D0707 - Intraoral periapical radiographic image image capture only (Effective 01/01/2021)
+D0708 - Intraoral bitewing radiographic image image capture only (Effective 01/01/2021)
+D0709 - Intraoral complete series of radiographic images image capture only (Effective 01/01/2021)
 D1352 - Preventive resin restoration in a moderate to high caries risk patient - permanent tooth
 D4210 - Gingivectomy or gingivoplasty - four or more contiguous teeth or tooth bounded spaces per quadrant
 D4211 - Gingivectomy or Gingivoplasty - one to three contiguous teeth or tooth bounded spaces per quadrant
@@ -54,8 +54,8 @@ D5988 - Surgical splint
 D5992 - Adjust maxillofacial prosthetic appliance, by report
 D5993 - Maintenance and cleaning of a maxillofacial prosthesis (extra- or intra-oral) other than required adjustments, by report
 D5994 - Periodontal medicament carrier with peripheral seal - laboratory processed (Deleted 12/31/2020)
-D5995 - Periodontal medicament carrier with peripheral seal – laboratory processed – maxillary (Effective 01/01/2021)
-D5996 - Periodontal medicament carrier with peripheral seal – laboratory processed – mandibular (Effective 01/01/2021)
+D5995 - Periodontal medicament carrier with peripheral seal laboratory processed maxillary (Effective 01/01/2021)
+D5996 - Periodontal medicament carrier with peripheral seal laboratory processed mandibular (Effective 01/01/2021)
 D5999 - Unspecified maxillofacial prosthesis, by report
 D6010 - Surgical placement of implant body: endosteal implant
 D6011 - Surgical access to an implant body (Second stage implant surgery)
@@ -158,7 +158,7 @@ D7948 - LeFort II or LeFort III (osteoplasty of facial bone for midface hypoplas
 D7949 - LeFort II or LeFort III - with bone graft
 D7950 - Osseous, osteoperiosteal, or cartilage graft of the mandible or maxilla - autogenous or non-autogenous, by report
 D7955 - Repair of maxillofacial soft and/or hard tissue defect
-D7960 - Frenulectomy – also known as frenectomy or frenotomy - separate procedure not incidental to another procedure (Deleted 12/31/2020)
+D7960 - Frenulectomy also known as frenectomy or frenotomy - separate procedure not incidental to another procedure (Deleted 12/31/2020)
 D7961 - Buccal / labial frenectomy (frenulectomy) (Effective 01/01/2021)
 D7962 - Lingual frenectomy (frenulectomy) (Effective 01/01/2021)
 D7970 - Excision of hyperplastic tissue - per arch
@@ -170,7 +170,7 @@ D7982 - Sialodochoplasty
 D7983 - Closure of salivary fistula
 D7990 - Emergency tracheotomy
 D7991 - Coronoidectomy
-D7993 - Surgical placement of craniofacial implant – extra oral (Effective 01/01/2021)
+D7993 - Surgical placement of craniofacial implant extra oral (Effective 01/01/2021)
 D7994 - Surgical placement: zygomatic implant (Effective 01/01/2021)
 D7995 - Synthetic graft - mandible or facial bones, by report
 D7996 - Implant - mandible for augmentation purposes (excluding alveolar ridge), by report
@@ -246,7 +246,7 @@ D1330 - Oral hygiene instructions
 D1351 - Sealant - per tooth
 D1353 - Sealant repair - per tooth
 D1354 - Application of caries arresting medicament - per tooth
-D1355 - Caries preventive medicament application – per tooth (Effective 01/01/2021)
+D1355 - Caries preventive medicament application per tooth (Effective 01/01/2021)
 D1516 - Fixed bilateral space maintainer, maxillary
 D1517 - Fixed bilateral space maintainer, mandibular
 D1526 - Remove bilateral space maintainer, maxillary
@@ -311,7 +311,7 @@ D2910 - Re-cement or re-bond inlay, onlay, veneer or partial coverage restoratio
 D2915 - Re-cement or re-bond indirectly fabricated or prefabricated post and core
 D2920 - Re-cement or re-bond crown
 D2921 - Reattachment of tooth fragment, incisal edge or cusp
-D2928 - Prefabricated porcelain/ceramic crown – permanent tooth (Effective 01/01/2021)
+D2928 - Prefabricated porcelain/ceramic crown permanent tooth (Effective 01/01/2021)
 D2929 - Prefabricated porcelain/ceramic crown - primary tooth
 D2930 - Prefabricated stainless-steel crown - primary tooth
 D2931 - Prefabricated stainless steel crown - permanent tooth
@@ -372,12 +372,12 @@ D3431 - Biologic materials to aid in soft and osseous tissue regeneration in con
 D3432 - Guided tissue regeneration, resorbable barrier, per site, in conjunction with periradicular surgery
 D3450 - Root amputation - per root
 D3470 - Intentional re-implantation (including necessary splinting)
-D3471 - Surgical repair of root resorption – anterior (Effective 01/01/2021)
-D3472 - Surgical repair of root resorption – premolar (Effective 01/01/2021)
-D3473 - Surgical repair of root resorption – molar (Effective 01/01/2021)
-D3501 - Surgical exposure of root surface without apicoectomy or repair of root resorption – anterior (Effective 01/01/2021)
-D3502 - Surgical exposure of root surface without apicoectomy or repair of root resorption – premolar (Effective 01/01/2021)
-D3503 - Surgical exposure of root surface without apicoectomy or repair of root resorption – molar (Effective 01/01/2021)
+D3471 - Surgical repair of root resorption anterior (Effective 01/01/2021)
+D3472 - Surgical repair of root resorption premolar (Effective 01/01/2021)
+D3473 - Surgical repair of root resorption molar (Effective 01/01/2021)
+D3501 - Surgical exposure of root surface without apicoectomy or repair of root resorption anterior (Effective 01/01/2021)
+D3502 - Surgical exposure of root surface without apicoectomy or repair of root resorption premolar (Effective 01/01/2021)
+D3503 - Surgical exposure of root surface without apicoectomy or repair of root resorption molar (Effective 01/01/2021)
 D3910 - Surgical procedure for isolation of tooth with rubber dam
 D3911 - Intra orifice barrier (Effective 01/01/2022)
 D3920 - Hemisection (including any root removal), not including root canal therapy
@@ -460,7 +460,7 @@ D5750 - Reline complete maxillary denture (indirect)
 D5751 - Reline complete mandibular denture (indirect)
 D5760 - Reline maxillary partial denture (indirect)
 D5761 - Reline mandibular partial denture (indirect)
-D5765 - Soft liner for complete or partial removable denture – indirect (Effective 01/01/2022)
+D5765 - Soft liner for complete or partial removable denture indirect (Effective 01/01/2022)
 D5810 - Interim complete denture (maxillary)
 D5811 - Interim complete denture (mandibular)
 D5820 - Interim partial denture (including retentive/clasping materials, rests, and teeth), maxillary
@@ -534,8 +534,8 @@ D6121 - Implant supported retainer for metal FPD - predominantly base alloys
 D6122 - Implant supported retainer for metal FPD - noble alloys
 D6123 - Implant supported retainer for metal FPD - titanium and titanium alloys
 D6190 - Radiographic/surgical implant index, by report
-D6191 - Semi-precision abutment – placement (Effective 01/01/2021)
-D6192 - Semi-precision attachment – placement (Effective 01/01/2021)
+D6191 - Semi-precision abutment placement (Effective 01/01/2021)
+D6192 - Semi-precision attachment placement (Effective 01/01/2021)
 D6194 - Abutment supported retainer crown for FPD - titanium and titanium alloys
 D6195 - Abutment supported retainer - porcelain fused to titanium and titanium alloys
 D6198 - Remove interim implant component (Effective 01/01/2022)
@@ -673,7 +673,7 @@ D9948 - Adjustment of custom sleep apnea appliance (Effective 01/01/2022)
 D9949 - Repair of custom sleep apnea appliance (Effective 01/01/2022)
 D9961 - Duplicate/copy patient's records
 D9970 - Enamel microabrasion
-D9971 - Odontoplasty – per tooth
+D9971 - Odontoplasty per tooth
 D9972 - External bleaching - per arch - performed in office
 D9973 - External bleaching - per tooth
 D9974 - Internal bleaching - per tooth

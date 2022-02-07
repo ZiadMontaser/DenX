@@ -38,6 +38,7 @@ if (isset($_SESSION['type'])) {
     <link rel="stylesheet" type="text/css" href="public/datatable/select.dataTables.min.css" />
     <script type="text/javascript" src="public/datatable/datatables.min.js"></script>
     <script type="text/javascript" src="public/datatable/dataTables.select.min.js"></script>
+    <script src="public/lib/print.min.js"></script>
     <script>
         $(function() {
             $(".date").datepicker({
@@ -492,6 +493,71 @@ if (isset($_SESSION['type'])) {
                     </tfoot>
                 </table>
             </div>
+            <div class="row p-32">
+                <h3>Diagnosis Report...</h3>
+                <div class="container">
+                <div class="row">
+                    <div class="col-md-5">
+                        <label for="start"><b>start</b></label>
+                        <input type="date" placeholder="start" name="start" id="diagnose_start" class="w-25 form-control" style="margin-bottom: 20px" onchange="reloadDiagnoseStates()">
+                    </div>
+                    <div class="col-md-5">
+                        <label for="end"><b>end</b></label>
+                        <input type="date" placeholder="end" name="end" id="diagnose_end" class="w-25 form-control" style="margin-bottom: 20px" onchange="reloadDiagnoseStates()">
+                    </div>
+                    <div class="col-md-2" style="margin-top:24px">
+                        <button type="button" class="btn btn-primary save" onclick="printJS('diagnosis','html')">Print</button>
+                    </div>
+                </div>
+                </div>
+                <table id="diagnosis" class="display" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Diagnos</th>
+                            <th>Number</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Diagnos</th>
+                            <th>Number</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <div class="row p-32">
+                <h3>Treatment Report...</h3>
+                <div class="container">
+                <div class="row">
+                    <div class="col-md-5">
+                        <label for="start"><b>start</b></label>
+                        <input type="date" placeholder="start" name="start" id="treatment_start" class="w-25 form-control" style="margin-bottom: 20px" onchange="reloadTreatmentStates()">
+                    </div>
+                    <div class="col-md-5">
+                        <label for="end"><b>end</b></label>
+                        <input type="date" placeholder="end" name="end" id="treatment_end" class="w-25 form-control" style="margin-bottom: 20px" onchange="reloadTreatmentStates()">
+                    </div>
+                    <div class="col-md-2" style="margin-top:24px">
+                        <button type="button" class="btn btn-primary save" onclick="printJS('treatment','html')">Print</button>
+                    </div>
+                </div>
+                </div>
+                <table id="treatment" class="display" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Treatment</th>
+                            <th>Number</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Treatment</th>
+                            <th>Number</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+
             <div class="row">
                 <div class="col-md-12">
 
@@ -679,6 +745,23 @@ if (isset($_SESSION['type'])) {
             "serverSide": true,
             "ajax": "phones.php"
         });
+        t4 = $('#diagnosis').DataTable({
+            "columns": [
+                {data: 'Diagnos'},
+                {data: 'Number'}
+            ],
+            "order": [ 1, 'desc' ]
+        })
+        reloadDiagnoseStates();
+        t5 = $('#treatment').DataTable({
+            "columns": [
+                {data: 'Treatment'},
+                {data: 'Number'}
+            ],
+            "order": [ 1, 'desc' ]
+        })
+        reloadTreatmentStates();
+
         var column = t1.column($(this).attr('ID'));
         column.visible(!column.visible());
         column = t2.column($(this).attr('ID'));
@@ -715,7 +798,48 @@ if (isset($_SESSION['type'])) {
                 },
                 success: function(events) {
                     data = JSON.parse(events);
+                    console.log(data)
                     $('#profit').val(data);
+                }
+            });
+        }
+
+        function reloadDiagnoseStates(){
+            start_date = "1990-05-20"
+            end_date ="2030-05-20" 
+            if($('#diagnose_start').val() != "") start_date = $('#diagnose_start').val();
+            if($('#diagnose_end').val() != "") end_date = $('#diagnose_end').val();
+            $.ajax({
+                url: "diagnosis-stats.php",
+                type: "GET",
+                data: {
+                    start: start_date,
+                    end: end_date
+                },
+                success: function(events) {
+                    data = JSON.parse(events);
+                    t4.clear();
+                    t4.rows.add( data ).draw();
+                }
+            });
+        }
+
+        function reloadTreatmentStates(){
+            start_date = "1990-05-20"
+            end_date ="2030-05-20" 
+            if($('#treatment_start').val() != "") start_date = $('#treatment_start').val();
+            if($('#treatment_end').val() != "") end_date = $('#treatment_end').val();
+            $.ajax({
+                url: "treatment-stats.php",
+                type: "GET",
+                data: {
+                    start: start_date,
+                    end: end_date
+                },
+                success: function(events) {
+                    data = JSON.parse(events);
+                    t5.clear();
+                    t5.rows.add( data ).draw();
                 }
             });
         }
