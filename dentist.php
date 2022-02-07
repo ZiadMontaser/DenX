@@ -748,12 +748,31 @@ if (isset($_SESSION['type'])  && $_SESSION['hidden'] === '0') {
                                 </div>
                             </div>
                             <div role="tabpanel" class="tab-pane" id="viz4">
-                                <div id="visr"></div>
-                                <div id="diar"></div>
-                                <div id="manr"></div>
-                                <div id="prer"></div>
-
+                                <div id="vrfile" style="zoom: 0.8;" class="file">
+                                    <div class="line_page_border">
+                                        <img class="logo" src="img/ClinicLog.png"> </img>
+                                        <img class="watermark" src="img/ClinicLog.png"> </img>
+                                        <!-- <h4 style="margin-top: 10px">Alkamil dental clinic </h4></br> -->
+                                        <h4 style="margin-top: 15px">C.R no. :1268338</h4></br>
+                                        <h2 class="page_head">Visit report</h2>
+                                        </br><br>
+                                        <div>
+                                            <div id="visr"></div>
+                                            <div id="diar"></div>
+                                            <div id="manr"></div>
+                                            <div id="prer"></div>
+                                            </br><br>
+                                            Dentist name:
+                                            <?php echo ucwords(strtolower($_SESSION['name'])) ?></br>
+                                            <br>
+                                            Sign and stamp
+                                            &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;clinic
+                                            stamp
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
+
                         </div>
 
                     </div>
@@ -775,7 +794,11 @@ if (isset($_SESSION['type'])  && $_SESSION['hidden'] === '0') {
                 <div class="modal-footer" id="pres" style="display:none">
                     <button type="button" class="btn btn-primary save" onclick="addPres()">Save Medicine</button>
                     <button type="button" class="btn btn-primary save" onclick="clearPres()">clear prescription</button>
-                    <button type="button" class="btn btn-primary save" onclick="loadPres(); printJS('prpes', 'html')">Print precription</button>
+                    <button type="button" class="btn btn-primary save" onclick="loadPres();
+                                                                                document.querySelector('#pres_file').parentElement.style.display = 'block';
+                                                                                printJS({printable:'pres_file', type:'html', css:'css/print_page.css', style:'img{display:block;}'});
+                                                                                document.querySelector('#pres_file').parentElement.style.display = 'none';
+                                                                                ">Print precription</button>
                 </div>
                 <div class="modal-footer" id="pres3" style="display:none">
                     <button type="button" class="btn btn-default save" onclick="clearsl()">Clear</button>
@@ -786,7 +809,7 @@ if (isset($_SESSION['type'])  && $_SESSION['hidden'] === '0') {
                     <button type="button" class="btn btn-primary save" onclick="printJS({printable:'afile', type:'html', css:'css/print_page.css'})">Print</button>
                 </div>
                 <div class="modal-footer" id="pres4" style="display:none">
-                    <button type="button" class="btn btn-primary save" onclick="printJS('viz4', 'html')">Print</button>
+                    <button type="button" class="btn btn-primary save" onclick="printJS({printable:'vrfile', type:'html', css:'css/print_page.css'})">Print</button>
                     <button type="button" class="btn btn-primary save" onclick="payrep()">payment report</button>
                 </div>
             </div>
@@ -794,9 +817,30 @@ if (isset($_SESSION['type'])  && $_SESSION['hidden'] === '0') {
     </div>
 
     <div style="display: none">
-        <div id="prpes">
+        <div id="pres_file" class="file">
+            <div class="line_page_border">
+                <img class="logo" src="img/ClinicLog.png"> </img>
+                <img class="watermark" src="img/ClinicLog.png"> </img>
+                <!-- <h4 style="margin-top: 10px">Alkamil dental clinic </h4></br> -->
+                <h4 style="margin-top: 15px">C.R no. :1268338</h4></br>
+                <h2 class="page_head">Prescription</h2></br>
+                </br><br><br>
+                <div>
+                    <div id="prpes">
 
+                    </div>
+                    </br><br><br></br><br><br>
+                    Dentist name:
+                    <?php echo ucwords(strtolower($_SESSION['name'])) ?></br>
+                    <br>
+                    Sign and stamp
+                    &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;clinic
+                    stamp
+                </div>
+
+            </div>
         </div>
+
     </div>
     <div style="display: none" id="payrephead">
         <h4>payment report: </h4>" + "</br>
@@ -1542,7 +1586,7 @@ if (isset($_SESSION['type'])  && $_SESSION['hidden'] === '0') {
             $("#manr").html("");
             $("#prer").html("");
 
-            $("#visr").append("<h4>Patient data: </h4>" + "</br>");
+            $("#visr").append("<h4>Patient data: </h4>");
             $("#visr").append("Name: " + " " + $('#pp1x').val() + "</br>");
             $("#visr").append("Phone: " + " " + $('#pp2x').val() + "</br>");
             $("#visr").append("Sex: " + " " + $('#pp4x').val() + "</br>");
@@ -1550,20 +1594,20 @@ if (isset($_SESSION['type'])  && $_SESSION['hidden'] === '0') {
             $("#visr").append("Address: " + " " + $('#pp6x').val() + "</br>");
             $("#visr").append("Nationality: " + " " + $('#pp7x').val() + "</br>");
 
-            $("#visr").append("<h4>Visit date: </h4>" + "</br>");
+            $("#visr").append("</br>" + "<h4>Visit date: </h4>");
             $("#visr").append($('#Edate').val() + " " + $('#Estart').val() + "</br>");
 
-            $("#diar").append("<h4>Diagnosis: </h4>" + "</br>");
+            $("#diar").append("</br>" + "<h4>Diagnosis: </h4>");
             t5.rows().every(function(rowIdx, tableLoop, rowLoop) {
                 var data = this.data();
                 $("#diar").append(data[1] + " at tooth: " + data[0] + "</br>");
             });
-            $("#manr").append("<h4>Management: </h4>" + "</br>");
+            $("#manr").append("</br>" + "<h4>Management: </h4>");
             t6.rows().every(function(rowIdx, tableLoop, rowLoop) {
                 var data = this.data();
                 $("#manr").append(data[1] + " at tooth: " + data[0] + "</br>");
             });
-            $("#prer").append("<h4>Prescription: </h4>" + "</br>");
+            $("#prer").append("</br>" + "<h4>Prescription: </h4>");
             t7.rows().every(function(rowIdx, tableLoop, rowLoop) {
                 var data = this.data();
                 $("#prer").append(data[0] + " " + data[1] + "mg " + data[2] + "</br>");
