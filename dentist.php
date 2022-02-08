@@ -1201,7 +1201,7 @@ if (isset($_SESSION['type'])  && $_SESSION['hidden'] === '0') {
                 "lengthChange": false,
                 "iDisplayLength": 5,
                 "processing": true,
-                "serverSide": true,
+                "serverSide": false,
                 select: {
                     style: 'single'
                 },
@@ -1212,7 +1212,7 @@ if (isset($_SESSION['type'])  && $_SESSION['hidden'] === '0') {
                 "lengthChange": false,
                 "iDisplayLength": 5,
                 "processing": true,
-                "serverSide": true,
+                "serverSide": false,
                 "ajax": "patients-dentist.php"
             });
             t4 = $('#disp-dentists').DataTable({
@@ -1220,7 +1220,7 @@ if (isset($_SESSION['type'])  && $_SESSION['hidden'] === '0') {
                 "lengthChange": false,
                 "iDisplayLength": 5,
                 "processing": true,
-                "serverSide": true,
+                "serverSide": false,
                 "ajax": "dentists.php"
             });
             var column = t1.column($(this).attr('ID'));
