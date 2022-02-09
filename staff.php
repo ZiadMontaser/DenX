@@ -46,7 +46,7 @@ $columns = array(
 // SQL server connection information
 $sql_details = array(
     'user' => 'root',
-    'pass' => '',
+    'pass' => 'redpen_reusedPaper26296',
     'db'   => 'denx',
     'host' => 'localhost'
 );
@@ -58,7 +58,8 @@ $sql_details = array(
  */
  
 require( 'ssp.class.php' );
-$c = SSP::simple( $_GET, $sql_details, $table, $primaryKey, $columns );
+$where = "not type='1'";
+$c = SSP::complex( $_GET, $sql_details, $table, $primaryKey, $columns,$where );
 
 for ($i = 0; $i < sizeof($c['data']); $i++){
     if($c['data'][$i][3] == '1') {

@@ -1,7 +1,7 @@
 <?php
 
 DEFINE ('DB_USER','root');
-DEFINE ('DB_PSWD','');
+DEFINE ('DB_PSWD','redpen_reusedPaper26296');
 DEFINE ('DB_HOST','localhost');
 DEFINE ('DB_NAME','denx');
 

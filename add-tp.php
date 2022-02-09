@@ -1,0 +1,20 @@
+<?php
+
+//load.php
+
+require ('connect-mysql.php');
+
+$obj = json_decode($_POST["myData"]);
+$x1 = $obj->v;
+$x3 = $obj->t;
+$x4 = $obj->d;
+$x5 = $obj->p;
+
+$query = "INSERT INTO `treatment_plan`(`Patient_ID`, `Visit_ID`, `Plan`, `Advice`) VALUES ($x5,$x1,\"$x3\",\"$x4\") ON DUPLICATE KEY UPDATE Plan=\"$x3\", Advice=\"$x4\";";
+
+$statement = $dbcon->prepare($query);
+echo $query;
+$statement->execute();
+
+
+?>

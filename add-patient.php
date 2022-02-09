@@ -13,8 +13,9 @@ $y1 = $obj->sex;
 $y3 = $obj->bdate;
 $y4 = $obj->address;
 $y5 = $obj->nationality;
+$y6 = $obj->sn;
 
-$query = "INSERT INTO `patients`(`name`, `ssn`,  `Comment`, `sex`, `birthdate`, `address`, `nationality`) VALUES ('$x1','$x3','$x5', '$y1','$y3','$y4','$y5')";
+$query = "INSERT INTO `patients`(`name`, `ssn`,  `Comment`, `sex`, `birthdate`, `address`, `nationality`, `sn`) VALUES ('$x1','$x3','$x5', '$y1','$y3','$y4','$y5', '$y6')";
 $statement = $dbcon->prepare($query);
 $statement->execute();
 

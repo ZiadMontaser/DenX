@@ -8,7 +8,7 @@ $diagnosis = json_decode(ob_get_clean());
 
 $start = $_GET["start"];
 $end = $_GET["end"];
-
+error_log("$start $end");
 $stats = array();
 foreach($diagnosis as $diagnos){
     $query = "SELECT surgeries.id FROM `surgeries` , `visits` WHERE surgeries.visitId = visits.id AND surgeries.surgery=\"$diagnos\" AND visits.start >='$start 00:00:00' AND visits.end <= '$end 23:59:59'";

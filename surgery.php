@@ -18,8 +18,7 @@ $result = $results->fetch_all();
 
 $myfile = fopen("src/cdt_codes.txt", "r");
 while(!feof($myfile)) {
-    $line = fgets($myfile);
-    array_push($data,utf8_encode(str_replace("\r\n","", $line)));
+    array_push($data,str_replace("\r\n","", fgets($myfile)));
 }
 
 foreach($result as $row)

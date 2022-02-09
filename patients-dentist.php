@@ -37,14 +37,15 @@ $columns = array(
     array( 'db' => 'birthdate',   'dt' => 4 ),
     array( 'db' => 'address',   'dt' => 5 ),
     array( 'db' => 'nationality',   'dt' => 6 ),
-    array( 'db' => 'Comment', 'dt' => 7 )
+    array( 'db' => 'sn',   'dt' => 7 ),
+    array( 'db' => 'Comment', 'dt' => 8 )
     
 );
  
 // SQL server connection information
 $sql_details = array(
     'user' => 'root',
-    'pass' => '',
+    'pass' => 'redpen_reusedPaper26296',
     'db'   => 'denx',
     'host' => 'localhost'
 );

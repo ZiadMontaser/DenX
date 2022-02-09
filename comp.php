@@ -1,0 +1,33 @@
+<?php
+
+//load.php
+
+require ('connect-mysql.php');
+
+$data = array();
+if(isset($_POST["vid"])){
+    $x = $_POST["vid"];
+    $y = $_POST["pid"];
+    $query = "SELECT vis.start, comp.complaint, comp.frequency, comp.duration FROM visits AS vis, complaints AS comp WHERE vis.id = comp.Visit_ID AND comp.Patient_ID = $y order by vis.ID;";
+
+    $statement = $dbcon->prepare($query);
+
+    $statement->execute();
+
+    $results = $statement->get_result();
+
+    $result = $results->fetch_all();
+
+    foreach($result as $row)
+    {
+        $data[] = array(
+            0   => $row[0],
+            1   => $row[1],
+            2   => $row[2],
+            3   => $row[3],
+        );
+    }
+
+    echo json_encode($data);
+}
+?>

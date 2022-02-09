@@ -42,7 +42,11 @@ if (isset($_SESSION['type'])) {
     <script>
         $(function() {
             $(".date").datepicker({
-                dateFormat: 'dd-mm-yy'
+                changeMonth: true,
+                changeYear: true,
+                dateFormat: "yy-mm-dd",
+                yearRange: "1900:+10",
+                showOn: 'focus'
             });
         });
     </script>
@@ -246,7 +250,7 @@ if (isset($_SESSION['type'])) {
     </div>
     <div id="recep" style="display: none">
         <form role="form" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
-            <div class="container col-md-4 col-md-offset-1 text-center">
+            <div class="container col-md-4 text-center">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-6">
@@ -278,7 +282,7 @@ if (isset($_SESSION['type'])) {
                         </div>
                         <div class="col-md-6">
                             <label for="rbdate"><b>Birthdate</b></label>
-                            <input type="text" placeholder="bdate" name="rbdate" id="rbdate" class="date form-control" style="margin-bottom: 20px" required>
+                            <input type="text" placeholder="bdate" value="yyyy-mm-dd" name="rbdate" id="rbdate" class="date form-control" style="margin-bottom: 20px" required>
 
                         </div>
                     </div>
@@ -334,7 +338,7 @@ if (isset($_SESSION['type'])) {
 
     <div id="den" style="display: none">
         <form role="form" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
-            <div class="container col-md-4 col-md-offset-1 text-center">
+            <div class="container col-md-4 text-center">
 
                 <div class="container">
                     <div class="row">
@@ -364,7 +368,7 @@ if (isset($_SESSION['type'])) {
                         </div>
                         <div class="col-md-6">
                             <label for="dbdate"><b>Birthdate</b></label>
-                            <input type="text" placeholder="bdate" name="dbdate" id="dbdate" class="date form-control" style="margin-bottom: 20px" required>
+                            <input type="text" placeholder="bdate" value="yyyy-mm-dd" name="dbdate" id="dbdate" class="date form-control" style="margin-bottom: 20px" required>
 
                         </div>
                     </div>
@@ -478,6 +482,7 @@ if (isset($_SESSION['type'])) {
                             <th>Bitrhdate</th>
                             <th>Address</th>
                             <th>Nationality</th>
+                            <th>SSN</th>
                         </tr>
                     </thead>
                     <tfoot>
@@ -489,10 +494,12 @@ if (isset($_SESSION['type'])) {
                             <th>Bitrhdate</th>
                             <th>Address</th>
                             <th>Nationality</th>
+                            <th>SSN</th>
                         </tr>
                     </tfoot>
                 </table>
             </div>
+
             <div class="row p-32">
                 <h3>Diagnosis Report...</h3>
                 <div class="container">
@@ -562,9 +569,9 @@ if (isset($_SESSION['type'])) {
                 <div class="col-md-12">
                     <h3>Profit calculator</h3>
                     <label for="start"><b>start</b></label>
-                    <input type="date" placeholder="start" name="start" id="start" class="form-control" style="margin-bottom: 20px">
+                    <input type="text" placeholder="start" name="start" id="start" value="yyyy-mm-dd" class="date form-control" style="margin-bottom: 20px">
                     <label for="end"><b>end</b></label>
-                    <input type="date" placeholder="end" name="end" id="end" class="form-control" style="margin-bottom: 20px">
+                    <input type="text" placeholder="end" name="end" id="end" value="yyyy-mm-dd" class="date form-control" style="margin-bottom: 20px">
                     <div class="container" style="margin-left:24px">
                         <div class="row">
                             <div class="col-md-10">
@@ -652,13 +659,101 @@ if (isset($_SESSION['type'])) {
 
 
 
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
 
+            <!-- Modal content-->
+            <div class="modal-content">
+
+                <div class="modal-body">
+
+
+
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label for="ename"><b>Name</b></label>
+                                <input type="text" placeholder="Enter Username" name="ename" id="ename" class="form-control" style="margin-bottom: 20px" required>
+
+                            </div>
+                            <div class="col-md-3">
+                                <label for="epassword"><b>Password</b></label>
+                                <input type="password" placeholder="Enter Password" name="epassword" id="epassword" class="form-control" style="margin-bottom: 20px" required>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label for="esex"><b>Sex</b></label>
+                                <select type="text" placeholder="sex" name="esex" id="esex" class="form-control" style="margin-bottom: 20px">
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Other">Other</option>
+                                </select>
+
+                            </div>
+                            <div class="col-md-3">
+                                <label for="ebdate"><b>Birthdate</b></label>
+                                <input type="text" placeholder="bdate" value="yyyy-mm-dd" name="ebdate" id="ebdate" class="date form-control" style="margin-bottom: 20px" required>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label for="eaddress"><b>Address</b></label>
+                                <input type="text" placeholder="Address" name="eaddress" id="eaddress" class="form-control" style="margin-bottom: 20px" required>
+
+                            </div>
+                            <div class="col-md-3">
+                                <label for="enash"><b>Nationality</b></label>
+                                <input type="text" placeholder="Nationality" name="enash" id="enash" class="form-control" style="margin-bottom: 20px" required>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label for="ephone"><b>Phone</b></label>
+                                <input type="number" placeholder="Phone" name="ephone" id="ephone" class="form-control" style="margin-bottom: 20px" required>
+
+                            </div>
+                            <div class="col-md-3">
+                                <label for="essn"><b>Passport no.</b></label>
+                                <input type="text" placeholder="Passport no." name="essn" id="essn" class="form-control" style="margin-bottom: 20px" required>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary save" onclick="estaff()">Save</button>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
 
 
 
 
 
     <script>
+        var rx;
         $.ajax({
             url: "fd.php",
             type: "POST",
@@ -679,13 +774,58 @@ if (isset($_SESSION['type'])) {
             "serverSide": true,
             "ajax": "staff.php"
         });
+        $('#staff tbody').on('dblclick', 'tr', function(ev) {
+
+            var cell = t1.row(this);
+            rx = cell.data();
+            $("#ename").val(rx[1]);
+            $("#epassword").val(rx[2]);
+            $("#esex").val(rx[4]);
+            $("#ebdate").val(rx[5]);
+            $("#eaddress").val(rx[6]);
+            $("#enash").val(rx[7]);
+            $("#ephone").val(rx[8]);
+            $("#essn").val(rx[9]);
+
+            $("#myModal").modal("show");
+
+        });
+
+        function estaff() {
+            var data = {
+                "id": rx[0],
+                "x1": $("#ename").val(),
+                "x2": $("#epassword").val(),
+                "x4": $("#esex").val(),
+                "x5": $("#ebdate").val(),
+                "x6": $("#eaddress").val(),
+                "x7": $("#enash").val(),
+                "x8": $("#ephone").val(),
+                "x9": $("#essn").val()
+            };
+            var dataString = JSON.stringify(data);
+            $.ajax({
+                url: 'edit-staff.php',
+                data: {
+                    myData: dataString
+                },
+                type: 'POST',
+                success: function(res) {
+                    t1.ajax.reload();
+                    $("#myModal").modal("hide");
+                },
+                error: function(response) {
+                    alert("some problem happened, please try again");
+                }
+            });
+        }
         $('#staff tbody').on('mousedown', 'tr', function(ev) {
             var cell = t1.row(this);
             var r = cell.data();
 
             if (ev.which == 3 && r[0] != '1') {
                 if (r[10] === 'no') {
-                    if (confirm("are you sure you want to hide this member?!" + r[0])) {
+                    if (confirm("are you sure you want to hide this member?!")) {
                         var data = {
                             "x": r[0]
                         };
@@ -761,7 +901,6 @@ if (isset($_SESSION['type'])) {
             "order": [ 1, 'desc' ]
         })
         reloadTreatmentStates();
-
         var column = t1.column($(this).attr('ID'));
         column.visible(!column.visible());
         column = t2.column($(this).attr('ID'));
@@ -798,12 +937,10 @@ if (isset($_SESSION['type'])) {
                 },
                 success: function(events) {
                     data = JSON.parse(events);
-                    console.log(data)
                     $('#profit').val(data);
                 }
             });
         }
-
         function reloadDiagnoseStates(){
             start_date = "1990-05-20"
             end_date ="2030-05-20" 
@@ -843,7 +980,6 @@ if (isset($_SESSION['type'])) {
                 }
             });
         }
-
         function phone() {
             $.ajax({
                 url: "add-phone.php",

@@ -36,7 +36,7 @@ $columns = array(
 // SQL server connection information
 $sql_details = array(
     'user' => 'root',
-    'pass' => '',
+    'pass' => 'redpen_reusedPaper26296',
     'db'   => 'denx',
     'host' => 'localhost'
 );

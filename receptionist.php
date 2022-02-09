@@ -44,7 +44,7 @@ if(isset($_SESSION['type']) && $_SESSION['hidden'] === '0'){
     <script type="text/javascript" src="public/datatable/dataTables.select.min.js"></script>
     <script>
     $( function() {
-        $( ".date" ).datepicker({ dateFormat: 'dd-mm-yy' });
+        $( ".date" ).datepicker({changeMonth: true,changeYear: true,dateFormat: "yy-mm-dd",yearRange: "1900:+10",showOn:'focus'});
     } );
     </script>
 
@@ -72,7 +72,7 @@ if(isset($_SESSION['type']) && $_SESSION['hidden'] === '0'){
 
     <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" style="width: 90%;">
-        <div class="modal-content" style="  height: auto; min-height: 90%;">
+        <div class="modal-content" style="  margin-left:-15px;height: auto; min-height: 90%;">
             <div class="modal-body">
                 <div role="tabpanel">
                     <!-- Nav tabs -->
@@ -126,11 +126,21 @@ if(isset($_SESSION['type']) && $_SESSION['hidden'] === '0'){
                                                 </select>
                                                 </div><div class="col-xs-3">
                                                 <label for="bd"><b>Birthdate</b></label>
-                                                <input type="text" placeholder="bd" name="bd"id="bd" class="date form-control" style="margin-bottom: 20px">
+                                                <input type="text" placeholder="bd" name="bd"id="bd" value="yyyy-mm-dd" class="date form-control" style="margin-bottom: 20px">
+                                                </div></div></div>
+
+
+                                                <div class="container" style="margin-left: -15px">
+<div class="row">
+<div class="col-xs-3">
+<label for="address"><b>Address</b></label>
+                                                <input type="text" placeholder="address" name="address"id="address" class="form-control" style="margin-bottom: 20px">
+
+                                                </div><div class="col-xs-3">
+                                                <label for="sn"><b>SSN</b></label>
+                                                <input type="text" placeholder="SSN" name="sn"id="sn"  class=" form-control" style="margin-bottom: 20px">
                                                 </div></div></div>
                                                 
-                                                <label for="address"><b>Address</b></label>
-                                                <input type="text" placeholder="address" name="address"id="address" class="form-control" style="margin-bottom: 20px">
                                                 
                                                 <div class="container" style="margin-left: -15px">
 <div class="row">
@@ -165,6 +175,7 @@ if(isset($_SESSION['type']) && $_SESSION['hidden'] === '0'){
                                                         <th>Bitrhdate</th>
                                                         <th>Address</th>
                                                         <th>Nationality</th>
+                                                        <th>SSN</th>
                                                     </tr>
                                                 </thead>
                                                 <tfoot>
@@ -176,12 +187,13 @@ if(isset($_SESSION['type']) && $_SESSION['hidden'] === '0'){
                                                         <th>Bitrhdate</th>
                                                         <th>Address</th>
                                                         <th>Nationality</th>
+                                                        <th>SSN</th>
                                                     </tr>
                                                 </tfoot>
                                             </table>
                                         </div>
                                     </div>
-                                    <div class="col-xs-4 pull-right" style="margin-top:32px;width:35%">
+                                    <div class="col-xs-1" style="margin-left:-5px;margin-top:32px;width:35%">
                                         <h4>Choose dentist...</h4>
                                         <table id="dentists" class="display" style="width:100%">
                                             <thead>
@@ -203,7 +215,7 @@ if(isset($_SESSION['type']) && $_SESSION['hidden'] === '0'){
                         </div>
                         <div role="tabpanel" class="tab-pane" id="vi">
                             <label for="date"><b>date</b></label>
-                            <input type="text" placeholder="date" name="date"id="date" class="date form-control" style="margin-bottom: 20px">
+                            <input type="text" placeholder="date" value="yyyy-mm-dd" name="date"id="date" class="date form-control" style="margin-bottom: 20px">
                             <label for="start"><b>start</b></label>
                             <input type="time" placeholder="start" name="start"id="start" class="form-control" style="margin-bottom: 20px">
                             <div style="display: none">
@@ -215,11 +227,14 @@ if(isset($_SESSION['type']) && $_SESSION['hidden'] === '0'){
                         </div>
                     </div>
                 </div>
-                <label for="payment"><b>Entry fees</b></label>
+                <div style="margin-top:-20px">
+                <label for="payment" ><b>Entry fees</b></label>
                 <input type="number" placeholder="payment" name="payment"id="payment" class="form-control" style="margin-bottom: 20px; width:100%" >
 
+                </div>
+
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer" style="margin-top:-20px">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary save" onclick="save()">Save Visit</button>
             </div>
@@ -229,7 +244,7 @@ if(isset($_SESSION['type']) && $_SESSION['hidden'] === '0'){
 
 
 <div class="modal fade" id="pModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             
             <div class="modal-body">
@@ -246,6 +261,7 @@ if(isset($_SESSION['type']) && $_SESSION['hidden'] === '0'){
                                                         <th>Bitrhdate</th>
                                                         <th>Address</th>
                                                         <th>Nationality</th>
+                                                        <th>SSN</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
@@ -257,6 +273,7 @@ if(isset($_SESSION['type']) && $_SESSION['hidden'] === '0'){
                                                         <th>Bitrhdate</th>
                                                         <th>Address</th>
                                                         <th>Nationality</th>
+                                                        <th>SSN</th>
                                     </tr>
                                 </tfoot>
                             </table>
@@ -323,7 +340,7 @@ if(isset($_SESSION['type']) && $_SESSION['hidden'] === '0'){
                             <input type="number" placeholder="vid" name="vid"id="vid" class="form-control" style="margin-bottom: 20px" disabled>
                             </div>
                             <label for="date"><b>date</b></label>
-                            <input type="text" placeholder="date" name="Edate"id="Edate" class="date form-control" style="margin-bottom: 20px">
+                            <input type="text" placeholder="date"value="yyyy-mm-dd" name="Edate"id="Edate" class="date form-control" style="margin-bottom: 20px">
                             <label for="start"><b>start</b></label>
                             <input type="time" placeholder="start" name="Estart"id="Estart" class="form-control" style="margin-bottom: 20px">
                             <div style="display:none">
@@ -390,11 +407,20 @@ if(isset($_SESSION['type']) && $_SESSION['hidden'] === '0'){
                                                 </select>
                                                 </div><div class="col-xs-3">
                                                 <label for="pp5"><b>Birthdate</b></label>
-                                                <input type="text" placeholder="bd" name="pp5"id="pp5" class="date form-control" style="margin-bottom: 20px">
+                                                <input type="text" placeholder="bd"value="yyyy-mm-dd" name="pp5"id="pp5" class="date form-control" style="margin-bottom: 20px">
+                                                </div></div></div>
+
+
+                                                <div class="container" style="margin-left: -15px">
+<div class="row">
+<div class="col-xs-3">
+<label for="pp6"><b>Address</b></label>
+                                                <input type="text" placeholder="address" name="pp6"id="pp6" class="form-control" style="margin-bottom: 20px">
+                                                </div><div class="col-xs-3">
+                                                <label for="ppsn"><b>SSN</b></label>
+                                                <input type="text" placeholder="SSN"name="ppsn"id="ppsn" class=" form-control" style="margin-bottom: 20px">
                                                 </div></div></div>
                                                 
-                                                <label for="pp6"><b>Address</b></label>
-                                                <input type="text" placeholder="address" name="pp6"id="pp6" class="form-control" style="margin-bottom: 20px">
                                                 
                                                 <div class="container" style="margin-left: -15px">
 <div class="row">
@@ -457,6 +483,7 @@ if(isset($_SESSION['type']) && $_SESSION['hidden'] === '0'){
             var bdate = $('#bd').val();
             var address = $('#address').val();
             var nationality = $('#nation').val();
+            var ssn = $('#sn').val();
             if(name === ""){
                 alert("name field is empty");
                 return;
@@ -474,7 +501,8 @@ if(isset($_SESSION['type']) && $_SESSION['hidden'] === '0'){
                 "sex": sex,
                 "bdate": bdate,
                 "address": address,
-                "nationality": nationality
+                "nationality": nationality,
+                "sn": sn
             };
             console.log(data);
             var dataString = JSON.stringify(data);
@@ -495,6 +523,7 @@ if(isset($_SESSION['type']) && $_SESSION['hidden'] === '0'){
                     $('#bd').val("");
                     $('#address').val("");
                     $('#nation').val("");
+                    $('#sn').val("");
 
                     
                 },
@@ -513,6 +542,7 @@ if(isset($_SESSION['type']) && $_SESSION['hidden'] === '0'){
             var address = $("#pp6").val();
             var nation = $("#pp7").val();
             var comment = $("#pp8").val();
+            var ssn = $("#ppsn").val();
             var data = {
                 "id": id,
                 "name": name,
@@ -521,7 +551,8 @@ if(isset($_SESSION['type']) && $_SESSION['hidden'] === '0'){
                 "bdate": bdate,
                 "address": address,
                 "nation": nation,
-                "comment": comment
+                "comment": comment,
+                "sn": ssn
             };
             console.log(data);
             var dataString = JSON.stringify(data);
@@ -532,6 +563,7 @@ if(isset($_SESSION['type']) && $_SESSION['hidden'] === '0'){
                 success: function(response) {
                     var tle = $('#patients').DataTable();
                     tle.ajax.reload();
+                    t1.ajax.reload();
                     $("#pp").modal("hide");
                 },
                 error: function(response){
@@ -542,6 +574,9 @@ if(isset($_SESSION['type']) && $_SESSION['hidden'] === '0'){
 
         function coloring(event){ 
             var dt = moment(new Date());
+	    if (event.start === null) return "black";
+	    if (event.done === null) return "black";
+            if (event.end === null) return "black";
             if(event.end == null)console.log(event)
             if(event.done === 0 && moment(event.start._i).isBefore(dt) && moment(event.end._i).isAfter(dt)){
                 return "orange";
@@ -573,11 +608,11 @@ if(isset($_SESSION['type']) && $_SESSION['hidden'] === '0'){
             var end1 = document.getElementById("end").value;
             var payment1 = document.getElementById("payment").value;
             var comment1 = document.getElementById("Comment").value;
-            if(date1 == ""){
+            if(date1 == "yyyy-mm-dd"){
                 date1 = moment().format("YYYY-MM-DD");
                 
             }else console.log(date1);
-            if(start1 == ""){
+            if(start1 == "yyyy-mm-dd"){
                 start1=moment().format('HH:mm');
                 console.log(moment().format('HH:mm'))
                 
@@ -599,6 +634,7 @@ if(isset($_SESSION['type']) && $_SESSION['hidden'] === '0'){
                 var bdate = $('#bd').val();
                 var address = $('#address').val();
                 var nationality = $('#nation').val();
+                var ssn1 = $('#sn').val();
                 if(name === ""){
                     alert("Patient name is a mandatory!!");
                     return;
@@ -616,7 +652,8 @@ if(isset($_SESSION['type']) && $_SESSION['hidden'] === '0'){
                     "sex": sex,
                     "bdate": bdate,
                     "address": address,
-                    "nationality": nationality
+                    "nationality": nationality,
+                    "sn": ssn1
                 };
                 console.log(data);
                 var dataString = JSON.stringify(data);
@@ -636,6 +673,7 @@ if(isset($_SESSION['type']) && $_SESSION['hidden'] === '0'){
                         $('#bd').val("");
                         $('#address').val("");
                         $('#nation').val("");
+                        $('#sn').val("");
                         console.log("p");
                         p = response;
                         var data = {
@@ -847,7 +885,8 @@ if(isset($_SESSION['type']) && $_SESSION['hidden'] === '0'){
                         $("#pp5").val(r[4]);
                         $("#pp6").val(r[5]);
                         $("#pp7").val(r[6]);
-                        $("#pp8").val(r[7]);
+                        $("#pp8").val(r[8]);
+                        $("#ppsn").val(r[7]);
 
                         $("#addModal").modal("hide");
                         $("#pp").modal("show");
@@ -858,7 +897,7 @@ if(isset($_SESSION['type']) && $_SESSION['hidden'] === '0'){
                 "iDisplayLength": 5,
                 "processing": true,
                 "bInfo" : false,
-                "serverSide": false,
+                "serverSide": true,
                 select: {
                     style: 'single'
                 },
@@ -877,7 +916,7 @@ if(isset($_SESSION['type']) && $_SESSION['hidden'] === '0'){
                 "lengthChange": false,
                 "iDisplayLength": 5,
                 "processing": true,
-                "serverSide": false,
+                "serverSide": true,
                 "ajax": "dentists.php"
             } );
             var column = t1.column( $(this).attr('ID') );
@@ -939,7 +978,7 @@ if(isset($_SESSION['type']) && $_SESSION['hidden'] === '0'){
             });
             $('#addModal').on('hidden.bs.modal', function () {
                 $('[href="#pi"]').tab('show');
-                document.getElementById("date").value = "";
+                document.getElementById("date").value = "yyyy-mm-dd";
                 document.getElementById("start").value = "";
                 document.getElementById("end").value = "";
                 document.getElementById("payment").value = "";
