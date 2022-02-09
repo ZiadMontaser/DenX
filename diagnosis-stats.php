@@ -1,15 +1,16 @@
 <?php
+$startTime = hrTime(true);
+
 ob_start();
 require 'diagnosis.php';
 $diagnosis = json_decode(ob_get_clean());
 
 $start = $_GET["start"];
 $end = $_GET["end"];
-error_log("$start 00:00:00");
-error_log("$end 23:59:59");
+
 $stats = array();
 foreach($diagnosis as $diagnos){
-    $query = "SELECT * FROM `diagnosis` WHERE diagnosis=\"{$diagnos}\"";
+    $query = "SELECT surgeries.id FROM `diagnosis` , `visits` WHERE surgeries.visitId = visits.id AND surgeries.surgery=\"$diagnos\" AND visits.start >='$start 00:00:00' AND visits.end <= '$end 23:59:59'";
 
     $statement = $dbcon->prepare($query);
 
@@ -18,20 +19,8 @@ foreach($diagnosis as $diagnos){
     $results = $statement->get_result();
 
     $result = $results->fetch_all();
-    
-    $count = 0;
 
-
-    foreach($result as $row){
-        $query1 = "SELECT * FROM `visits` WHERE id={$row[1]}";
-        $statement1 = $dbcon->prepare($query1);
-        $statement1->execute();
-        $visit = $statement1->get_result()->fetch_all();
-        if($visit[0][3]>="$start 00:00:00" and $visit[0][4]<="$end 23:59:59"){
-            $count += 1;
-        }
-        
-    }
+    $count = count($result);
 
     if($count > 0){
         $entery = array(
@@ -41,5 +30,9 @@ foreach($diagnosis as $diagnos){
         array_push($stats, $entery);
     }
 }
+
+$duration = (hrtime(true) - $startTime) / 1000000000;
+error_log("Diagnoes Stats was generated in {$duration}s from $start to $end");
+
 echo json_encode($stats);
 ?>

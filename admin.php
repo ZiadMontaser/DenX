@@ -560,7 +560,7 @@ if (isset($_SESSION['type'])) {
 
             <div class="row">
                 <div class="col-md-12">
-
+                    <h3>Profit calculator</h3>
                     <label for="start"><b>start</b></label>
                     <input type="date" placeholder="start" name="start" id="start" class="form-control" style="margin-bottom: 20px">
                     <label for="end"><b>end</b></label>
