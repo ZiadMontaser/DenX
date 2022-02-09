@@ -1149,7 +1149,7 @@ if (isset($_SESSION['type']) && $_SESSION['hidden'] === '0') {
 			var end1 = document.getElementById("end").value;
 			var payment1 = document.getElementById("payment").value;
 			var comment1 = document.getElementById("Comment").value;
-			if (date1 == "") {
+			if (date1 == "yyyy-mm-dd") {
 				date1 = moment().format("YYYY-MM-DD");
 
 			} else console.log(date1);
@@ -1188,6 +1188,15 @@ if (isset($_SESSION['type']) && $_SESSION['hidden'] === '0') {
 				success: function(response) {
 					$('#calendar').fullCalendar('refetchEvents');
 					$('#modal-calendar').fullCalendar('refetchEvents');
+					$('[href="#pi"]').tab('show');
+					document.getElementById("date").value = "";
+					document.getElementById("start").value = "";
+					document.getElementById("end").value = "";
+					document.getElementById("payment").value = "";
+					document.getElementById("Comment").value = "";
+					t1.rows('.selected').nodes().to$().removeClass('selected');
+					t2.rows('.selected').nodes().to$().removeClass('selected');
+					$("#addModal").modal("hide");
 				}
 			});
 			$('[href="#pi"]').tab('show');

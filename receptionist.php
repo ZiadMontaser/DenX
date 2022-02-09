@@ -612,7 +612,8 @@ if(isset($_SESSION['type']) && $_SESSION['hidden'] === '0'){
                 date1 = moment().format("YYYY-MM-DD");
                 
             }else console.log(date1);
-            if(start1 == "yyyy-mm-dd"){
+            
+            if(start1 == ""){
                 start1=moment().format('HH:mm');
                 console.log(moment().format('HH:mm'))
                 

@@ -245,6 +245,7 @@ if (isset($_SESSION['type'])) {
         <button type="button" class="btn btn-primary" id="br" onclick="rr()">Add Recentionist</button>
         <button type="button" class="btn btn-primary" id="bs" onclick="ss()">Statistics</button>
         <button type="button" class="btn btn-primary" id="bf" onclick="ff()">Clinic information</button>
+        <button type="button" class="btn btn-primary" id="ad" onclick="ad()">App Data</button>
         <button type="button" class="btn btn-default pull-right" onclick="window.location.replace('logout.php');">logout</button>
 
     </div>
@@ -503,19 +504,19 @@ if (isset($_SESSION['type'])) {
             <div class="row p-32">
                 <h3>Diagnosis Report...</h3>
                 <div class="container">
-                <div class="row">
-                    <div class="col-md-5">
-                        <label for="start"><b>start</b></label>
-                        <input type="date" placeholder="start" name="start" id="diagnose_start" class="w-25 form-control" style="margin-bottom: 20px" onchange="reloadDiagnoseStates()">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <label for="start"><b>start</b></label>
+                            <input type="date" placeholder="start" name="start" id="diagnose_start" class="w-25 form-control" style="margin-bottom: 20px" onchange="reloadDiagnoseStates()">
+                        </div>
+                        <div class="col-md-5">
+                            <label for="end"><b>end</b></label>
+                            <input type="date" placeholder="end" name="end" id="diagnose_end" class="w-25 form-control" style="margin-bottom: 20px" onchange="reloadDiagnoseStates()">
+                        </div>
+                        <div class="col-md-2" style="margin-top:24px">
+                            <button type="button" class="btn btn-primary save" onclick="printJS('diagnosis','html')">Print</button>
+                        </div>
                     </div>
-                    <div class="col-md-5">
-                        <label for="end"><b>end</b></label>
-                        <input type="date" placeholder="end" name="end" id="diagnose_end" class="w-25 form-control" style="margin-bottom: 20px" onchange="reloadDiagnoseStates()">
-                    </div>
-                    <div class="col-md-2" style="margin-top:24px">
-                        <button type="button" class="btn btn-primary save" onclick="printJS('diagnosis','html')">Print</button>
-                    </div>
-                </div>
                 </div>
                 <table id="diagnosis" class="display" style="width:100%">
                     <thead>
@@ -535,19 +536,19 @@ if (isset($_SESSION['type'])) {
             <div class="row p-32">
                 <h3>Treatment Report...</h3>
                 <div class="container">
-                <div class="row">
-                    <div class="col-md-5">
-                        <label for="start"><b>start</b></label>
-                        <input type="date" placeholder="start" name="start" id="treatment_start" class="w-25 form-control" style="margin-bottom: 20px" onchange="reloadTreatmentStates()">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <label for="start"><b>start</b></label>
+                            <input type="date" placeholder="start" name="start" id="treatment_start" class="w-25 form-control" style="margin-bottom: 20px" onchange="reloadTreatmentStates()">
+                        </div>
+                        <div class="col-md-5">
+                            <label for="end"><b>end</b></label>
+                            <input type="date" placeholder="end" name="end" id="treatment_end" class="w-25 form-control" style="margin-bottom: 20px" onchange="reloadTreatmentStates()">
+                        </div>
+                        <div class="col-md-2" style="margin-top:24px">
+                            <button type="button" class="btn btn-primary save" onclick="printJS('treatment','html')">Print</button>
+                        </div>
                     </div>
-                    <div class="col-md-5">
-                        <label for="end"><b>end</b></label>
-                        <input type="date" placeholder="end" name="end" id="treatment_end" class="w-25 form-control" style="margin-bottom: 20px" onchange="reloadTreatmentStates()">
-                    </div>
-                    <div class="col-md-2" style="margin-top:24px">
-                        <button type="button" class="btn btn-primary save" onclick="printJS('treatment','html')">Print</button>
-                    </div>
-                </div>
                 </div>
                 <table id="treatment" class="display" style="width:100%">
                     <thead>
@@ -650,6 +651,26 @@ if (isset($_SESSION['type'])) {
                     </div>
 
                 </div>
+            </div>
+        </div>
+    </div>
+    <div id="app_data" style="display: none;margin-top: 18px">
+        <div class="container  m-5" >
+            <div class="row">
+                <div class="col-xs-6" >
+
+                <button type="button" class="btn btn-primary save" onclick="restore()">Restore</button>
+
+                </div>
+                <div class="col-xs-6 center-block">
+                <button type="button" class="btn btn-primary save" onclick="backup()">Back Up</button>
+
+
+                </div>
+            </div>
+            <div class="row center-block ">
+            <input type="file" class="form-control-file" id="sql_backup" name="content">
+
             </div>
         </div>
     </div>
@@ -886,19 +907,25 @@ if (isset($_SESSION['type'])) {
             "ajax": "phones.php"
         });
         t4 = $('#diagnosis').DataTable({
-            "columns": [
-                {data: 'Diagnos'},
-                {data: 'Number'}
+            "columns": [{
+                    data: 'Diagnos'
+                },
+                {
+                    data: 'Number'
+                }
             ],
-            "order": [ 1, 'desc' ]
+            "order": [1, 'desc']
         })
         reloadDiagnoseStates();
         t5 = $('#treatment').DataTable({
-            "columns": [
-                {data: 'Treatment'},
-                {data: 'Number'}
+            "columns": [{
+                    data: 'Treatment'
+                },
+                {
+                    data: 'Number'
+                }
             ],
-            "order": [ 1, 'desc' ]
+            "order": [1, 'desc']
         })
         reloadTreatmentStates();
         var column = t1.column($(this).attr('ID'));
@@ -941,11 +968,12 @@ if (isset($_SESSION['type'])) {
                 }
             });
         }
-        function reloadDiagnoseStates(){
+
+        function reloadDiagnoseStates() {
             start_date = "1990-05-20"
-            end_date ="2030-05-20" 
-            if($('#diagnose_start').val() != "") start_date = $('#diagnose_start').val();
-            if($('#diagnose_end').val() != "") end_date = $('#diagnose_end').val();
+            end_date = "2030-05-20"
+            if ($('#diagnose_start').val() != "") start_date = $('#diagnose_start').val();
+            if ($('#diagnose_end').val() != "") end_date = $('#diagnose_end').val();
             $.ajax({
                 url: "diagnosis-stats.php",
                 type: "GET",
@@ -956,16 +984,16 @@ if (isset($_SESSION['type'])) {
                 success: function(events) {
                     data = JSON.parse(events);
                     t4.clear();
-                    t4.rows.add( data ).draw();
+                    t4.rows.add(data).draw();
                 }
             });
         }
 
-        function reloadTreatmentStates(){
+        function reloadTreatmentStates() {
             start_date = "1990-05-20"
-            end_date ="2030-05-20" 
-            if($('#treatment_start').val() != "") start_date = $('#treatment_start').val();
-            if($('#treatment_end').val() != "") end_date = $('#treatment_end').val();
+            end_date = "2030-05-20"
+            if ($('#treatment_start').val() != "") start_date = $('#treatment_start').val();
+            if ($('#treatment_end').val() != "") end_date = $('#treatment_end').val();
             $.ajax({
                 url: "treatment-stats.php",
                 type: "GET",
@@ -976,10 +1004,11 @@ if (isset($_SESSION['type'])) {
                 success: function(events) {
                     data = JSON.parse(events);
                     t5.clear();
-                    t5.rows.add( data ).draw();
+                    t5.rows.add(data).draw();
                 }
             });
         }
+
         function phone() {
             $.ajax({
                 url: "add-phone.php",
@@ -1022,6 +1051,7 @@ if (isset($_SESSION['type'])) {
             document.getElementById("recep").style.display = "none";
             document.getElementById("stats").style.display = "none";
             document.getElementById("data").style.display = "none";
+            document.getElementById("app_data").style.display = "none";
         }
 
         function rr() {
@@ -1030,6 +1060,7 @@ if (isset($_SESSION['type'])) {
             document.getElementById("data").style.display = "none";
             document.getElementById("den").style.display = "none";
             document.getElementById("recep").style.display = "block";
+            document.getElementById("app_data").style.display = "none";
         }
 
         function ff() {
@@ -1038,6 +1069,7 @@ if (isset($_SESSION['type'])) {
             document.getElementById("data").style.display = "block";
             document.getElementById("den").style.display = "none";
             document.getElementById("recep").style.display = "none";
+            document.getElementById("app_data").style.display = "none";
         }
 
         function ss() {
@@ -1048,6 +1080,42 @@ if (isset($_SESSION['type'])) {
             document.getElementById("data").style.display = "none";
             document.getElementById("den").style.display = "none";
             document.getElementById("recep").style.display = "none";
+            document.getElementById("app_data").style.display = "none";
+        }
+
+        function ad() {
+            document.getElementById("stats").style.display = "none";
+            document.getElementById("data").style.display = "none";
+            document.getElementById("den").style.display = "none";
+            document.getElementById("recep").style.display = "none";
+            document.getElementById("app_data").style.display = "block";
+        }
+
+        function backup() {
+            window.location = "export-db.php";
+        }
+
+        function restore() {
+            var fileContent = $('#sql_backup').prop('files');
+            var reader = new FileReader();
+            reader.readAsText(fileContent[0], "UTF-8")
+            reader.onload = function(e) {
+                $.ajax({
+                    url: 'import-db.php',
+                    type: 'POST',
+                    data: {
+                        content: reader.result
+                    },
+                    success: function(res) {
+                        alert("Updated successfully")
+                    },
+                    error: function(response) {
+                        alert("some problem happened, please try again");
+                    }
+                });
+            };
+
+
         }
     </script>
 </body>

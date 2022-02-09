@@ -19,12 +19,8 @@ $query = "INSERT INTO `patients`(`name`, `ssn`,  `Comment`, `sex`, `birthdate`, 
 $statement = $dbcon->prepare($query);
 $statement->execute();
 
+$id = mysqli_insert_id($dbcon);
 
-$query = "SELECT id FROM patients WHERE ssn = '$x3';";
-$statement = $dbcon->prepare($query);
-$statement->execute();
-$results = $statement->get_result();
-$result = $results->fetch_all();
-echo json_encode($result[0][0]);
+echo json_encode($id);
 
 ?>
