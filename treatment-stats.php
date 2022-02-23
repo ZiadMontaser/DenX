@@ -1,40 +1,22 @@
 <?php
-$startTime = hrTime(true);
+$startTime = microtime(true);
 
-ob_start();
-require 'surgery.php';
-$diagnosis = json_decode(ob_get_clean());
-
+require ('connect-mysql.php');
 
 $start = $_GET["start"];
 $end = $_GET["end"];
-error_log("$start $end");
-$stats = array();
-foreach($diagnosis as $diagnos){
-    $query = "SELECT surgeries.id FROM `surgeries` , `visits` WHERE surgeries.visitId = visits.id AND surgeries.surgery=\"$diagnos\" AND visits.start >='$start 00:00:00' AND visits.end <= '$end 23:59:59'";
 
-    $statement = $dbcon->prepare($query);
+$query = "SELECT surgery, COUNT(*) FROM `surgeries`,visits WHERE surgeries.visitId = visits.id AND visits.start >= '$start 00:00:00' AND visits.end <= '$end 23:59:59' GROUP BY surgery  
+    ORDER BY `COUNT(*)`  DESC";
+$statement = $dbcon->prepare($query);
 
-    $statement->execute();
+$statement->execute();
 
-    $results = $statement->get_result();
+$results = $statement->get_result();
 
-    $result = $results->fetch_all();
-    
-    $count = count($result);
+$result = $results->fetch_all();
 
-    if($count > 0){
-        $entery = array(
-            "Treatment"=> $diagnos,
-            "Number" => "$count"
-        );
-        array_push($stats, $entery);
-    }
-}
-
-$duration = (hrtime(true) - $startTime) / 1000000000;
+$duration = (microtime(true) - $startTime);
 error_log("Treatment Stats was generated in {$duration}s from $start to $end");
 
-echo json_encode($stats);
-
-?>
+echo json_encode($result);

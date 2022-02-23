@@ -907,24 +907,10 @@ if (isset($_SESSION['type'])) {
             "ajax": "phones.php"
         });
         t4 = $('#diagnosis').DataTable({
-            "columns": [{
-                    data: 'Diagnos'
-                },
-                {
-                    data: 'Number'
-                }
-            ],
             "order": [1, 'desc']
         })
         reloadDiagnoseStates();
         t5 = $('#treatment').DataTable({
-            "columns": [{
-                    data: 'Treatment'
-                },
-                {
-                    data: 'Number'
-                }
-            ],
             "order": [1, 'desc']
         })
         reloadTreatmentStates();
