@@ -11,6 +11,9 @@ if(isset($_SESSION['type']) && $_SESSION['hidden'] === '0'){
         if($_SESSION['type'] === 3){
             $url = 'dentist.php';
         }
+        if ($_SESSION['type'] === 4) {
+            $url = 'admin_super.php';
+        }
         header('Location: ' . $url);
     }
     

@@ -70,6 +70,9 @@
                                     if($_SESSION['type'] === 3){
                                         $url = 'dentist.php';
                                     }
+									if($_SESSION['type'] === 4){
+                                        $url = 'admin_super.php';
+                                    }
 									header('Location: ' . $url); // Make the browser load either the members’ or the admin page
 									exit(); // Cancel the rest of the script
 									mysqli_free_result($result);

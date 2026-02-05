@@ -11,6 +11,9 @@ if (isset($_SESSION['type']) && $_SESSION['hidden'] === '0') {
 		if ($_SESSION['type'] === 1) {
 			$url = 'admin.php';
 		}
+		if ($_SESSION['type'] === 4) {
+            $url = 'admin_super.php';
+        }
 		header('Location: ' . $url);
 	}
 } else {
@@ -277,8 +280,7 @@ if (isset($_SESSION['type']) && $_SESSION['hidden'] === '0') {
 					<div role="tabpanel">
 						<!-- Nav tabs -->
 						<ul class="nav nav-tabs" role="tablist">
-							<li role="presentation" class="active"
-												   ><a onclick="document.getElementById('se').style.display='block';document.getElementById('pres').style.display='none';document.getElementById('surg').style.display='none';document.getElementById('diag').style.display='none';document.getElementById('pres3').style.display='none';document.getElementById('pres4').style.display='none';document.getElementById('comp').style.display='none';document.getElementById('med_hist').style.display='none';document.getElementById('soc_hist').style.display='none';document.getElementById('vit').style.display='none';document.getElementById('exa').style.display='none';document.getElementById('tp').style.display='none';document.getElementById('ap').style.display='none';" href="#piz" aria-controls="piz" role="tab" data-toggle="tab">Visit data</a>
+							<li role="presentation" class="active"><a onclick="document.getElementById('se').style.display='block';document.getElementById('pres').style.display='none';document.getElementById('surg').style.display='none';document.getElementById('diag').style.display='none';document.getElementById('pres3').style.display='none';document.getElementById('pres4').style.display='none';document.getElementById('comp').style.display='none';document.getElementById('med_hist').style.display='none';document.getElementById('soc_hist').style.display='none';document.getElementById('vit').style.display='none';document.getElementById('exa').style.display='none';document.getElementById('tp').style.display='none';document.getElementById('ap').style.display='none';" href="#piz" aria-controls="piz" role="tab" data-toggle="tab">Visit data</a>
 							</li>
 							<li role="presentation"><a onclick="document.getElementById('se').style.display='none';document.getElementById('surg').style.display='none';document.getElementById('pres').style.display='none';document.getElementById('diag').style.display='none';document.getElementById('pres3').style.display='none';document.getElementById('pres4').style.display='none';document.getElementById('comp').style.display='block';document.getElementById('med_hist').style.display='none';document.getElementById('soc_hist').style.display='none';document.getElementById('vit').style.display='none';document.getElementById('exa').style.display='none';document.getElementById('tp').style.display='none';document.getElementById('ap').style.display='none';" href="#comp_tab" aria-controls="comp_tab" role="tab" data-toggle="tab">Complaints</a>
 							</li>
@@ -294,15 +296,17 @@ if (isset($_SESSION['type']) && $_SESSION['hidden'] === '0') {
 							</li>
 							<li role="presentation"><a onclick="document.getElementById('se').style.display='none';document.getElementById('surg').style.display='none';document.getElementById('pres').style.display='none';document.getElementById('diag').style.display='block';document.getElementById('pres3').style.display='none';document.getElementById('pres4').style.display='none';document.getElementById('comp').style.display='none';document.getElementById('med_hist').style.display='none';document.getElementById('soc_hist').style.display='none';document.getElementById('vit').style.display='none';document.getElementById('exa').style.display='none';document.getElementById('tp').style.display='none';document.getElementById('ap').style.display='none';" href="#viz" aria-controls="viz" role="tab" data-toggle="tab">Diagnosis</a>
 							</li>
-							<li role="presentation"><a onclick="document.getElementById('se').style.display='none';document.getElementById('diag').style.display='none';document.getElementById('pres').style.display='none';document.getElementById('surg').style.display='block';document.getElementById('pres3').style.display='none';document.getElementById('pres4').style.display='none';document.getElementById('comp').style.display='none';document.getElementById('med_hist').style.display='none';document.getElementById('soc_hist').style.display='none';document.getElementById('vit').style.display='none';document.getElementById('exa').style.display='none';document.getElementById('tp').style.display='none';document.getElementById('ap').style.display='none';" href="#piz2" aria-controls="piz2" role="tab" data-toggle="tab">Managements</a>
+							<li role="presentation"><a onclick="document.getElementById('se').style.display='none';document.getElementById('diag').style.display='none';document.getElementById('pres').style.display='none';document.getElementById('surg').style.display='block';document.getElementById('pres3').style.display='none';document.getElementById('pres4').style.display='none';document.getElementById('comp').style.display='none';document.getElementById('med_hist').style.display='none';document.getElementById('soc_hist').style.display='none';document.getElementById('vit').style.display='none';document.getElementById('exa').style.display='none';document.getElementById('tp').style.display='none';document.getElementById('ap').style.display='none';" href="#piz2" aria-controls="piz2" role="tab" data-toggle="tab" id="managments_tap">Managements</a>
 							</li>
 							<li role="presentation"><a onclick="document.getElementById('se').style.display='none';document.getElementById('surg').style.display='none';document.getElementById('diag').style.display='none';document.getElementById('pres').style.display='block';document.getElementById('pres3').style.display='none';document.getElementById('pres4').style.display='none';document.getElementById('comp').style.display='none';document.getElementById('med_hist').style.display='none';document.getElementById('soc_hist').style.display='none';document.getElementById('vit').style.display='none';document.getElementById('exa').style.display='none';document.getElementById('tp').style.display='none';document.getElementById('ap').style.display='none';loadPres();" href="#viz2" aria-controls="viz2" role="tab" data-toggle="tab">prescriptions</a>
 							</li>
 							<li role="presentation"><a onclick="document.getElementById('se').style.display='none';document.getElementById('surg').style.display='none';document.getElementById('diag').style.display='none';document.getElementById('pres').style.display='none';document.getElementById('pres3').style.display='block';document.getElementById('pres4').style.display='none';document.getElementById('comp').style.display='none';document.getElementById('med_hist').style.display='none';document.getElementById('soc_hist').style.display='none';document.getElementById('vit').style.display='none';document.getElementById('exa').style.display='none';document.getElementById('tp').style.display='none';document.getElementById('ap').style.display='none';loadSickLeave()" href="#viz3" aria-controls="viz3" role="tab" data-toggle="tab">Sick leave</a>
 							</li>
-							<li role="presentation"><a onclick="document.getElementById('se').style.display='none';document.getElementById('surg').style.display='none';document.getElementById('diag').style.display='none';document.getElementById('pres').style.display='none';document.getElementById('pres3').style.display='block';document.getElementById('pres4').style.display='none';document.getElementById('comp').style.display='none';document.getElementById('med_hist').style.display='none';document.getElementById('soc_hist').style.display='none';document.getElementById('vit').style.display='none';document.getElementById('exa').style.display='none';document.getElementById('tp').style.display='none';document.getElementById('ap').style.display='block';loadAttendance()" href="#viz5" aria-controls="viz3" role="tab" data-toggle="tab">Attendance</a>
+							<li role="presentation"><a onclick="document.getElementById('se').style.display='none';document.getElementById('surg').style.display='none';document.getElementById('diag').style.display='none';document.getElementById('pres').style.display='none';document.getElementById('pres3').style.display='none';document.getElementById('pres4').style.display='none';document.getElementById('comp').style.display='none';document.getElementById('med_hist').style.display='none';document.getElementById('soc_hist').style.display='none';document.getElementById('vit').style.display='none';document.getElementById('exa').style.display='none';document.getElementById('tp').style.display='none';document.getElementById('ap').style.display='block';loadAttendance()" href="#viz5" aria-controls="viz3" role="tab" data-toggle="tab">Attendance</a>
 							</li>
 							<li role="presentation"><a onclick="document.getElementById('se').style.display='none';document.getElementById('surg').style.display='none';document.getElementById('diag').style.display='none';document.getElementById('pres').style.display='none';document.getElementById('pres3').style.display='none';document.getElementById('pres4').style.display='block';document.getElementById('comp').style.display='none';document.getElementById('med_hist').style.display='none';document.getElementById('soc_hist').style.display='none';document.getElementById('vit').style.display='none';document.getElementById('exa').style.display='none';document.getElementById('tp').style.display='none';document.getElementById('ap').style.display='none';loadReport();" href="#viz4" aria-controls="viz4" role="tab" data-toggle="tab">Visit report</a>
+							</li>
+							<li role="presentation"><a onclick="document.getElementById('se').style.display='none';document.getElementById('surg').style.display='none';document.getElementById('diag').style.display='none';document.getElementById('pres').style.display='none';document.getElementById('pres3').style.display='none';document.getElementById('pres4').style.display='none';document.getElementById('comp').style.display='none';document.getElementById('med_hist').style.display='none';document.getElementById('soc_hist').style.display='none';document.getElementById('vit').style.display='none';document.getElementById('exa').style.display='none';document.getElementById('tp').style.display='none';document.getElementById('ap').style.display='none';LoadPreviousVisists();" href="#tabAllVisits" aria-controls="viz4" role="tab" data-toggle="tab">Previous Visits</a>
 							</li>
 						</ul>
 						<!-- Tab panes -->
@@ -860,19 +864,21 @@ if (isset($_SESSION['type']) && $_SESSION['hidden'] === '0') {
 												</div>
 											</div>
 											<label for="awork"><b>Place of work</b></label>
-                                            <input type="text" placeholder="work place" name="awork" id="awork" class="form-control" style="margin-bottom: 20px" onchange="$('#a2').html($('#awork').val());">
-                                            <div class="container" style="margin-left:-15px">
-                                                <div class="row">
-                                                    <div class="col-xs-2">
-                                                        <label for="astart"><b>Start</b></label>
-                                                        <input type="time" placeholder="start" name="astart" id="astart" class="form-control" style="margin-bottom:20px" onchange="$('#a4').html($('#astart').val());">
-                                                    </div>
-                                                    <div class="col-xs-2">
-                                                        <label for="aend"><b>End</b></label>
-                                                        <input type="time" placeholder="end" name="aend" id="aend" class="form-control" style="margin-bottom:20px" onchange="$('#a5').html($('#aend').val());">
-                                                    </div>
-                                                </div>
-                                            </div>
+											<input type="text" placeholder="work place" name="awork" id="awork" class="form-control" style="margin-bottom: 20px" onchange="$('#a2').html($('#awork').val());">
+											<div class="container" style="margin-left:-15px">
+												<div class="row">
+													<div class="col-xs-2">
+														<label for="astart"><b>Start</b></label>
+														<input type="time" placeholder="start" name="astart" id="astart" class="form-control" style="margin-bottom:20px" onchange="$('#a4').html($('#astart').val());">
+													</div>
+													<div class="col-xs-2">
+														<label for="aend"><b>End</b></label>
+														<input type="time" placeholder="end" name="aend" id="aend" class="form-control" style="margin-bottom:20px" onchange="$('#a5').html($('#aend').val());">
+													</div>
+												</div>
+											</div>
+											<input type="date" placeholder="Date" name="adate" id="adate" class="form-control" style="margin-bottom: 20px" onchange="$('#a3').html($('#adate').val());">
+
 
 
 										</div>
@@ -885,20 +891,20 @@ if (isset($_SESSION['type']) && $_SESSION['hidden'] === '0') {
 														<!-- <h4 style="margin-top: 10px">Alkamil dental clinic </h4></br> -->
 														<h4 style="margin-top: 15px">C.R no. :1268338</h4></br>
 														<h2 class="page_head">Attendance</h2></br>
-                                                        </br><br><br>
-                                                        <div>Patient name: <span id="a1"></span></br>
-                                                            Place of work: <span id="a2"></span></br><br>
-                                                            Alkamil dental clinic certifies that the above mentioned patient was examined in
-                                                            our clinic from <span id="a4">12:34 PM</span> to <span id="a5">1:10 PM</span>
+														</br><br><br>
+														<div>Patient name: <span id="a1"></span></br>
+															Place of work: <span id="a2"></span></br><br>
+															Alkamil dental clinic certifies that the above mentioned patient was examined in
+															our clinic from <span id="a4">12:34 PM</span> to <span id="a5">1:10 PM</span> on <span id="a3">2020-12-12</span></br>
 
-                                                            </br><br><br></br><br><br>
-                                                            Dentist name:
-                                                            <?php echo ucwords(strtolower($_SESSION['name'])) ?></br>
-                                                            <br>
-                                                            Sign and stamp
-                                                            &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;clinic
-                                                            stamp
-                                                        </div>
+															</br><br><br></br><br><br>
+															Dentist name:
+															<?php echo ucwords(strtolower($_SESSION['name'])) ?></br>
+															<br>
+															Sign and stamp
+															&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;clinic
+															stamp
+														</div>
 													</div>
 												</div>
 
@@ -909,29 +915,33 @@ if (isset($_SESSION['type']) && $_SESSION['hidden'] === '0') {
 								</div>
 							</div>
 							<div role="tabpanel" class="tab-pane" id="viz4">
-                                <div id="vrfile" style="zoom: 0.8;" class="file">
-                                    <div class="line_page_border">
-                                        <img class="logo" src="img/ClinicLog.png"> </img>
-                                        <img class="watermark" src="img/ClinicLog.png"> </img>
-                                        <!-- <h4 style="margin-top: 10px">Alkamil dental clinic </h4></br> -->
-                                        <h4 style="margin-top: 15px">C.R no. :1268338</h4></br>
-                                        <h2 class="page_head">Medical Visit report</h2>
-                                        <div>
-                                            <div id="visr"></div>
-                                            <div id="diar"></div>
-                                            <div id="manr"></div>
-                                            <div id="prer"></div>
-                                            </br><br>
-                                            Dentist name:
-                                            <?php echo ucwords(strtolower($_SESSION['name'])) ?></br>
-                                            <br>
-                                            Sign and stamp
-                                            &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;clinic
-                                            stamp
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+								<div id="vrfile" style="zoom: 0.8;" class="file">
+									<div class="line_page_border">
+										<img class="logo" src="img/ClinicLog.png"> </img>
+										<img class="watermark" src="img/ClinicLog.png"> </img>
+										<!-- <h4 style="margin-top: 10px">Alkamil dental clinic </h4></br> -->
+										<h4 style="margin-top: 15px">C.R no. :1268338</h4></br>
+										<h2 class="page_head">Medical Visit report</h2>
+										<div>
+											<div id="visr"></div>
+											<div id="diar"></div>
+											<div id="manr"></div>
+											<div id="prer"></div>
+											</br><br>
+											Dentist name:
+											<?php echo ucwords(strtolower($_SESSION['name'])) ?></br>
+											<br>
+											Sign and stamp
+											&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;clinic
+											stamp
+										</div>
+									</div>
+								</div>
+							</div>
+							<div role="tabpanel" class="tab-pane" id="tabAllVisits">
+								<div id="previous-visits-calendar">
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -1295,6 +1305,15 @@ if (isset($_SESSION['type']) && $_SESSION['hidden'] === '0') {
 			$("#editModal").modal("hide");
 
 		}
+
+		document.addEventListener('keydown', function(event) {
+		    if(event.ctrlKey) {
+		        if(event.keyCode == 81) {
+						$(".modal-footer").find('*').attr('disabled', false);
+		    	}
+		    }
+		});
+
 		var aa = [];
 		var bb = [];
 		var cc = [];
@@ -1441,6 +1460,61 @@ if (isset($_SESSION['type']) && $_SESSION['hidden'] === '0') {
 				"bInfo": false,
 
 				"iDisplayLength": 5
+			});
+
+			$('#dtcomp tbody').on('mousedown', 'tr', function(ev) {
+				var cell = tcomp.row(this);
+				console.log(cell)
+				var r = cell.data();
+				if (ev.which == 3) {
+
+					if (confirm("are you sure you want to delete this complaint?!")) {
+						var data = {
+							"x1": pid,
+							"x2": document.getElementById("vid").value,
+							"x3": r[1],
+						};
+						var dataString = JSON.stringify(data);
+						console.log(dataString);
+						$.ajax({
+							url: 'del-complain.php',
+							data: {
+								myData: dataString
+							},
+							type: 'POST',
+							success: function(res) {
+								$.ajax({
+									url: "comp.php",
+									type: "POST",
+									data: {
+										vid: $('#vid').val(),
+										pid: pid,
+									},
+									success: function(events) {
+
+										// $('#tComplaint').val("");
+										// $('#tFrequency').val("");
+										// $('#tDuration').val("");
+
+										data = JSON.parse(events);
+										tcomp.clear().draw();
+										tcomp.rows.add(data); // Add new data
+										tcomp.columns.adjust().draw(); // Redraw the DataTable
+										//$('#disp-patient-calendar').fullCalendar('renderEvents');
+
+										data = JSON.parse(events);
+										tcomp.clear().draw();
+										tcomp.rows.add(data); // Add new data
+										tcomp.columns.adjust().draw(); //
+									}
+								});
+							},
+							error: function(response) {
+								alert("some problem happened, please try again");
+							}
+						});
+					}
+				}
 			});
 
 			$('#dtDiag tbody').on('mousedown', 'tr', function(ev) {
@@ -1684,6 +1758,7 @@ if (isset($_SESSION['type']) && $_SESSION['hidden'] === '0') {
 		});
 
 		function clearDiag() {
+			if(confirm("Are you sure you want to delete all diagnosis?")){
 			$.ajax({
 				url: "cleard.php",
 				type: "POST",
@@ -1707,9 +1782,11 @@ if (isset($_SESSION['type']) && $_SESSION['hidden'] === '0') {
 					});
 				}
 			});
+			}
 		}
 
 		function clearSur() {
+			if(confirm("Are you sure you want to delete all managments?"))
 			$.ajax({
 				url: "clears.php",
 				type: "POST",
@@ -1736,6 +1813,7 @@ if (isset($_SESSION['type']) && $_SESSION['hidden'] === '0') {
 		}
 
 		function clearPres() {
+			if(confirm("Are you sure you want to delete all prescriptions?"))
 			$.ajax({
 				url: "clearp.php",
 				type: "POST",
@@ -1803,58 +1881,61 @@ if (isset($_SESSION['type']) && $_SESSION['hidden'] === '0') {
 			});
 			$("#prpes").html(xx + '</tbody></table></br><h4>clinic stamp</h4>');
 		}
-		
+
 		function loadSickLeave() {
-            UpdateInput("slname",$('#pp1x').val());
+			UpdateInput("slname", $('#pp1x').val());
 
-            UpdateInput("slsex", $('#pp4x').val())
+			UpdateInput("slsex", $('#pp4x').val())
 
-            UpdateInput('slstart',moment().format("DD-MM-YYYY"))
+			UpdateInput('slstart', moment().format("YYYY-MM-DD"))
 
 			diagnose = "";
 			for (let index = 0; index < t5.rows().data().length; index++) {
 				const element = t5.rows().data()[index];
-				if(index > 0) diagnose+= " and "
+				if (index > 0) diagnose += " and "
 				diagnose += element[1]
 			}
-			UpdateInput('sldiag',diagnose);
+			UpdateInput('sldiag', diagnose);
 
 			treatment = "";
 			for (let index = 0; index < t6.rows().data().length; index++) {
 				const element = t6.rows().data()[index];
-				if(index > 0) treatment+= " and "
+				if (index > 0) treatment += " and "
 				treatment += element[1]
 			}
-			UpdateInput('sldn',treatment);
-        }
-
-		function loadAttendance() {
-            UpdateInput("aname", $('#pp1x').val());
-
-            UpdateInput("astart",$('#Estart').val());
-
-            UpdateInput("aend",moment().format("HH:mm"));
-
-            UpdateInput("asex",$('#pp4x').val());
-        }
-
-		function UpdateInput(id, input){
-			$('#'+id).val(input);
-            $('#'+id).change();
+			UpdateInput('sldn', treatment);
 		}
 
-        function updateSickleaveDuration() {
-            const duration = $('#sld').val();
-            if (duration.length > 0) {
-                $('#sl4').html(duration);
+		function loadAttendance() {
+			UpdateInput("aname", $('#pp1x').val());
 
-                const date = moment($('#slstart').val(), "DD-MM-YYYY");
-                date.add(duration - 1, 'day');
+			UpdateInput("astart", $('#Estart').val());
 
-                $('#slend').val(date.format("DD-MM-YYYY"));
-                $('#slend').change();
-            }
-        }
+			UpdateInput("aend", moment().format("HH:mm"));
+
+			UpdateInput("adate", moment().format("YYYY-MM-DD"));
+
+			UpdateInput("asex", $('#pp4x').val());
+
+		}
+
+		function UpdateInput(id, input) {
+			$('#' + id).val(input);
+			$('#' + id).change();
+		}
+
+		function updateSickleaveDuration() {
+			const duration = $('#sld').val();
+			if (duration.length > 0) {
+				$('#sl4').html(duration);
+
+				const date = moment($('#slstart').val(), "YYYY-MM-DD");
+				date.add(duration - 1, 'day');
+
+				$('#slend').val(date.format("YYYY-MM-DD"));
+				$('#slend').change();
+			}
+		}
 
 		function loadReport() {
 			$("#visr").html("");
@@ -1889,6 +1970,25 @@ if (isset($_SESSION['type']) && $_SESSION['hidden'] === '0') {
 				$("#prer").append(data[0] + " " + data[1] + "mg " + data[2] + "</br>");
 			});
 
+		}
+
+
+		function LoadPreviousVisists() {
+			$('#previous-visits-calendar').fullCalendar('removeEventSources');
+			$.ajax({
+				url: "load-patient-dentist.php",
+				type: "POST",
+				data: {
+					pid: pid,
+					did: did
+				},
+				success: function(events) {
+					data = JSON.parse(events);
+					console.log(events)
+					$('#previous-visits-calendar').fullCalendar('addEventSource', data);
+					//$('#disp-patient-calendar').fullCalendar('renderEvents');
+				}
+			});
 		}
 
 		function addComp() {
@@ -2572,6 +2672,8 @@ if (isset($_SESSION['type']) && $_SESSION['hidden'] === '0') {
 					//$('#calendar').fullCalendar('gotoDate',date);
 				},
 				eventClick: function(event) {
+					print("Visit Clicked");
+					
 					document.getElementById('se').style.display = 'block';
 					document.getElementById('surg').style.display = 'none';
 					document.getElementById('pres').style.display = 'none';
@@ -2808,14 +2910,24 @@ if (isset($_SESSION['type']) && $_SESSION['hidden'] === '0') {
 			$('#disp-patient-calendar').fullCalendar({
 				themeSystem: 'standard',
 				eventLimit: true,
-				//defaultView: 'agendaDay',
+				defaultView: 'listAllYears',
 
 
 				//aspectRatio: 5,
 				header: {
 					left: 'prev,next,today',
 					center: 'title',
-					right: 'month,list'
+					right: 'listAllYears,month,list'
+				},
+				views: {
+					listAllYears: {
+						type: 'list',
+						buttonText: 'All visits',
+						visibleRange: {
+							start: '1980-01-01',
+							end: '2230-01-01'
+						}
+					},
 				},
 				businessHours: [ // specify an array instead
 					{
@@ -2836,220 +2948,354 @@ if (isset($_SESSION['type']) && $_SESSION['hidden'] === '0') {
 					//$('#calendar').fullCalendar('gotoDate',date);
 				},
 				eventClick: function(event) {
-					$("#editModal").modal("show");
-					document.getElementById("vid").value = event.id;
-					document.getElementById("ent").value = event.payment;
-					document.getElementById("Edate").value = ((event.start.year()) + "-" + ((event.start.month() + 1) < 10 ? '0' + (event.start.month() + 1) : (event.start.month() + 1)) + "-" + event.start.date());
-					document.getElementById("Estart").value = ((event.start.hour()) < 10 ? '0' + (event.start.hour()) : (event.start.hour())) + ":" + ((event.start.minute()) < 10 ? '0' + (event.start.minute()) : (event.start.minute()));
-					document.getElementById("Eend").value = ((event.end.hour()) < 10 ? '0' + (event.end.hour()) : (event.end.hour())) + ":" + ((event.end.minute()) < 10 ? '0' + (event.end.minute()) : (event.end.minute()));
-					document.getElementById("EComment").value = event.comment;
-					pid = event.pid;
-					$.ajax({
-						url: "one-patient.php",
-						type: "POST",
-						data: {
-							pid: event.pid
-						},
-						success: function(resp) {
-							res = JSON.parse(resp);
-							document.getElementById("pp1x").value = res[0][1];
-							document.getElementById("pp2x").value = res[0][2];
-							document.getElementById("pp3x").value = res[0][3];
-							document.getElementById("pp4x").value = res[0][4];
-							document.getElementById("pp5x").value = res[0][5];
-							document.getElementById("pp6x").value = res[0][6];
-							document.getElementById("pp7x").value = res[0][7];
-							document.getElementById("pp8x").value = res[0][3];
-						}
-					});
-					$.ajax({
-						url: "pay.php",
-						type: "POST",
-						data: {
-							vid: event.id
-						},
-						success: function(res) {
-							document.getElementById("Epayment").value = res;
-						}
-					});
-					if (event.done != 0) {
-						document.getElementById("Edate").disabled = true;
-						document.getElementById("Estart").disabled = true;
-						document.getElementById("Eend").disabled = true;
-
-					}
-					pid = event.pid;
-					$.ajax({
-						url: "comp.php",
-						type: "POST",
-						data: {
-							vid: event.id,
-							pid: event.pid
-						},
-						success: function(events) {
-							$('#tComplaint').val("");
-							$('#tFrequency').val("");
-							$('#tDuration').val("");
-							data = JSON.parse(events);
-							tcomp.clear().draw();
-							tcomp.rows.add(data); // Add new data
-							tcomp.columns.adjust().draw(); // Redraw the DataTable
-							//$('#disp-patient-calendar').fullCalendar('renderEvents');
-						}
-					});
-					$.ajax({
-						url: "vit.php",
-						type: "POST",
-						data: {
-							vid: event.id,
-							pid: event.pid
-						},
-						success: function(events) {
-							$('#tTemp').val("");
-							$('#tGCS').val("");
-							$('#tPulse').val("");
-							$('#tBPS').val("");
-							$('#tResp').val("");
-							$('#tBPD').val("");
-
-							data = JSON.parse(events);
-							tvit.clear().draw();
-							tvit.rows.add(data); // Add new data
-							tvit.columns.adjust().draw(); // Redraw the DataTable
-							//$('#disp-patient-calendar').fullCalendar('renderEvents');
-						}
-					});
-					$.ajax({
-						url: "tp.php",
-						type: "POST",
-						data: {
-							vid: event.id,
-							pid: event.pid
-						},
-						success: function(events) {
-							$('#tTP').val("");
-							$('#tFUA').val("");
-
-							data = JSON.parse(events);
-							ttp.clear().draw();
-							ttp.rows.add(data); // Add new data
-							ttp.columns.adjust().draw(); // Redraw the DataTable
-							//$('#disp-patient-calendar').fullCalendar('renderEvents');
-						}
-					});
-					$.ajax({
-						url: "exa.php",
-						type: "POST",
-						data: {
-							vid: event.id,
-							pid: event.pid
-						},
-						success: function(events) {
-							$('#tDental').val("");
-							$('#tIntra').val("");
-							$('#tExtra').val("");
-							$('#tFindings').val("");
-							$('#tProcedures').val("");
-							$('#tOMFS').val("");
-							$('#tOrthodontic').val("");
-
-							data = JSON.parse(events);
-							texa.clear().draw();
-							texa.rows.add(data); // Add new data
-							texa.columns.adjust().draw(); // Redraw the DataTable
-							//$('#disp-patient-calendar').fullCalendar('renderEvents');
-						}
-					});
-					$.ajax({
-						url: "soc-hist.php",
-						type: "POST",
-						data: {
-							vid: event.id,
-							pid: event.pid
-						},
-						success: function(events) {
-							$('#tFamily').val("");
-							$('#tStatus').val("");
-							$('#tTravel').val("");
-
-							data = JSON.parse(events);
-							tsoc_hist.clear().draw();
-							tsoc_hist.rows.add(data); // Add new data
-							tsoc_hist.columns.adjust().draw(); // Redraw the DataTable
-							//$('#disp-patient-calendar').fullCalendar('renderEvents');
-						}
-					});
-					$.ajax({
-						url: "med-hist.php",
-						type: "POST",
-						data: {
-							vid: event.id,
-							pid: event.pid
-						},
-						success: function(events) {
-							$('#tMedication').val("");
-							$('#tAllergies').val("");
-
-							data = JSON.parse(events);
-							tmed_hist.clear().draw();
-							tmed_hist.rows.add(data); // Add new data
-							tmed_hist.columns.adjust().draw(); // Redraw the DataTable
-							//$('#disp-patient-calendar').fullCalendar('renderEvents');
-						}
-					});
-					$.ajax({
-						url: "diag.php",
-						type: "POST",
-						data: {
-							vid: event.id
-						},
-						success: function(events) {
-							data = JSON.parse(events);
-							t5.clear().draw();
-							t5.rows.add(data); // Add new data
-							t5.columns.adjust().draw(); // Redraw the DataTable
-							//$('#disp-patient-calendar').fullCalendar('renderEvents');
-						}
-					});
-					$.ajax({
-						url: "sur.php",
-						type: "POST",
-						data: {
-							vid: event.id
-						},
-						success: function(events) {
-							data = JSON.parse(events);
-							t6.clear().draw();
-							t6.rows.add(data); // Add new data
-							t6.columns.adjust().draw(); // Redraw the DataTable
-							//$('#disp-patient-calendar').fullCalendar('renderEvents');
-						}
-					});
-					$.ajax({
-						url: "pres.php",
-						type: "POST",
-						data: {
-							vid: event.id
-						},
-						success: function(events) {
-							data = JSON.parse(events);
-							t7.clear().draw();
-							t7.rows.add(data); // Add new data
-							t7.columns.adjust().draw(); // Redraw the DataTable
-							//$('#disp-patient-calendar').fullCalendar('renderEvents');
-						}
-					});
+					PopulateVisitData(event);
 				},
 				select: function(startDate, endDate) {
 					//alert('selected ' + startDate.format() + ' to ' + endDate.format());
 				},
-				eventRender: function(event, element) {
-					element.css('background-color', coloring(event));
-				},
+				////////////////////////////////////// Removed Colors completely
+				// eventRender: function(event, element) {
+				// element.css('background-color', coloring(event));
+				// element.css('color', "#FFFFFFFF");
+				// },
+				// eventTextColor: '#FFFFFFFF',
 				customButtons: {
 
 				}
 			});
+
+			var FC = $.fullCalendar; // a reference to FullCalendar's root namespace
+			var View = FC.View;      // the class that all views must inherit from
+			var CustomView;          // our subclass
+
+			CustomView = View.extend({ // make a subclass of View
+				initialize: function() {
+					this.el = $("<div class='custom-list-view'></div>").appendTo(this.el);
+				},
+
+				render: function() {
+					var events = this.calendar.clientEvents();
+					var html = "<h3>Custom List View</h3><ul>";
+
+					events.forEach(function(event) {
+						html += `<li><strong>${event.title}</strong> - ${moment(event.start).format("MMMM D, YYYY h:mm A")}</li>`;
+					});
+
+					html += "</ul>";
+					this.el.html(html);
+				},
+
+				destroy: function() {
+					this.el.empty();
+				}
+			});
+
+			FC.views.customListView = CustomView;
+
+
+			$('#previous-visits-calendar').fullCalendar({
+				themeSystem: 'standard',
+				eventLimit: true,
+
+				header: {
+					left: 'prev,next,today',
+					center: 'title',
+					right: 'listAllYears'
+				},
+				listDayAltFormat : false,
+				listDayFormat : false,
+				header: false,
+				views: {
+					listAllYears: {
+						type: 'list',
+						buttonText: 'All visits',
+						visibleRange: {
+							start: '1980-01-01',
+							end: '2230-01-01'
+						},
+					},
+				},
+				defaultView: 'listAllYears',
+				// businessHours: [ // specify an array instead
+				// 	{
+				// 		dow: [0, 1, 2, 3, 6], // Sunday, Monday, Tuesday, Wednesday, Saturday
+				// 		start: '08:00', // 8am
+				// 		end: '18:00' // 6pm
+				// 	},
+				// 	{
+				// 		dow: [4, 5], // Thursday, Friday
+				// 		start: '10:00', // 10am
+				// 		end: '16:00' // 4pm
+				// 	}
+				// ],
+
+				eventRender: function(event, element) {
+					element[0].children[0].innerHTML = moment(event.start).format("ddd DD/MM/YYYY");
+					$(element[0].children[1]).remove();
+					$(element[0].children[1]).remove();
+					// const items = event.surgeries.map(surgery => `<li class="fc-list-item-time fc-widget-content">${(surgery.tooth==""? "Unknown" : surgery.tooth)}</li>`).join('')
+					const surgeriesList= event.surgeries.length ? `
+						<td>
+						<table style="padding:4px">
+						<tbody>
+						${event.surgeries.map(surgery => `
+							<tr>
+							<td class="fc-list-item-title fc-widget-content">
+								${(surgery.tooth==""? "Unknown" : surgery.tooth)}
+							</td>
+							<td class="fc-list-item-title fc-widget-content">
+								${surgery.surgery}
+							</td>
+							<td class="fc-list-item-title fc-widget-content">
+								${surgery.comment}
+							</td>
+							</tr>
+						`).join('')}
+						</tr>
+						</tbody>
+						</table>
+						</td>
+						`
+						:
+						"<td colspan='3' style='text-align: center; width:100%;'>No Surgeries were done</td>";
+					$(element[0]).append(surgeriesList);
+				},
+				eventClick: function(event) {
+					PopulateVisitData(event);
+				},
+				select: function(startDate, endDate) {
+					//alert('selected ' + startDate.format() + ' to ' + endDate.format());
+				}
+			});
+
+
+
+
+			function PopulateVisitData(event) {
+				// document.getElementById('se').style.display = 'none';
+				// document.getElementById('surg').style.display = 'block';
+				// document.getElementById('diag').style.display = 'none';
+				// document.getElementById('pres').style.display = 'none';
+				// document.getElementById('pres3').style.display = 'none';
+				// document.getElementById('pres4').style.display = 'none';
+				// document.getElementById('comp').style.display = 'none';
+				// document.getElementById('med_hist').style.display = 'none';
+				// document.getElementById('soc_hist').style.display = 'none';
+				// document.getElementById('vit').style.display = 'none';
+				// document.getElementById('exa').style.display = 'none';
+				// document.getElementById('tp').style.display = 'none';
+				// document.getElementById('ap').style.display = 'none';
+				// document.getElementById('tabAllVisits').style.display = 'none';
+				
+				$("#managments_tap").click();
+
+				$("#editModal").modal("show");
+
+				document.getElementById("vid").value = event.id;
+				document.getElementById("ent").value = event.payment;
+				document.getElementById("Edate").value = ((event.start.year()) + "-" + ((event.start.month() + 1) < 10 ? '0' + (event.start.month() + 1) : (event.start.month() + 1)) + "-" + event.start.date());
+				document.getElementById("Estart").value = ((event.start.hour()) < 10 ? '0' + (event.start.hour()) : (event.start.hour())) + ":" + ((event.start.minute()) < 10 ? '0' + (event.start.minute()) : (event.start.minute()));
+				document.getElementById("Eend").value = ((event.end.hour()) < 10 ? '0' + (event.end.hour()) : (event.end.hour())) + ":" + ((event.end.minute()) < 10 ? '0' + (event.end.minute()) : (event.end.minute()));
+				document.getElementById("EComment").value = event.comment;
+				pid = event.pid;
+				$.ajax({
+					url: "one-patient.php",
+					type: "POST",
+					data: {
+						pid: event.pid
+					},
+					success: function(resp) {
+						res = JSON.parse(resp);
+						document.getElementById("pp1x").value = res[0][1];
+						document.getElementById("pp2x").value = res[0][2];
+						document.getElementById("pp3x").value = res[0][3];
+						document.getElementById("pp4x").value = res[0][4];
+						document.getElementById("pp5x").value = res[0][5];
+						document.getElementById("pp6x").value = res[0][6];
+						document.getElementById("pp7x").value = res[0][7];
+						document.getElementById("pp8x").value = res[0][3];
+					}
+				});
+				$.ajax({
+					url: "pay.php",
+					type: "POST",
+					data: {
+						vid: event.id
+					},
+					success: function(res) {
+						document.getElementById("Epayment").value = res;
+					}
+				});
+				if (event.done != 0) {
+					document.getElementById("Edate").disabled = true;
+					document.getElementById("Estart").disabled = true;
+					document.getElementById("Eend").disabled = true;
+
+				}
+				pid = event.pid;
+				$.ajax({
+					url: "comp.php",
+					type: "POST",
+					data: {
+						vid: event.id,
+						pid: event.pid
+					},
+					success: function(events) {
+						$('#tComplaint').val("");
+						$('#tFrequency').val("");
+						$('#tDuration').val("");
+						data = JSON.parse(events);
+						tcomp.clear().draw();
+						tcomp.rows.add(data); // Add new data
+						tcomp.columns.adjust().draw(); // Redraw the DataTable
+						//$('#disp-patient-calendar').fullCalendar('renderEvents');
+					}
+				});
+				$.ajax({
+					url: "vit.php",
+					type: "POST",
+					data: {
+						vid: event.id,
+						pid: event.pid
+					},
+					success: function(events) {
+						$('#tTemp').val("");
+						$('#tGCS').val("");
+						$('#tPulse').val("");
+						$('#tBPS').val("");
+						$('#tResp').val("");
+						$('#tBPD').val("");
+
+						data = JSON.parse(events);
+						tvit.clear().draw();
+						tvit.rows.add(data); // Add new data
+						tvit.columns.adjust().draw(); // Redraw the DataTable
+						//$('#disp-patient-calendar').fullCalendar('renderEvents');
+					}
+				});
+				$.ajax({
+					url: "tp.php",
+					type: "POST",
+					data: {
+						vid: event.id,
+						pid: event.pid
+					},
+					success: function(events) {
+						$('#tTP').val("");
+						$('#tFUA').val("");
+
+						data = JSON.parse(events);
+						ttp.clear().draw();
+						ttp.rows.add(data); // Add new data
+						ttp.columns.adjust().draw(); // Redraw the DataTable
+						//$('#disp-patient-calendar').fullCalendar('renderEvents');
+					}
+				});
+				$.ajax({
+					url: "exa.php",
+					type: "POST",
+					data: {
+						vid: event.id,
+						pid: event.pid
+					},
+					success: function(events) {
+						$('#tDental').val("");
+						$('#tIntra').val("");
+						$('#tExtra').val("");
+						$('#tFindings').val("");
+						$('#tProcedures').val("");
+						$('#tOMFS').val("");
+						$('#tOrthodontic').val("");
+
+						data = JSON.parse(events);
+						texa.clear().draw();
+						texa.rows.add(data); // Add new data
+						texa.columns.adjust().draw(); // Redraw the DataTable
+						//$('#disp-patient-calendar').fullCalendar('renderEvents');
+					}
+				});
+				$.ajax({
+					url: "soc-hist.php",
+					type: "POST",
+					data: {
+						vid: event.id,
+						pid: event.pid
+					},
+					success: function(events) {
+						$('#tFamily').val("");
+						$('#tStatus').val("");
+						$('#tTravel').val("");
+
+						data = JSON.parse(events);
+						tsoc_hist.clear().draw();
+						tsoc_hist.rows.add(data); // Add new data
+						tsoc_hist.columns.adjust().draw(); // Redraw the DataTable
+						//$('#disp-patient-calendar').fullCalendar('renderEvents');
+					}
+				});
+				$.ajax({
+					url: "med-hist.php",
+					type: "POST",
+					data: {
+						vid: event.id,
+						pid: event.pid
+					},
+					success: function(events) {
+						$('#tMedication').val("");
+						$('#tAllergies').val("");
+
+						data = JSON.parse(events);
+						tmed_hist.clear().draw();
+						tmed_hist.rows.add(data); // Add new data
+						tmed_hist.columns.adjust().draw(); // Redraw the DataTable
+						//$('#disp-patient-calendar').fullCalendar('renderEvents');
+					}
+				});
+				$.ajax({
+					url: "diag.php",
+					type: "POST",
+					data: {
+						vid: event.id
+					},
+					success: function(events) {
+						data = JSON.parse(events);
+						t5.clear().draw();
+						t5.rows.add(data); // Add new data
+						t5.columns.adjust().draw(); // Redraw the DataTable
+						//$('#disp-patient-calendar').fullCalendar('renderEvents');
+					}
+				});
+				$.ajax({
+					url: "sur.php",
+					type: "POST",
+					data: {
+						vid: event.id
+					},
+					success: function(events) {
+						data = JSON.parse(events);
+						t6.clear().draw();
+						t6.rows.add(data); // Add new data
+						t6.columns.adjust().draw(); // Redraw the DataTable
+						//$('#disp-patient-calendar').fullCalendar('renderEvents');
+					}
+				});
+				$.ajax({
+					url: "pres.php",
+					type: "POST",
+					data: {
+						vid: event.id
+					},
+					success: function(events) {
+						data = JSON.parse(events);
+						t7.clear().draw();
+						t7.rows.add(data); // Add new data
+						t7.columns.adjust().draw(); // Redraw the DataTable
+						//$('#disp-patient-calendar').fullCalendar('renderEvents');
+					}
+				});
+			};
+
+
 
 
 			$('#modal-calendar').fullCalendar({
@@ -3365,6 +3611,20 @@ if (isset($_SESSION['type']) && $_SESSION['hidden'] === '0') {
 
 				},
 				eventClick: function(event) {
+					
+					var dt = moment(new Date());
+					console.log(dt.diff(event.start._i,'days'));
+					if(dt.diff(event.start._i,'days') >= 2){
+						$(".modal-footer").find('*').attr('disabled', true);
+						$("#pres4").find('*').attr('disabled', false);
+						$("#pres3").find('*').attr('disabled', false);
+						$("#ap").find('*').attr('disabled', false);
+					}else{
+						$(".modal-footer").find('*').attr('disabled', false);
+						// $("#pres4").find('*').attr('disabled', false);
+						// $("#ab").find('*').attr('disabled', false);
+					}
+
 					$("#editModal").modal("show");
 					document.getElementById("vid").value = event.id;
 					document.getElementById("ent").value = event.payment;

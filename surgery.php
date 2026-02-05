@@ -6,7 +6,7 @@ require ('connect-mysql.php');
 
 $data = array();
 
-$query = "SELECT `surgery` FROM `surgeries` WHERE 1";
+$query = "SELECT DISTINCT `surgery` FROM `surgeries` WHERE 1";
 
 $statement = $dbcon->prepare($query);
 
@@ -23,9 +23,10 @@ while(!feof($myfile)) {
 
 foreach($result as $row)
 {
-    if(!is_in_array($row[0], $data)){
+    // if(!is_in_array($row[0], $data)){
+        if(strlen($row[0]) > 0 && $row[0][0] != "D")
         array_push($data,$row[0]);
-    }
+    // }
 }
 
 echo json_encode($data);

@@ -2,7 +2,7 @@
 //index.php
 session_start();
 if (isset($_SESSION['type'])) {
-    if ($_SESSION['type'] != 1) {
+    if ($_SESSION['type'] != 4) {
 
         echo "Unauthorized access!!";
         if ($_SESSION['type'] === 2) {
@@ -11,8 +11,8 @@ if (isset($_SESSION['type'])) {
         if ($_SESSION['type'] === 3) {
             $url = 'dentist.php';
         }
-        if ($_SESSION['type'] === 4) {
-            $url = 'super_admin.php';
+        if ($_SESSION['type'] === 1) {
+            $url = 'admin.php';
         }
         header('Location: ' . $url);
     }
@@ -244,17 +244,235 @@ if (isset($_SESSION['type'])) {
 
 
     <div class="text-center">
+        <button type="button" class="btn btn-primary" id="bd" onclick="dd()">Add Dentist</button>
+        <button type="button" class="btn btn-primary" id="br" onclick="rr()">Add Recentionist</button>
         <button type="button" class="btn btn-primary" id="bs" onclick="ss()">Statistics</button>
+        <button type="button" class="btn btn-primary" id="bf" onclick="ff()">Clinic information</button>
         <button type="button" class="btn btn-primary" id="ad" onclick="ad()">App Data</button>
         <button type="button" class="btn btn-default pull-right" onclick="window.location.replace('logout.php');">logout</button>
 
     </div>
-   
+    <div id="recep" style="display: none">
+        <form role="form" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
+            <div class="container col-md-4 text-center">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="recepname"><b>Receptionist's Name</b></label>
+                            <input type="text" placeholder="Enter Username" name="recepname" class="form-control" style="margin-bottom: 20px" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="receppsw"><b>Temporary Password</b></label>
+                            <input type="password" placeholder="Enter Password" name="receppsw" class="form-control" style="margin-bottom: 20px" required>
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="rsex"><b>Sex</b></label>
+                            <select type="text" placeholder="sex" name="rsex" id="rsex" class="form-control" style="margin-bottom: 20px">
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Other">Other</option>
+                            </select>
+
+                        </div>
+                        <div class="col-md-6">
+                            <label for="rbdate"><b>Birthdate</b></label>
+                            <input type="text" placeholder="bdate" value="yyyy-mm-dd" name="rbdate" id="rbdate" class="date form-control" style="margin-bottom: 20px" required>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="raddress"><b>Address</b></label>
+                            <input type="text" placeholder="Address" name="raddress" class="form-control" style="margin-bottom: 20px" required>
+
+                        </div>
+                        <div class="col-md-6">
+                            <label for="rnash"><b>Nationality</b></label>
+                            <input type="text" placeholder="Nationality" name="rnash" class="form-control" style="margin-bottom: 20px" required>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="rphone"><b>Phone</b></label>
+                            <input type="number" placeholder="Phone" name="rphone" class="form-control" style="margin-bottom: 20px" required>
+
+                        </div>
+                        <div class="col-md-6">
+                            <label for="rssn"><b>Passport no.</b></label>
+                            <input type="text" placeholder="Passport no." name="rssn" class="form-control" style="margin-bottom: 20px" required>
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="container">
+                    <div class="row">
+                        <div class="">
+                            <button type="submit" class="btn btn-primary" name="addrecep">Add</button>
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+    </div>
+
+    </form>
+    </div>
+
+    <div id="den" style="display: none">
+        <form role="form" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
+            <div class="container col-md-4 text-center">
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="denname"><b>Dentist's name</b></label>
+                            <input type="text" placeholder="Enter Username" name="denname" class="form-control" style="margin-bottom: 20px" required>
+
+                        </div>
+                        <div class="col-md-6">
+                            <label for="denpsw"><b>Temporary Password</b></label>
+                            <input type="password" placeholder="Enter Password" name="denpsw" class="form-control" style="margin-bottom: 20px" required>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="dsex"><b>Sex</b></label>
+                            <select type="text" placeholder="sex" name="dsex" id="dsex" class="form-control" style="margin-bottom: 20px">
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Other">Other</option>
+                            </select>
+
+                        </div>
+                        <div class="col-md-6">
+                            <label for="dbdate"><b>Birthdate</b></label>
+                            <input type="text" placeholder="bdate" value="yyyy-mm-dd" name="dbdate" id="dbdate" class="date form-control" style="margin-bottom: 20px" required>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="daddress"><b>Address</b></label>
+                            <input type="text" placeholder="Address" name="daddress" class="form-control" style="margin-bottom: 20px" required>
+
+                        </div>
+                        <div class="col-md-6">
+                            <label for="dnash"><b>Nationality</b></label>
+                            <input type="text" placeholder="Nationality" name="dnash" class="form-control" style="margin-bottom: 20px" required>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="dphone"><b>Phone</b></label>
+                            <input type="number" placeholder="Phone" name="dphone" class="form-control" style="margin-bottom: 20px" required>
+
+                        </div>
+                        <div class="col-md-6">
+                            <label for="dssn"><b>Passport no.</b></label>
+                            <input type="text" placeholder="Passport no." name="dssn" class="form-control" style="margin-bottom: 20px" required>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="row">
+                        <div class="">
+                            <button type="submit" class="btn btn-primary" name="addden">Add</button>
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+    </div>
+
+    </form>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
 
 
     <div id="stats" style="display: none">
         <div class="container">
-            
+            <div class="row">
+                <h3>Staff...</h3>
+                <table id="staff" class="display" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Password</th>
+                            <th>Type</th>
+                            <th>sex</th>
+                            <th>Birthdate</th>
+                            <th>Address</th>
+                            <th>Nationality</th>
+                            <th>Phone</th>
+                            <th>Passport no.</th>
+                            <th>Hidden</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Password</th>
+                            <th>Type</th>
+                            <th>sex</th>
+                            <th>Birthdate</th>
+                            <th>Address</th>
+                            <th>Nationality</th>
+                            <th>Phone</th>
+                            <th>Passport no.</th>
+                            <th>Hidden</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
             <div class="row">
                 <h3>Patients...</h3>
 
@@ -385,7 +603,28 @@ if (isset($_SESSION['type'])) {
             </div>
 
 
-            
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>Profit calculator</h3>
+                    <label for="start"><b>start</b></label>
+                    <input type="text" placeholder="start" name="start" id="start" value="yyyy-mm-dd" class="date form-control" style="margin-bottom: 20px">
+                    <label for="end"><b>end</b></label>
+                    <input type="text" placeholder="end" name="end" id="end" value="yyyy-mm-dd" class="date form-control" style="margin-bottom: 20px">
+                    <div class="container" style="margin-left:24px">
+                        <div class="row">
+                            <div class="col-md-10">
+                                <label for="profit"><b>Profit</b></label>
+                                <input type="number" placeholder="profit" name="profit" id="profit" class="form-control" style="margin-bottom: 20px" disabled>
+                            </div>
+                            <div class="col-md-2" style="margin-top:24px">
+                                <button type="button" class="btn btn-primary save" onclick="calc()">Clac.</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
         </div>
     </div>
 
@@ -396,7 +635,62 @@ if (isset($_SESSION['type'])) {
 
 
 
-    
+    <div id="data" style="display: none;margin-top: 18px">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-6" style="margin-top:56px">
+
+                    <label for="cr"><b>CR</b></label>
+                    <input type="text" placeholder="CR" name="cr" id="cr" class="form-control" style="margin-bottom: 20px">
+
+                    <label for="code"><b>PoCode</b></label>
+                    <input type="text" placeholder="PoCode" name="code" id="code" class="form-control" style="margin-bottom: 20px">
+
+                    <label for="box"><b>PoBox</b></label>
+                    <input type="text" placeholder="PoBox" name="box" id="box" class="form-control" style="margin-bottom: 20px">
+
+                    <label for="fd-name"><b>Name</b></label>
+                    <input type="text" placeholder="name" name="fd-name" id="fd-name" class="form-control" style="margin-bottom: 20px">
+
+                    <button type="button" class="btn btn-primary save" onclick="e()">Edit</button>
+
+                </div>
+                <div class="col-xs-6">
+                    <table id="phones" class="display" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>phone</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>phone</th>
+                                <th>Description</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                    <div class="container" style="margin-left:-38px">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <label for="phone"><b>phone</b></label>
+                                <input type="text" placeholder="phone" name="phone" id="phone" class="form-control" style="margin-bottom: 20px">
+
+                            </div>
+                            <div class="col-xs-3">
+                                <label for="desc"><b>description</b></label>
+                                <input type="text" placeholder="desc" name="desc" id="desc" class="form-control" style="margin-bottom: 20px">
+                            </div>
+                            <div class="col-xs-6" style="margin-top:24px;">
+                                <button type="button" class="btn btn-primary save" onclick="phone()">Add</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
     <div id="app_data" style="display: none;margin-top: 18px">
         <div class="container  m-5" >
             <div class="row">
@@ -806,19 +1100,28 @@ if (isset($_SESSION['type'])) {
 
         function dd() {
 
+            document.getElementById("den").style.display = "block";
+            document.getElementById("recep").style.display = "none";
             document.getElementById("stats").style.display = "none";
+            document.getElementById("data").style.display = "none";
             document.getElementById("app_data").style.display = "none";
         }
 
         function rr() {
 
             document.getElementById("stats").style.display = "none";
+            document.getElementById("data").style.display = "none";
+            document.getElementById("den").style.display = "none";
+            document.getElementById("recep").style.display = "block";
             document.getElementById("app_data").style.display = "none";
         }
 
         function ff() {
 
             document.getElementById("stats").style.display = "none";
+            document.getElementById("data").style.display = "block";
+            document.getElementById("den").style.display = "none";
+            document.getElementById("recep").style.display = "none";
             document.getElementById("app_data").style.display = "none";
         }
 
@@ -827,11 +1130,17 @@ if (isset($_SESSION['type'])) {
             t1.ajax.reload();
             t2.ajax.reload();
             document.getElementById("stats").style.display = "block";
+            document.getElementById("data").style.display = "none";
+            document.getElementById("den").style.display = "none";
+            document.getElementById("recep").style.display = "none";
             document.getElementById("app_data").style.display = "none";
         }
 
         function ad() {
             document.getElementById("stats").style.display = "none";
+            document.getElementById("data").style.display = "none";
+            document.getElementById("den").style.display = "none";
+            document.getElementById("recep").style.display = "none";
             document.getElementById("app_data").style.display = "block";
         }
 
