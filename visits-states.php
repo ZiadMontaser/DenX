@@ -32,29 +32,57 @@ error_log("Visits Stats was generated in {$duration}s from $start to $end");
 // $otherMale = Request("SELECT COUNT(*) FROM `visits`, `patients` WHERE visits.patientId = patients.id AND patients.sex = 'Male'  AND visits.start >= '$start 00:00:00' AND visits.end <= '$end 23:59:59' AND patients.nationality != 'omani'");
 // $otherFemale = Request("SELECT COUNT(*) FROM `visits`, `patients` WHERE visits.patientId = patients.id AND patients.sex = 'Female'  AND visits.start >= '$start 00:00:00' AND visits.end <= '$end 23:59:59' AND patients.nationality = 'omani'");
 
-$youngOmani =      Request("SELECT COUNT(*) FROM `visits`, `patients` WHERE visits.patientId = patients.id AND visits.start >= '$start 00:00:00' AND visits.end <= '$end 23:59:59'                             AND patients.nationality = 'omani' AND DATEDIFF( NOW(), patients.birthdate) < 5 * 365");
-$teenOmani =       Request("SELECT COUNT(*) FROM `visits`, `patients` WHERE visits.patientId = patients.id AND visits.start >= '$start 00:00:00' AND visits.end <= '$end 23:59:59'                             AND patients.nationality = 'omani' AND DATEDIFF( NOW(), patients.birthdate) >= 5 * 365 AND DATEDIFF( NOW(), patients.birthdate) < 14 * 365");
-$adultOmaniMale =  Request("SELECT COUNT(*) FROM `visits`, `patients` WHERE visits.patientId = patients.id AND visits.start >= '$start 00:00:00' AND visits.end <= '$end 23:59:59' AND patients.sex = 'Male'   AND patients.nationality = 'omani' AND (DATEDIFF( NOW(), patients.birthdate) >= 14 * 365 OR patients.birthdate = '0000-00-00')");
-$adultOmaniFemale= Request("SELECT COUNT(*) FROM `visits`, `patients` WHERE visits.patientId = patients.id AND visits.start >= '$start 00:00:00' AND visits.end <= '$end 23:59:59' AND patients.sex = 'Female' AND patients.nationality = 'omani' AND (DATEDIFF( NOW(), patients.birthdate) >= 14 * 365 OR patients.birthdate = '0000-00-00')");
-$youngOther =      Request("SELECT COUNT(*) FROM `visits`, `patients` WHERE visits.patientId = patients.id AND visits.start >= '$start 00:00:00' AND visits.end <= '$end 23:59:59'                             AND patients.nationality != 'omani' AND DATEDIFF( NOW(), patients.birthdate) < 5 * 365");
-$teenOther =       Request("SELECT COUNT(*) FROM `visits`, `patients` WHERE visits.patientId = patients.id AND visits.start >= '$start 00:00:00' AND visits.end <= '$end 23:59:59'                             AND patients.nationality != 'omani' AND DATEDIFF( NOW(), patients.birthdate) >= 5 * 365 AND DATEDIFF( NOW(), patients.birthdate) < 14 * 365");
-$adultOtherMale =  Request("SELECT COUNT(*) FROM `visits`, `patients` WHERE visits.patientId = patients.id AND visits.start >= '$start 00:00:00' AND visits.end <= '$end 23:59:59' AND patients.sex = 'Male'   AND patients.nationality != 'omani' AND (DATEDIFF( NOW(), patients.birthdate) >= 14 * 365 OR patients.birthdate = '0000-00-00')");
-$adultOtherFemale= Request("SELECT COUNT(*) FROM `visits`, `patients` WHERE visits.patientId = patients.id AND visits.start >= '$start 00:00:00' AND visits.end <= '$end 23:59:59' AND patients.sex = 'Female' AND patients.nationality != 'omani' AND (DATEDIFF( NOW(), patients.birthdate) >= 14 * 365 OR patients.birthdate = '0000-00-00')");
+
+// Omani
+$omaniMale0_4 = Request("SELECT COUNT(*) FROM `visits`, `patients` WHERE visits.patientId = patients.id AND visits.start >= '$start 00:00:00' AND visits.end <= '$end 23:59:59' AND patients.nationality = 'omani' AND patients.sex = 'Male' AND DATEDIFF( NOW(), patients.birthdate) < 5 * 365");
+$omaniMale5_14 = Request("SELECT COUNT(*) FROM `visits`, `patients` WHERE visits.patientId = patients.id AND visits.start >= '$start 00:00:00' AND visits.end <= '$end 23:59:59' AND patients.nationality = 'omani' AND patients.sex = 'Male' AND DATEDIFF( NOW(), patients.birthdate) >= 5 * 365 AND DATEDIFF( NOW(), patients.birthdate) < 15 * 365");
+$omaniMale15_59 = Request("SELECT COUNT(*) FROM `visits`, `patients` WHERE visits.patientId = patients.id AND visits.start >= '$start 00:00:00' AND visits.end <= '$end 23:59:59' AND patients.nationality = 'omani' AND patients.sex = 'Male' AND ( (DATEDIFF( NOW(), patients.birthdate) >= 15 * 365 AND DATEDIFF( NOW(), patients.birthdate) < 60 * 365) OR patients.birthdate = '0000-00-00')");
+$omaniMale60_ = Request("SELECT COUNT(*) FROM `visits`, `patients` WHERE visits.patientId = patients.id AND visits.start >= '$start 00:00:00' AND visits.end <= '$end 23:59:59' AND patients.nationality = 'omani' AND patients.sex = 'Male' AND DATEDIFF( NOW(), patients.birthdate) >= 60 * 365");
+
+$omaniFemale0_4 = Request("SELECT COUNT(*) FROM `visits`, `patients` WHERE visits.patientId = patients.id AND visits.start >= '$start 00:00:00' AND visits.end <= '$end 23:59:59' AND patients.nationality = 'omani' AND patients.sex = 'Female' AND DATEDIFF( NOW(), patients.birthdate) < 5 * 365");
+$omaniFemale5_14 = Request("SELECT COUNT(*) FROM `visits`, `patients` WHERE visits.patientId = patients.id AND visits.start >= '$start 00:00:00' AND visits.end <= '$end 23:59:59' AND patients.nationality = 'omani' AND patients.sex = 'Female' AND DATEDIFF( NOW(), patients.birthdate) >= 5 * 365 AND DATEDIFF( NOW(), patients.birthdate) < 15 * 365");
+$omaniFemale15_59 = Request("SELECT COUNT(*) FROM `visits`, `patients` WHERE visits.patientId = patients.id AND visits.start >= '$start 00:00:00' AND visits.end <= '$end 23:59:59' AND patients.nationality = 'omani' AND patients.sex = 'Female' AND ( (DATEDIFF( NOW(), patients.birthdate) >= 15 * 365 AND DATEDIFF( NOW(), patients.birthdate) < 60 * 365) OR patients.birthdate = '0000-00-00')");
+$omaniFemale60_ = Request("SELECT COUNT(*) FROM `visits`, `patients` WHERE visits.patientId = patients.id AND visits.start >= '$start 00:00:00' AND visits.end <= '$end 23:59:59' AND patients.nationality = 'omani' AND patients.sex = 'Female' AND DATEDIFF( NOW(), patients.birthdate) >= 60 * 365");
+
+// Non-Omani
+$otherMale0_4 = Request("SELECT COUNT(*) FROM `visits`, `patients` WHERE visits.patientId = patients.id AND visits.start >= '$start 00:00:00' AND visits.end <= '$end 23:59:59' AND patients.nationality != 'omani' AND patients.sex = 'Male' AND DATEDIFF( NOW(), patients.birthdate) < 5 * 365");
+$otherMale5_14 = Request("SELECT COUNT(*) FROM `visits`, `patients` WHERE visits.patientId = patients.id AND visits.start >= '$start 00:00:00' AND visits.end <= '$end 23:59:59' AND patients.nationality != 'omani' AND patients.sex = 'Male' AND DATEDIFF( NOW(), patients.birthdate) >= 5 * 365 AND DATEDIFF( NOW(), patients.birthdate) < 15 * 365");
+$otherMale15_59 = Request("SELECT COUNT(*) FROM `visits`, `patients` WHERE visits.patientId = patients.id AND visits.start >= '$start 00:00:00' AND visits.end <= '$end 23:59:59' AND patients.nationality != 'omani' AND patients.sex = 'Male' AND ( (DATEDIFF( NOW(), patients.birthdate) >= 15 * 365 AND DATEDIFF( NOW(), patients.birthdate) < 60 * 365) OR patients.birthdate = '0000-00-00')");
+$otherMale60_ = Request("SELECT COUNT(*) FROM `visits`, `patients` WHERE visits.patientId = patients.id AND visits.start >= '$start 00:00:00' AND visits.end <= '$end 23:59:59' AND patients.nationality != 'omani' AND patients.sex = 'Male' AND DATEDIFF( NOW(), patients.birthdate) >= 60 * 365");
+
+$otherFemale0_4 = Request("SELECT COUNT(*) FROM `visits`, `patients` WHERE visits.patientId = patients.id AND visits.start >= '$start 00:00:00' AND visits.end <= '$end 23:59:59' AND patients.nationality != 'omani' AND patients.sex = 'Female' AND DATEDIFF( NOW(), patients.birthdate) < 5 * 365");
+$otherFemale5_14 = Request("SELECT COUNT(*) FROM `visits`, `patients` WHERE visits.patientId = patients.id AND visits.start >= '$start 00:00:00' AND visits.end <= '$end 23:59:59' AND patients.nationality != 'omani' AND patients.sex = 'Female' AND DATEDIFF( NOW(), patients.birthdate) >= 5 * 365 AND DATEDIFF( NOW(), patients.birthdate) < 15 * 365");
+$otherFemale15_59 = Request("SELECT COUNT(*) FROM `visits`, `patients` WHERE visits.patientId = patients.id AND visits.start >= '$start 00:00:00' AND visits.end <= '$end 23:59:59' AND patients.nationality != 'omani' AND patients.sex = 'Female' AND ( (DATEDIFF( NOW(), patients.birthdate) >= 15 * 365 AND DATEDIFF( NOW(), patients.birthdate) < 60 * 365) OR patients.birthdate = '0000-00-00')");
+$otherFemale60_ = Request("SELECT COUNT(*) FROM `visits`, `patients` WHERE visits.patientId = patients.id AND visits.start >= '$start 00:00:00' AND visits.end <= '$end 23:59:59' AND patients.nationality != 'omani' AND patients.sex = 'Female' AND DATEDIFF( NOW(), patients.birthdate) >= 60 * 365");
+
 
 $factor = 1;
 
 echo json_encode([
     ["From $start to $end", ""],
-    ["Omani" , ""],
-    ["Children < 5Yrs",     ceil($factor * $youngOmani[0][0])],
-    ["Teen 5 to < 14 Yrs",  ceil($factor * $teenOmani[0][0])],
-    ["Adult Male",          ceil($factor * $adultOmaniMale[0][0])],
-    ["Adult Female",        ceil($factor * $adultOmaniFemale[0][0])],
-    ["Non-Omani" , ""],
-    ["Children < 5Yrs",     ceil($factor * $youngOther[0][0])],
-    ["Teen 5 to < 14 Yrs",  ceil($factor * $teenOther[0][0])],
-    ["Adult Male",          ceil($factor * $adultOtherMale[0][0])],
-    ["Adult Female",        ceil($factor * $adultOtherFemale[0][0])],
+    
+    // Omani
+    ["Omani Male 0-4",      ceil($factor * $omaniMale0_4[0][0])],
+    ["Omani Male 5-14",     ceil($factor * $omaniMale5_14[0][0])],
+    ["Omani Male 15-59",    ceil($factor * $omaniMale15_59[0][0])],
+    ["Omani Male 60+",      ceil($factor * $omaniMale60_[0][0])],
+
+    ["Omani Female 0-4",    ceil($factor * $omaniFemale0_4[0][0])],
+    ["Omani Female 5-14",   ceil($factor * $omaniFemale5_14[0][0])],
+    ["Omani Female 15-59",  ceil($factor * $omaniFemale15_59[0][0])],
+    ["Omani Female 60+",    ceil($factor * $omaniFemale60_[0][0])],
+
+    // Non-Omani
+    ["Non-Omani Male 0-4",      ceil($factor * $otherMale0_4[0][0])],
+    ["Non-Omani Male 5-14",     ceil($factor * $otherMale5_14[0][0])],
+    ["Non-Omani Male 15-59",    ceil($factor * $otherMale15_59[0][0])],
+    ["Non-Omani Male 60+",      ceil($factor * $otherMale60_[0][0])],
+
+    ["Non-Omani Female 0-4",    ceil($factor * $otherFemale0_4[0][0])],
+    ["Non-Omani Female 5-14",   ceil($factor * $otherFemale5_14[0][0])],
+    ["Non-Omani Female 15-59",  ceil($factor * $otherFemale15_59[0][0])],
+    ["Non-Omani Female 60+",    ceil($factor * $otherFemale60_[0][0])],
+
 ]);
 
 
